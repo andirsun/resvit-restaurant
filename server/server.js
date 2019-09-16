@@ -9,16 +9,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 //==============================Eventos====================
-app.post('/postevento',function(req,res){
+app.post('/postevent',function(req,res){
     res.json('Aca va a tener que enviarme la informacion del evento para crearlo');
 });
-app.put('/editevento',function(req,res){
+app.put('/editevent',function(req,res){
     res.json('Aca va a tener que enviarme la informacion del evento para actualizarlo');
 });
-app.get('/getevento/:id',function(req,res){
+app.get('/getevent/:id',function(req,res){
     let id = req.params.id;
     res.json({
-        idEvento:id
+        idEvent:id
     });
 });
 //========================================================
