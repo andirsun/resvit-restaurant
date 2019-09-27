@@ -57,16 +57,5 @@ app.get('/', function (req, res) {
     });
 });
 //==============================Eventos====================
-app.post('/postevent',function(req,res){
-    res.json('Aca va a tener que enviarme la informacion del evento para crearlo');
-});
-app.put('/editevent',function(req,res){
-    res.json('Aca va a tener que enviarme la informacion del evento para actualizarlo');
-});
-app.get('/getevent/:id',function(req,res){
-    let id = req.params.id;
-    res.json({
-        idEvent:id
-    });
-});
+
  */

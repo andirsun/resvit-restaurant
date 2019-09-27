@@ -2,8 +2,7 @@ require('./config/config');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const Connection = require('tedious').Connection
-const Request = require('tedious').Request
+
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -12,49 +11,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 /////////
-var config = {
-    userName: 'sa',
-    password: 'Sqlserver2.',
-    server: '40.117.173.135',
-    options: {
-        database: 'ADMINISTRADOR' // update
-    }
-    
-  };
 
-  var connection = new Connection(config);
-  
-  connection.on('connect', function (err) {
-    if (err) {
-      console.log('eror de conexion',err);
-    } else {
-        console.log("conexion correcta");
-      //executeStatement()
-    }
-  })
-  
-  function executeStatement () {
-    request = new Request("select 123, 'hello world'", function (err, rowCount) {
-      if (err) {
-        console.log(err)
-      } else {
-        console.log(rowCount + ' rows')
-      }
-      connection.close()
-    })
-  
-    request.on('row', function (columns) {
-      columns.forEach(function (column) {
-        if (column.value === null) {
-          console.log('NULL')
-        } else {
-          console.log(column.value)
-        }
-      })
-    })
-  
-    connection.execSql(request)
-}
+
 //========================================================
 /*
 app.post('/usuario',function(req,res){
@@ -73,7 +31,19 @@ app.post('/usuario',function(req,res){
     
 
 });*/
-/*DATA BASE CONFIGURING  TO sql server the tedius module is require */
+app.post('/postevent',function(req,res){
+  res.json('Aca va a tener que enviarme la informacion del evento para crearlo');
+});
+app.put('/editevent',function(req,res){
+  res.json('Aca va a tener que enviarme la informacion del evento para actualizarlo');
+});
+app.get('/getevent/:id',function(req,res){
+  let id = req.params.id;
+  res.json({
+      idEvent:id
+  });
+});
+
 
 app.listen(process.env.PORT,()=>{
     console.log('escuchando al puerto',3000);
