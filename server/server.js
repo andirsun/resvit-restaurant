@@ -2,7 +2,18 @@ require('./config/config');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+var sqlite3 = require('sqlite3').verbose()
 
+
+var db = new sqlite3.Database('prueba1');
+
+db.serialize(function(){ 
+  db.each("SELECT id FROM users", function(err, row) {
+      console.log("User id : "+row.id);
+  });
+ 
+});
+db.close();
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
