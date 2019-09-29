@@ -43,7 +43,7 @@ app.post('/usuario',function(req,res){
 
 });*/
 app.post('/postevent',function(req,res){
-  res.json('Aca va a tener que enviarme la informacion del evento para crearlo');
+  res.json('Aca va a tener que enviarme la informacion del evento para crearlooooo');
 });
 app.put('/editevent',function(req,res){
   res.json('Aca va a tener que enviarme la informacion del evento para actualizarlo');
