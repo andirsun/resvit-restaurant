@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose()
 
 ////Create or read the Database file//////
-var db = new sqlite3.Database('http://159.65.217.210/chinook.db',(err)=>{
+var db = new sqlite3.Database('../Databases/db/chinook.db',(err)=>{
   if (err){
     console.log(err.message);
   }
