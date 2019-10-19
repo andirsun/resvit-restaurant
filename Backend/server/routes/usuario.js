@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const Usuario = require('../models/usuario');
 //////////////////////////////////////
 app.get('/authenticate',function(req,res){
   let body = req.body;//Body request
@@ -22,23 +23,36 @@ app.get('/authenticate',function(req,res){
   }
 });
 
-
+app.get('/usuario',function(req,res){
+  let id = req.params.id;
+  res.json({
+      id:1
+  });
+});
 
 app.post('/usuario',function(req,res){
     let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
-
-    if(body.nombre === undefined){ //asi respondo si las peticiones son buenas o malas
-        res.status(400).json({
-            ok:false,
-            mensaje:'EL nombre es necesario'
-        });
-    }else{
-        res.json({
-            persona:body
-        });
-    }
+    let usuario = new Usuario({
+      nombre : body.nombre,
+      email : body.email,
+      password : body.password,
+      role: body.role
+    });
     
-
+    usuario.save((err,usuarioDB)=>{
+      //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
+      if(err){
+        return response.status(400).json({
+          ok:false,
+          err
+        });
+      }
+        res.json({
+          ok:true,
+          usuario: usuarioDB
+        });
+      
+    });    
 });
 //===========================================================
 app.post('/postevent',function(req,res){

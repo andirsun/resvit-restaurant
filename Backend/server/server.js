@@ -19,11 +19,24 @@ app.use( require('./routes/usuario'));
 
 
 
-mongoose.connect('mongodb://localhost:27017/resturante', (err)=>{
 
-  if(err) throw err;
-  console.log(`Base de datos mela`);
+
+
+
+
+
+mongoose.connect('mongodb://181.50.100.167:27018/test', {
+    useNewUrlParser: true,
+    user: 'dba',
+    pass: 'dba2019'
+}).then(() => {
+    console.log('successfully connected to the database');
+}).catch(err => {
+    console.log('error connecting to the database');
+    process.exit();
 });
+
+
 
 app.listen(process.env.PORT,()=>{
     console.log('escuchando al puerto',3000);
