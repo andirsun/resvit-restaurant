@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
  
 // parse application/json
 app.use(bodyParser.json());
-app.use( require('./routes/usuario'));
+app.use( require('./routes/user'));
 
 
 
@@ -24,8 +24,8 @@ app.use( require('./routes/usuario'));
 
 
 
-/*
-mongoose.connect('mongodb://181.50.100.167:27018/test', {
+
+mongoose.connect('mongodb://181.50.100.167:27018/Restaurants', {
     useNewUrlParser: true,
     user: 'dba',
     pass: 'dba2019'
@@ -34,12 +34,13 @@ mongoose.connect('mongodb://181.50.100.167:27018/test', {
 }).catch(err => {
     console.log('error connecting to the database');
     process.exit();
-});*/
+});
+/*
 mongoose.connect('mongodb://localhost:27017/resturant', (err)=>{
 
   if(err) throw err;
   console.log(`Base de datos mela`);
-});
+});*/
 
 
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 let Schema = mongoose.Schema;
 
@@ -6,13 +7,13 @@ let rolesValidos ={
     values:[1,2],
     message:'{VALUE} no es un rol valido'
 };
-let usuarioSchema = new Schema({
+let userSchema = new Schema({
    /* idUser:{
         type:int,
         required:[true,'el nombre es necesario']
     },*/
     userType:{
-        type:int,
+        type:Number,
         required:[true,'el tipo de usuario es un campo necesario'],
         enum:  rolesValidos
     },
@@ -22,6 +23,7 @@ let usuarioSchema = new Schema({
     },
     email:{
         type:String,
+        unique:true,
         required: [true,"EL correo es necesario"]
     },
     password:{
@@ -31,13 +33,13 @@ let usuarioSchema = new Schema({
 });
 
 
-
-usuarioSchema.methods.toJson = function(){//es para no devolver nunca el pass en la respuesta
+/*
+userSchema.methods.toJson = function(){//es para no devolver nunca el pass en la respuesta
     let user = this;
     let userObject = user.toObject();
     delete userObject.password;
     return userObject;
-}
-usuarioSchema.plugin(uniqueValidator,{message: '{PATH} Debe de ser Unico'}); //desplegar los errores mas user friendly
+}*/
+userSchema.plugin(uniqueValidator,{message: '{PATH} Debe de ser Unico'}); //desplegar los errores mas user friendly
 
-module.exports= mongoose.model('usuario',usuarioSchema);
+module.exports= mongoose.model('user',userSchema);

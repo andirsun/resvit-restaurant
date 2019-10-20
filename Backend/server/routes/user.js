@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const Usuario = require('../models/usuario');
+const User = require('../models/user');
+const bcrypt = require('bcrypt');
 //////////////////////////////////////
 
 app.get('/usuario',function(req,res){
@@ -10,13 +11,13 @@ app.get('/usuario',function(req,res){
   });
 });
 
-app.post('/usuario',function(req,res){
+app.post('/agregarUsuario',function(req,res){
     let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
-    let usuario = new Usuario({
-      nombre : body.nombre,
+    let usuario = new User({
+      userName : body.userName,
       email : body.email,
       password : bcrypt.hashSync(body.password,10), //ENCRIPTACION HASH DE UNA VIA CON 10 VUELTAS 
-      role: body.role
+      userType: body.userType
     });
     
     usuario.save((err,usuarioDB)=>{
@@ -27,25 +28,15 @@ app.post('/usuario',function(req,res){
           err
         });
       }
-        res.json({
-          ok:true,
-          usuario: usuarioDB
-        });
+
+      usuario.password =null;
+      res.json({
+        ok:true,
+        usuario: usuarioDB
+      });
       
     });    
 });
-//===========================================================
-app.post('/postevent',function(req,res){
-  res.json('Aca va a tener que enviarme la informacion del evento para crearlooooo');
-});
-app.put('/editevent',function(req,res){
-  res.json('Aca va a tener que enviarme la informacion del evento para actualizarlo');
-});
-app.get('/getevent/:id',function(req,res){
-  let id = req.params.id;
-  res.json({
-      idEvent:id
-  });
-});
+
 
 module.exports = app;//para importar al archivo de server.js
