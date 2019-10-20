@@ -3,13 +3,22 @@ const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let rolesValidos ={
-    values:['ADMIN_ROLE','USER_ROLE'],
+    values:[1,2],
     message:'{VALUE} no es un rol valido'
 };
 let usuarioSchema = new Schema({
-    nombre:{
-        type: String,
+   /* idUser:{
+        type:int,
         required:[true,'el nombre es necesario']
+    },*/
+    userType:{
+        type:int,
+        required:[true,'el tipo de usuario es un campo necesario'],
+        enum:  rolesValidos
+    },
+    userName:{
+        type: String,
+        required:[true,'el nombre un campo requerido']
     },
     email:{
         type:String,
@@ -18,26 +27,7 @@ let usuarioSchema = new Schema({
     password:{
         type:String,
         required: [true,"EL pass es necesario"]
-    },
-    img:{
-        type:String,
-        required: false
-    },
-    role:{
-        type:String,
-        default:'USER_ROLE' ,
-        enum:  rolesValidos
-    },
-    estado:{
-        type:Boolean,
-        default:true
-    },
-    google:{
-        type:Boolean,
-        default:false
     }
-
-
 });
 
 
@@ -46,9 +36,8 @@ usuarioSchema.methods.toJson = function(){//es para no devolver nunca el pass en
     let user = this;
     let userObject = user.toObject();
     delete userObject.password;
-
     return userObject;
 }
-usuarioSchema.plugin(uniqueValidator,{message: '{PATH} Debe de ser Unico'});
+usuarioSchema.plugin(uniqueValidator,{message: '{PATH} Debe de ser Unico'}); //desplegar los errores mas user friendly
 
 module.exports= mongoose.model('usuario',usuarioSchema);

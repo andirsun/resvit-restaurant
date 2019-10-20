@@ -24,7 +24,7 @@ app.use( require('./routes/usuario'));
 
 
 
-
+/*
 mongoose.connect('mongodb://181.50.100.167:27018/test', {
     useNewUrlParser: true,
     user: 'dba',
@@ -34,7 +34,14 @@ mongoose.connect('mongodb://181.50.100.167:27018/test', {
 }).catch(err => {
     console.log('error connecting to the database');
     process.exit();
+});*/
+mongoose.connect('mongodb://localhost:27017/resturant', (err)=>{
+
+  if(err) throw err;
+  console.log(`Base de datos mela`);
 });
+
+
 
 
 
