@@ -42,4 +42,4 @@ userSchema.methods.toJson = function(){//es para no devolver nunca el pass en la
 }*/
 userSchema.plugin(uniqueValidator,{message: '{PATH} Debe de ser Unico'}); //desplegar los errores mas user friendly
 
-module.exports= mongoose.model('user',userSchema);
+module.exports= mongoose.model('user',userSchema);//name of the collection
