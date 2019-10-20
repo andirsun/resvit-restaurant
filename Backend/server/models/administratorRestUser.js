@@ -24,4 +24,4 @@ let adminRestUserSchema = new Schema({
 });
 adminRestUserSchema.plugin(uniqueValidator,{message: '{PATH} Debe de ser Unico'}); //desplegar los errores mas user friendly
 
-module.exports= mongoose.model('administratorRestUser',userSchema);//name of the collection
+module.exports= mongoose.model('administratorRestUser',adminRestUserSchema);//name of the collection

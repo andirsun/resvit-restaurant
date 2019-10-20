@@ -24,4 +24,4 @@ let eventSchema = new Schema({
 });
 eventSchema.plugin(uniqueValidator,{message: '{PATH} Debe de ser Unico'}); //desplegar los errores mas user friendly
 
-module.exports= mongoose.model('event',userSchema);//name of the collection
+module.exports= mongoose.model('event',eventSchema);//name of the collection

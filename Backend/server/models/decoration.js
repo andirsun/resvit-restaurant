@@ -20,4 +20,4 @@ let decorationSchema = new Schema({
 });
 decorationSchema.plugin(uniqueValidator,{message: '{PATH} Debe de ser Unico'}); //desplegar los errores mas user friendly
 
-module.exports= mongoose.model('decoration',userSchema);//name of the collection
+module.exports= mongoose.model('decoration',decorationSchema);//name of the collection
