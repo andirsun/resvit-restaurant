@@ -3,6 +3,27 @@ const app = express();
 const Event = require('../models/event');
 
 
+app.get('/getEvents',function(req,events){
+  let desde = req.query.desde || 0; //logic operator, if user doesnt send "desde" propertie in the petition, then desde variable will be set in 0;
+  desde = Number(desde);
+
+  let limite = req.query.limite || 0; 
+  limite = Number(limite);
+
+  Event.find({})
+        .exec((err,res)=>{
+            if(err){
+              return res.status(400).json({
+                response:1,
+                content:err
+              });
+            }
+            res.json({
+              response : 2,
+              events
+            });
+          })
+});
 
 app.post('/addEvent',function(req,res){
     let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
