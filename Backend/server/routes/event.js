@@ -11,18 +11,18 @@ app.get('/getEvents',function(req,events){
   limite = Number(limite);
 
   Event.find({})
-        .exec((err,res)=>{
+        .exec((err,resMon)=>{
             if(err){
-              return res.status(400).json({
+              return resMon.status(400).json({
                 response:1,
                 content:err
               });
             }
-            res.json({
-              response : 2,
-              events
-            });
-          })
+            if(resMon){
+              data = {resMon}
+            }
+            events.json(data)
+          });
 });
 
 app.post('/addEvent',function(req,res){
