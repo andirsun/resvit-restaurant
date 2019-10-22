@@ -3,15 +3,15 @@ const app = express();
 const Event = require('../models/event');
 
 
-app.get('/getEvents/:id',function(req,events){
+app.get('/getEvents',function(req,events){
   let desde = req.query.desde || 0; //logic operator, if user doesnt send "desde" propertie in the petition, then desde variable will be set in 0;
   desde = Number(desde);
 
   let limite = req.query.limite || 0; 
   limite = Number(limite);
-  let idRes = req.params.id;
+  //let idRes = req.params.idRestaurant;
   
-  Event.find({idRestaurant:idRes})
+  Event.find()
         .exec((err,resMon)=>{
             if(err){
               return resMon.status(400).json({
@@ -23,6 +23,8 @@ app.get('/getEvents/:id',function(req,events){
               data = {
                 response:2,
                 events: resMon
+               
+
               };
             }
             events.json(data)//display response
