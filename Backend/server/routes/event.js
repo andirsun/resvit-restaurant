@@ -3,14 +3,15 @@ const app = express();
 const Event = require('../models/event');
 
 
-app.get('/getEvents',function(req,events){
+app.get('/getEvents/:id',function(req,events){
   let desde = req.query.desde || 0; //logic operator, if user doesnt send "desde" propertie in the petition, then desde variable will be set in 0;
   desde = Number(desde);
 
   let limite = req.query.limite || 0; 
   limite = Number(limite);
-
-  Event.find({})
+  let idRes = req.params.id;
+  
+  Event.find({idRestaurant:idRes})
         .exec((err,resMon)=>{
             if(err){
               return resMon.status(400).json({
@@ -19,10 +20,19 @@ app.get('/getEvents',function(req,events){
               });
             }
             if(resMon){
-              data = {events: resMon}
+              data = {
+                response:2,
+                events: resMon
+              };
             }
             events.json(data)//display response
           });
+});
+app.get('/random/:id',function(req,res){
+  let id = req.params.id;
+  res.json({
+      id:id
+  });
 });
 
 app.post('/addEvent',function(req,res){

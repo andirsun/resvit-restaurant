@@ -81,10 +81,5 @@ app.post('/postevent',function(req,res){
 app.put('/editevent',function(req,res){
   res.json('Aca va a tener que enviarme la informacion del evento para actualizarlo');
 });
-app.get('/getevent/:id',function(req,res){
-  let id = req.params.id;
-  res.json({
-      idEvent:id
-  });
-});
+
 module.exports = app;//para importar al archivo de server.js
