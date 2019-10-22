@@ -43,6 +43,8 @@ app.use( require('./routes/decoration'));
 //////Conection to MongoDB database //////////////////////////////
 mongoose.connect('mongodb://181.50.100.167:27018/Restaurants', {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
     user: 'dba',
     pass: 'dba2019'
 }).then(() => {
@@ -53,5 +55,5 @@ mongoose.connect('mongodb://181.50.100.167:27018/Restaurants', {
 });
 //////////////////////////////////////////////////////////////////
 app.listen(process.env.PORT,()=>{
-    console.log('escuchando al puerto',3000);
+    console.log('Running in the port number : ',3000);
 });
