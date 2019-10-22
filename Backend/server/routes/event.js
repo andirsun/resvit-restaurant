@@ -19,9 +19,9 @@ app.get('/getEvents',function(req,events){
               });
             }
             if(resMon){
-              data = {resMon}
+              data = {events: resMon}
             }
-            events.json(data)
+            events.json(data)//display response
           });
 });
 
@@ -48,18 +48,6 @@ app.post('/addEvent',function(req,res){
       });
     });    
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = app;//para importar al archivo de server.js
