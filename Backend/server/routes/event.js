@@ -14,7 +14,7 @@ app.post('/addEvent',function(req,res){
     type: body.type
   });
   
-  Event.save((err,eventDB)=>{
+  event.save((err,eventDB)=>{
     //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
     if(err){
       return res.status(400).json({
