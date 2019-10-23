@@ -7,16 +7,16 @@
 .Menu {
     display: flex;
     flex-direction: row;
-    width: 60%;
+    width: 80%;
     text-align: center;
   }
 .App-header {
     background-color: #1c1d1f;
-    height: 90px;
+    height: 80px;
     display: flex;
     box-shadow: 2px 2px 5px #999;
     flex-direction: row;
-    text-align: center;
+    /*text-align: center;*/
   }
 .App-link {
     color: #09d3ac;
@@ -26,12 +26,17 @@
 }
 .EventCard{
     text-align: center;
-    width: 80%;
-    margin-left: 120px;
+    margin-left: 150px;
+    /*background-color: #FFD705*/
 }
 
 .Center{
-    width: 40%;
+    width: 50%;
     text-align: center;
-    margin-left: 90px;
+}
+
+.decorBar{
+  width: 100%;
+  height: 3px;
+  background-color: #FFD705;
 }

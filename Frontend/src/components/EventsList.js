@@ -10,7 +10,7 @@ export class EventList extends Component {
     render(){
         const {events} = this.props
         return(
-            <div>
+            <div className="ui three doubling stackables cards">
                 {
                     events.map(event =>{
                         return (
@@ -25,8 +25,7 @@ export class EventList extends Component {
                             </div>
                         )
                     })
-                }
-                
+                } 
             </div>
         )
     }
