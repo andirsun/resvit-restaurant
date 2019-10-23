@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Button, Form } from 'semantic-ui-react'
 import DatePicker from "react-datepicker";
-
+//import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 
 export class FormEvent extends Component{
@@ -9,42 +9,57 @@ export class FormEvent extends Component{
     state = {
         idRestaurant : '1',
         name : '',
-        type: '',
-        startDate: ''
-    };
+        startDate: new Date(),
+        type: ''
+    }
      
     handleChange = (date) => {
         this.setState({
           startDate: date
         });
-        console.log(this.state.startDated)
-    };
+    }
+    
     handleChangeName = (e) => {
+        e.preventDefault()
         this.setState({
           name: e.target.value
         });
-        console.log(this.state.name)
-    };
+    }
+
     handleChangeType = (e) => {
+        e.preventDefault()
         this.setState({
           type: e.target.value
         });
-        console.log(this.state.type)
-    };
+    }
 
     _handleSubmit=(e)=>{
-        const {id,name,type,date}=this.props
+        console.log(this.state)
+        /*
+        const {idRestaurant,name,date,type}=this.props
         fetch('https://resvit.herokuapp.com/addEvent', {
             method: 'POST',
+            headers: {
+				"Content-type": "application/x-www-form-urlencoded"
+			},
             body: JSON.stringify({
-              idRestaurant: {id},
+              idRestaurant: {idRestaurant},
               name: {name},
               date:{date},
               type:{type}
             })
-          }).then(response =>{
+        }).then(response =>{
               console.log(response)
-          })
+          }) ¨*/
+          /*
+        axios.post('https://resvit.herokuapp.com/addEvent',this.state)
+        .then( response =>{
+            console.log(response)
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+        */
     }
 
     
