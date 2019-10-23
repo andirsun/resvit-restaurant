@@ -13,7 +13,7 @@ export class Events extends Component {
     }
 
   _fetchMovie(){
-    fetch('http://resvit.herokuapp.com/getEvents')
+    fetch('http://resvit.herokuapp.com/getEvents/?id=1')
     .then(res => res.json())
     .then(result => {
       const {events=[]}=result
