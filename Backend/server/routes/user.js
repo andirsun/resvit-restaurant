@@ -31,7 +31,6 @@ app.post('/addUser',function(req,res){
       
     });    
 });
-
 app.get('/usuario',function(req,usuarios){
   let desde = req.query.desde || 0; //logic operator, if user doesnt send "desde" propertie in the petition, then desde variable will be set in 0;
   desde = Number(desde);
@@ -55,7 +54,6 @@ app.get('/usuario',function(req,usuarios){
             });
           })
 });
-
 app.put('/usuario/:id',function(req,res){
   let id = req.params.id;
   let body =_.pick( req.body,['nombre','email','img','role','estado']);//library underscore let me filter just the fields that i want to accept for update
@@ -70,16 +68,6 @@ app.put('/usuario/:id',function(req,res){
       response:2,
       usuario:usuarioDB
     });
-  });
-
-  
+  });  
 });
-
-app.post('/postevent',function(req,res){
-  res.json('Aca va a tener que enviarme la informacion del evento para crearlooooo');
-});
-app.put('/editevent',function(req,res){
-  res.json('Aca va a tener que enviarme la informacion del evento para actualizarlo');
-});
-
 module.exports = app;//para importar al archivo de server.js
