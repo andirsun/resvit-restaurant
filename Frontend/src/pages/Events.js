@@ -29,17 +29,18 @@ export class Events extends Component {
   render(){
 
     return (
-      <div>
+      <div> 
         <header className="App-header">
           <div className="Menu">
             <img src={logo} className="App-logo" alt="logo"/>
             <MenuR/>
           </div>
         </header>
-        <br></br>
-        <div className='Titulo'> 
+        <div className="decorBar"></div>
+
+        <div className="ui bottom attached button"> 
           <Title>Eventos</Title>
-          <div className="ui bottom attached button">
+          <div>
             <Button className='ui inverted secondary button' onClick={this._handleNew}>
               <i className="add icon"></i>
               Añadir Evento           
@@ -47,7 +48,7 @@ export class Events extends Component {
           </div>
         </div>
         <br></br>
-        <div className='EventCard'>
+        <div className="EventCard">
           <EventList events={this.state.result}></EventList>
         </div>
       </div>

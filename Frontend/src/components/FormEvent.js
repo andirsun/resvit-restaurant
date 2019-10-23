@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Segment } from 'semantic-ui-react'
 import DatePicker from "react-datepicker";
 //import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
@@ -65,7 +65,8 @@ export class FormEvent extends Component{
     
     render(){
         return(
-            <div>
+            <Segment>
+            <div >
                 <Form onSubmit={this._handleSubmit}>
                     <Form.Field>
                         <label>Nombre de Evento</label>
@@ -84,6 +85,7 @@ export class FormEvent extends Component{
                     <Button className='ui inverted secondary button' type='submit'>Submit</Button>
                 </Form>              
             </div>
+            </Segment>
         )
     }
 }
