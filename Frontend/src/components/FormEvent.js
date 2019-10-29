@@ -35,31 +35,29 @@ export class FormEvent extends Component{
 
     _handleSubmit=(e)=>{
         console.log(this.state)
-        /*
         const {idRestaurant,name,date,type}=this.props
-        fetch('https://resvit.herokuapp.com/addEvent', {
+        var params ={
+            idRestaurant: {idRestaurant},
+            name: {name},
+            date:{date},
+            type:{type}        
+        };
+        var formData = new FormData();
+        for (var k in params){
+            formData.append(k,params[k]);
+        }
+
+        var request ={
             method: 'POST',
-            headers: {
+            headers:{
 				"Content-type": "application/x-www-form-urlencoded"
-			},
-            body: JSON.stringify({
-              idRestaurant: {idRestaurant},
-              name: {name},
-              date:{date},
-              type:{type}
-            })
-        }).then(response =>{
-              console.log(response)
-          }) ¨*/
-          /*
-        axios.post('https://resvit.herokuapp.com/addEvent',this.state)
-        .then( response =>{
-            console.log(response)
-        })
-        .catch(error =>{
-            console.log(error)
-        })
-        */
+            },
+            body : formData
+        }
+        fetch('https://resvit.herokuapp.com/addEvent', request).then(
+            console.log("acabo")
+        )
+          
     }
 
     
