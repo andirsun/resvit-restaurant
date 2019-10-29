@@ -4,6 +4,7 @@ import {MenuR} from '../components/MenuR'
 import {Title} from '../components/Title'
 import logo from '../images/RevitBlanco.png'
 import '../styles/menu.css'
+import '../styles/addEventStyle.css'
 
 export class AddEvent extends Component{
     
@@ -21,8 +22,10 @@ export class AddEvent extends Component{
                     <Title>Añadir Evento</Title>
                 </div>
                 <br></br>
-                <div className='Center'>
-                <FormEvent></FormEvent>
+                <div className="main_content">
+                    <div className='container'>
+                    <FormEvent></FormEvent>
+                    </div>
                 </div>
             </div>
         )
