@@ -6,6 +6,7 @@ const _=require('underscore');
 //////////////////////////////////////
 
 app.post('/addUser',function(req,res){
+  //Add user to DB 
     let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
     let usuario = new User({
       userName : body.userName,
@@ -22,14 +23,35 @@ app.post('/addUser',function(req,res){
           content:err
         });
       }
-
       usuario.password =null;
-      res.json({
+      res.status(200).json({
         response:2,
         user: usuarioDB
       });
       
     });    
+});
+
+app.get('/autenticar',function(req,usuario){
+  //Use to login and validate if a user exists
+  /*
+  Event.find({idRestaurant:idRes})
+        .exec((err,resMon)=>{
+            if(err){
+              return resMon.status(400).json({
+                response:1,
+                content:err
+              });
+            }
+            if(resMon){
+              data = {
+                response:2,
+                events: resMon
+              };
+            }
+            events.json(data)//display response
+          });
+          */
 });
 app.get('/usuario',function(req,usuarios){
   let desde = req.query.desde || 0; //logic operator, if user doesnt send "desde" propertie in the petition, then desde variable will be set in 0;
@@ -48,7 +70,7 @@ app.get('/usuario',function(req,usuarios){
                 content:err
               });
             }
-            res.json({
+            res.status(200).json({
               response : 2,
               usuarios
             });
@@ -64,7 +86,7 @@ app.put('/usuario/:id',function(req,res){
         content:err
       });
     }
-    res.json({
+    res.status(200).json({
       response:2,
       usuario:usuarioDB
     });
