@@ -39,7 +39,7 @@ export class FormEvent extends Component{
         var params ={
             idRestaurant: {idRestaurant},
             name: {name},
-            date:{date},
+            date: {date},
             type:{type}        
         };
         var formData = new FormData();
@@ -80,7 +80,7 @@ export class FormEvent extends Component{
                             selected={this.state.startDate}
                             onChange={this.handleChange}/>
                     </Form.Field>
-                    <Button className='ui inverted secondary button' type='submit'>Submit</Button>
+                    <Button className='ui inverted secondary button' type='submit'>Guardar</Button>
                 </Form>              
             </div>
             </Segment>

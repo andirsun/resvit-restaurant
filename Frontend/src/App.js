@@ -9,8 +9,7 @@ class App extends Component {
 
     return (
       <div >
-        <p>Hola</p>
-        <Events></Events>
+        <AddEvent></AddEvent>
       </div>
     );
   }
