@@ -13,7 +13,6 @@ app.post('/addEvent',function(req,res){
     date : body.date,
     type: body.type
   });
-  
   event.save((err,eventDB)=>{
     //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
     if(err){
