@@ -1,0 +1,16 @@
+.main_content {
+    width: auto;
+    height: auto;
+    position: relative;
+    display: flex;
+}
+
+.container {
+    width: 955px!important;
+    height: auto;
+    margin: 0 auto auto auto;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    background-color: #1c1d1f;
+}

@@ -5,6 +5,7 @@ import {MenuR} from '../components/MenuR'
 import {Title} from'../components/Title'
 import {Button } from 'semantic-ui-react'
 import '../styles/menu.css'
+import '../styles/EventsPageStyle.css'
 
 
 export class Events extends Component {
@@ -48,8 +49,10 @@ export class Events extends Component {
           </div>
         </div>
         <br></br>
-        <div className="EventCard">
-          <EventList events={this.state.result}></EventList>
+        <div className="main_content">
+          <div className="container">
+            <EventList events={this.state.result}></EventList>
+          </div>
         </div>
       </div>
     );
