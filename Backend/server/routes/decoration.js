@@ -47,7 +47,7 @@ app.get('/getDecorations',function(req,events){
   limite = Number(limite);
   let idRes = req.query.id;
   idRes = Number(idRes)
-  Event.find({idRestaurant:idRes})
+  Decoration.find({idRestaurant:idRes})
         .exec((err,resMon)=>{
             if(err){
               return resMon.status(400).json({
