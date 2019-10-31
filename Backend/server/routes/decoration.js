@@ -58,7 +58,7 @@ app.get('/getDecorations',function(req,events){
             if(resMon){
               data = {
                 response:2,
-                events: resMon
+                decorations: resMon
               };
             }
             events.json(data)//display response

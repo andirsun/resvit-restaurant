@@ -43,6 +43,36 @@ app.put('/editEvent',function(req,res){
     });
   });
 });
+app.put('/uploadImageEvent',function(req,res){
+  if (!req.files || Object.keys(req.files).length === 0) { //si ningun archivo es detectado en la peticion que se envio
+    return res.status(400).json({
+        response : 1,
+        error:{
+          message: "No se ha seleccionado ningun archivo"
+        }
+    });
+  }
+  let file = req.files.archivo;//el nombre del input en html debe ser para este caso "archivo"
+  // Extenciones permitidas para cargar al servidor
+  let extenciones = [];
+  //Moving FIle
+  file.mv('uploads/filename.jpg', (err) => {
+    if (err)
+      return res.status(500).json({
+        response : 1,
+        content:{
+          message : "ocurrio un error mientras se movia el archivo al directorio" ,
+          error: err
+        }
+      });
+    res.json({
+      response : 2,
+      content: {
+        message: "la imagen se subio correctamente!!!"
+      }
+    });
+  });
+});
 app.get('/getEvents',function(req,events){
   let desde = req.query.desde || 0; //logic operator, if user doesnt send "desde" propertie in the petition, then desde variable will be set in 0;
   desde = Number(desde);

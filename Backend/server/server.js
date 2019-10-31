@@ -3,7 +3,10 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-//////////////////////////////////////////
+const fileUpload = require('express-fileupload');
+
+// Using module express-fileupload to upload files to server
+app.use(fileUpload({ useTempFiles: true })); 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
@@ -51,6 +54,7 @@ mongoose.connect('mongodb://181.50.100.167:27018/Restaurants', {
     console.log('successfully connected to the database');
 }).catch(err => {
     console.log('error connecting to the database');
+    console.log(err);
     process.exit();
 });
 //////////////////////////////////////////////////////////////////
