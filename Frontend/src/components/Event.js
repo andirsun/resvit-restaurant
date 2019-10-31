@@ -1,5 +1,6 @@
 import React , {Component} from 'react';
 import { Button, Card, Image, Segment} from 'semantic-ui-react'
+import ImageDefault from '../images/banda.jpg'
 import PropTypes from 'prop-types'
 import "../semantic/semantic.min.css"
 import "../styles/menu.css"
@@ -13,14 +14,22 @@ export class Event extends Component{
         image: PropTypes.string
     }
 
+    handleDelete(id,e){ 
+        console.log(id)
+        var url = 'https://resvit.herokuapp.com/deleteEvent/?id='+id
+        console.log(url)
+        fetch(url,{method:'DELETE'})
+        .then("se supone que eliminó")
+    }
+
     render(){
-        const { name, description, date, image}= this.props
+        const { id,name, description, date, image}= this.props
         return(
             <Segment>
                 <Card.Group>    
-                    <Card >
+                    <Card>
                         <Image
-                            src= {image ||'https://react.semantic-ui.com/images/avatar/large/steve.jpg'}
+                            src= {image ||ImageDefault}
                             wrapped ui={false}
                         />
                         <Card.Content>
@@ -36,7 +45,7 @@ export class Event extends Component{
                                     <Button className='ui inverted secondary button'>
                                         Editar
                                     </Button>
-                                    <Button className='ui inverted secondary button'>
+                                    <Button className='ui inverted secondary button' onClick={(e)=>this.handleDelete(id,e)}>
                                         Eliminar
                                     </Button>
                                 </div>

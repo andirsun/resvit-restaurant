@@ -49,8 +49,8 @@ export class Events extends Component {
           </div>
         </div>
         <br></br>
-        <div className="main_content">
-          <div className="container">
+        <div className="main_contentEvent">
+          <div className="containerEvent">
             <EventList events={this.state.result}></EventList>
           </div>
         </div>
