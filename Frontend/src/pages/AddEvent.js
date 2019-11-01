@@ -8,7 +8,9 @@ import '../styles/menu.css'
 export class AddEvent extends Component{
     
     render(){
+
         return(
+            
             <div>
                 <header className="App-header">
                 <div className="Menu">
