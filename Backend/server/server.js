@@ -33,18 +33,6 @@ app.use( require('./routes/decoration'));
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //////Conection to MongoDB database //////////////////////////////
 mongoose.connect('mongodb://181.50.100.167:27018/Restaurants', {
     useNewUrlParser: true,
