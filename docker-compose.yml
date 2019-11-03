@@ -1,6 +1,22 @@
-backend:  
-     build: .  
-     volumes:    
-         - "./Backend:/src/"  
-     ports:    
-         - "80:3000"
+version: "3"
+services:
+    frontend:
+        container_name: frontend
+        build:
+            context: ./Frontend
+            dockerfile: Dockerfile
+        image: scocarojas/reactjs
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./Frontend:/usr/src/app
+    backend:
+        container_name: backend
+        build:
+            context: ./Backend
+            dockerfile: Dockerfile
+        image: socarojas/nodejs
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./Backend:/usr/src/app
