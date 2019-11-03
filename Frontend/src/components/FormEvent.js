@@ -37,35 +37,28 @@ export class FormEvent extends Component{
     }
 
     _handleSubmit=(e)=>{
-        console.log(this.state)
-        const {idRestaurant,name,date,type}=this.props
+        var idRestaurant1 = this.state.idRestaurant
+        var name1 = this.state.name
+        var date1 = this.state.startDate
+        var type1 = this.state.type
         var params ={
-            idRestaurant: {idRestaurant},
-            name: {name},
-            date: {date},
-            type:{type}        
+            idRestaurant: idRestaurant1,
+            name: name1,
+            date: date1,
+            type: type1        
         };
-
-        var formData = new FormData();
-        for (var k in params){
-            let encodedkey = encodeURIComponent(k);
-            let encondedValue  = encodeURIComponent(params[k]);
-           
-        }
-
+        console.log(params)
         var request ={
             method: 'POST',
-            //mode: 'cors',
             headers:{
-                //"Acceses-Control-Allow-Origin":'*',
-                //'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+                'Accept' : 'application/json',
 				"Content-type": "application/json"
             },
-            body : params
+            body : JSON.stringify(params)
         }
-
+        console.log(request)
         fetch('https://resvit.herokuapp.com/addEvent',request)
-        .then(response => console.log(response))
+        .then(response =>              )
         .catch(err => console.log(err));
           
     }
