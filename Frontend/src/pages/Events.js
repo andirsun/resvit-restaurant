@@ -6,7 +6,8 @@ import {Title} from'../components/Title'
 import {Button } from 'semantic-ui-react'
 import '../styles/menu.css'
 import '../styles/EventsPageStyle.css'
-
+import { AddEvent } from './AddEvent';
+import {Link} from "react-router-dom";
 
 export class Events extends Component {
 
@@ -51,16 +52,18 @@ export class Events extends Component {
         <div className="ui bottom attached button"> 
           <Title>Eventos</Title>
           <div>
-            <Button className='ui inverted secondary button' onClick={this._handleNew}>
-              <i className="add icon"></i>
-              Añadir Evento           
-            </Button>
+            <Link to ={'/AddEvent'} >
+                <Button className='ui inverted secondary button' >
+                  <i className="add icon"></i>
+                  Añadir Evento           
+                </Button>
+            </Link>
           </div>
         </div>
         <br></br>
         <div className="main_contentEvent">
           <div className="containerEvent">
-            <EventList events={this.state.result} handleToUpdate={this.handleToUpdate}></EventList>
+            <EventList events={this.state.result} action={this.handleToUpdate}></EventList>
           </div>
         </div>
       </div>

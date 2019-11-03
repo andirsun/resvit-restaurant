@@ -13,7 +13,7 @@ export class EventList extends Component {
                 {
                     events.map(event =>{
                         return (
-                            <div key={event._id} handler >
+                            <div key={event._id} >
                                 <Event
                                 id ={event._id}
                                 name ={event.name}
