@@ -1,5 +1,6 @@
 import React , {Component} from 'react';
 import {Events} from './pages/Events'
+// eslint-disable-next-line
 import { AddEvent } from './pages/AddEvent';
 
 
