@@ -9,9 +9,18 @@ import '../styles/EventsPageStyle.css'
 
 
 export class Events extends Component {
-    state={
-        result:[]
-    }
+
+  constructor(props) {
+    super(props);
+    this.handleToUpdate  = this.handleToUpdate.bind(this);
+    this.state={
+      result:[]
+    };
+  }
+
+  handleToUpdate(newState){
+    this.setState({result:newState})
+  }
 
   _fetchMovie(){
     fetch('http://resvit.herokuapp.com/getEvents/?id=1')
@@ -51,7 +60,7 @@ export class Events extends Component {
         <br></br>
         <div className="main_contentEvent">
           <div className="containerEvent">
-            <EventList events={this.state.result}></EventList>
+            <EventList events={this.state.result} handleToUpdate={this.handleToUpdate}></EventList>
           </div>
         </div>
       </div>

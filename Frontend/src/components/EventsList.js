@@ -6,7 +6,6 @@ export class EventList extends Component {
     PropTypes ={
         events : PropTypes.array
     }
-
     render(){
         const {events} = this.props
         return(
@@ -14,7 +13,7 @@ export class EventList extends Component {
                 {
                     events.map(event =>{
                         return (
-                            <div key={event._id} >
+                            <div key={event._id} handler >
                                 <Event
                                 id ={event._id}
                                 name ={event.name}

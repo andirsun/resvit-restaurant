@@ -42,21 +42,28 @@ export class FormEvent extends Component{
             date: {date},
             type:{type}        
         };
+
         var formData = new FormData();
         for (var k in params){
-            formData.append(k,params[k]);
+            let encodedkey = encodeURIComponent(k);
+            let encondedValue  = encodeURIComponent(params[k]);
+           
         }
 
         var request ={
             method: 'POST',
+            //mode: 'cors',
             headers:{
-				"Content-type": "application/x-www-form-urlencoded"
+                //"Acceses-Control-Allow-Origin":'*',
+                //'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+				"Content-type": "application/json"
             },
-            body : formData
+            body : params
         }
-        fetch('https://resvit.herokuapp.com/addEvent', request).then(
-            console.log("acabo")
-        )
+
+        fetch('https://resvit.herokuapp.com/addEvent',request)
+        .then(response => console.log(response))
+        .catch(err => console.log(err));
           
     }
 
