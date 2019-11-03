@@ -47,7 +47,6 @@ export class FormEvent extends Component{
             date: date1,
             type: type1        
         };
-        console.log(params)
         var request ={
             method: 'POST',
             headers:{
@@ -56,14 +55,17 @@ export class FormEvent extends Component{
             },
             body : JSON.stringify(params)
         }
-        console.log(request)
         fetch('https://resvit.herokuapp.com/addEvent',request)
-        .then(response =>              )
-        .catch(err => console.log(err));
+        .then(response =>  {
+            console.log(response.status)
+            if (response.status == "200") {
+                console.log("se escribió con exito")
+            };
+        })
+        .catch(err => console.log("Se presentó un error"));
           
     }
 
-    
     render(){
         return(
             <Segment>

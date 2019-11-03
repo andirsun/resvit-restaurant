@@ -30,6 +30,7 @@ export class Events extends Component {
     .then(result => {
       const {events=[]}=result
       this.setState({result : events})
+      console.log(this.state.result)
     })        
   }
 

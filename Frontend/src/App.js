@@ -15,7 +15,7 @@ class App extends Component {
   render(){
     return (
       <div >
-        <AddEvent></AddEvent>
+        <Decorations></Decorations>
       </div>
     );
   }
