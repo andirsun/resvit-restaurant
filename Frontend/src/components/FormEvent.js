@@ -32,6 +32,9 @@ export class FormEvent extends Component{
           type: e.target.value
         });
     }
+    handleFileSelect=(e)=>{
+        console.log(e.target.files[0])
+    }
 
     _handleSubmit=(e)=>{
         console.log(this.state)
@@ -86,6 +89,10 @@ export class FormEvent extends Component{
                         <DatePicker
                             selected={this.state.startDate}
                             onChange={this.handleChange}/>
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Sube una imagen</label>
+                        <input type="file" onChange={this.handleFileSelect} />
                     </Form.Field>
                     <Button className='ui inverted secondary button' type='submit'>Guardar</Button>
                 </Form>              
