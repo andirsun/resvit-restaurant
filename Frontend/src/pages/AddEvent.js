@@ -3,6 +3,7 @@ import{FormEvent} from '../components/FormEvent'
 import {MenuR} from '../components/MenuR'
 import {Title} from '../components/Title'
 import logo from '../images/RevitBlanco.png'
+import Calendar from 'react-calendar'
 import '../styles/menu.css'
 import '../styles/addEventStyle.css'
 
@@ -26,6 +27,10 @@ export class AddEvent extends Component{
                     <div className='container'>
                     <FormEvent></FormEvent>
                     </div>
+                    <div className='container2'>
+                    <Calendar></Calendar>
+                    </div>
+                   
                 </div>
             </div>
         )

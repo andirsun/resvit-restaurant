@@ -9,6 +9,7 @@ import '../styles/EventsPageStyle.css'
 import { AddEvent } from './AddEvent';
 import {Link} from "react-router-dom";
 
+
 export class Events extends Component {
 
   constructor(props) {

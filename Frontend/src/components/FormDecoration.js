@@ -8,7 +8,8 @@ export class FormDecoration extends Component{
         description : '',
         type:'',
         value: '',
-        name:''
+        name:'',
+        image : null
     }
 
     handleChangeName=(e)=>{
@@ -22,6 +23,9 @@ export class FormDecoration extends Component{
     }
     handleChangeValue=(e)=>{
         this.setState({value:e.target.value})
+    }
+    handleFileSelect=(e)=>{
+        console.log(e.target.files[0])
     }
      
 
@@ -80,6 +84,10 @@ export class FormDecoration extends Component{
                     <Form.Field>
                         <label>Descripción</label>
                         <input placeholder='Describa la Decoración' onChange={this.handleChangeDescription} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Sube una imagen</label>
+                        <input type="file" onChange={this.handleFileSelect} />
                     </Form.Field>
                     <Button className='ui inverted secondary button' type='submit'>Guardar</Button>
                 </Form>              
