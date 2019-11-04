@@ -4,9 +4,7 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-COPY package.json .
-
-EXPOSE 5000
+EXPOSE 4000
 
 RUN npm install
 
