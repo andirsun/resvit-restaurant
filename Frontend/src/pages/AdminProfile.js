@@ -5,6 +5,7 @@ import logo from '../images/RevitBlanco.png';
 import {MenuProfile} from '../components/MenuProfile'
 import {Title} from '../components/Title'
 import TableExampleApprove from '../components/UserTable';
+import CardExampleCard from '../components/CardProfile'
 export class AdminProfile extends Component{
     render(){
         return(
@@ -25,7 +26,7 @@ export class AdminProfile extends Component{
                         <TableExampleApprove></TableExampleApprove>
                     </div>
                     <div className='containerP'>
-                        <img src={logo} className="App-logo" alt="logo"/>
+                        <CardExampleCard></CardExampleCard>
                     </div>
                 </div>
             </div>
