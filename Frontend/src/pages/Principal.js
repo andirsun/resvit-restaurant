@@ -7,12 +7,18 @@ export class Principal extends Component{
         result:[]
     }
 
-    fetchRestaurant(){
-        
+    fetchRestaurant(id){
+        fetch('http://181.50.100.167:5000/getRestaurantsxCity/'+id)
+        .then(res => res.json())
+        .then(result => {
+          const {Content=[]}=result
+          this.setState({result : Content})
+          console.log(this.state.result)
+        })        
     }
 
     componentDidMount(){
-        this.fetchRestaurant();
+        this.fetchRestaurant("2");
     }
     render(){
         return(
@@ -32,7 +38,7 @@ export class Principal extends Component{
                 </header>
                 <div className="decorBar"></div>
                 <div>
-                    <RestaurantList restorant={this.state.result}></RestaurantList>
+        
                 </div>
             </div>
             
