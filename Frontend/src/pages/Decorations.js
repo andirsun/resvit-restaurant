@@ -15,7 +15,7 @@ export class Decorations extends Component{
       };
 
     _fetchMovie(){
-        fetch('http://resvit.herokuapp.com/getDecorations/?id=2')
+        fetch('https://resvit.herokuapp.com/getDecorations/?id=2')
         .then(res => res.json())
         .then(response =>{ 
            const {decorations=[]}=response
