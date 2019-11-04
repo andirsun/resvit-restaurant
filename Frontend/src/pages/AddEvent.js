@@ -4,9 +4,10 @@ import {MenuR} from '../components/MenuR'
 import {Title} from '../components/Title'
 import logo from '../images/RevitBlanco.png'
 import Calendar from 'react-calendar'
+import {Link} from 'react-router-dom'
 import '../styles/menu.css'
 import '../styles/addEventStyle.css'
-import { Segment } from 'semantic-ui-react';
+import { Segment , Button} from 'semantic-ui-react';
 
 export class AddEvent extends Component{
     
@@ -22,6 +23,14 @@ export class AddEvent extends Component{
                 <div className="decorBar"></div>
                 <div className="ui bottom attached button">
                     <Title>Añadir Evento</Title>
+                    <div>
+                    <Link to ='/Events' >
+                        <Button className='ui inverted secondary button' >
+                        <i className="angle double left icon"></i>
+                        Volver           
+                        </Button>
+                    </Link>
+                    </div>
                 </div>
                 <br></br>
                 <div className="main_content">
