@@ -32,37 +32,40 @@ export class FormEvent extends Component{
           type: e.target.value
         });
     }
-
-    _handleSubmit=(e)=>{
-        console.log(this.state)
-        /*
-        const {idRestaurant,name,date,type}=this.props
-        fetch('https://resvit.herokuapp.com/addEvent', {
-            method: 'POST',
-            headers: {
-				"Content-type": "application/x-www-form-urlencoded"
-			},
-            body: JSON.stringify({
-              idRestaurant: {idRestaurant},
-              name: {name},
-              date:{date},
-              type:{type}
-            })
-        }).then(response =>{
-              console.log(response)
-          }) ¨*/
-          /*
-        axios.post('https://resvit.herokuapp.com/addEvent',this.state)
-        .then( response =>{
-            console.log(response)
-        })
-        .catch(error =>{
-            console.log(error)
-        })
-        */
+    handleFileSelect=(e)=>{
+        console.log(e.target.files[0])
     }
 
-    
+    _handleSubmit=(e)=>{
+        var idRestaurant1 = this.state.idRestaurant
+        var name1 = this.state.name
+        var date1 = this.state.startDate
+        var type1 = this.state.type
+        var params ={
+            idRestaurant: idRestaurant1,
+            name: name1,
+            date: date1,
+            type: type1        
+        };
+        var request ={
+            method: 'POST',
+            headers:{
+                'Accept' : 'application/json',
+				"Content-type": "application/json"
+            },
+            body : JSON.stringify(params)
+        }
+        fetch('https://resvit.herokuapp.com/addEvent',request)
+        .then(response =>  {
+            console.log(response.status)
+            if (response.status == "200") {
+                console.log("se escribió con exito")
+            };
+        })
+        .catch(err => console.log("Se presentó un error"));
+          
+    }
+
     render(){
         return(
             <Segment>
@@ -82,7 +85,11 @@ export class FormEvent extends Component{
                             selected={this.state.startDate}
                             onChange={this.handleChange}/>
                     </Form.Field>
-                    <Button className='ui inverted secondary button' type='submit'>Submit</Button>
+                    <Form.Field>
+                        <label>Sube una imagen</label>
+                        <input type="file" onChange={this.handleFileSelect} />
+                    </Form.Field>
+                    <Button className='ui inverted secondary button' type='submit'>Guardar</Button>
                 </Form>              
             </div>
             </Segment>

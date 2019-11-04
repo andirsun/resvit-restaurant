@@ -1,26 +1,25 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-import {Event} from './Event'
+import {Decoration} from '../components/Decoration.js'
 
-export class EventList extends Component {
+export class DecorationsList extends Component {
     PropTypes ={
-        events : PropTypes.array
+        decorations : PropTypes.array
     }
     render(){
-        const {events} = this.props
-        console.log(events)
+        const {decorations}
+         = this.props
         return(
             <div className="ui three doubling stackables cards">
                 {
-                    events.map(event =>{
+                    decorations.map(event =>{
                         return (
                             <div key={event._id} >
-                                <Event
+                                <Decoration
                                 id ={event._id}
-                                name ={event.name}
-                                description={event.type}
-                                date={event.date}
-                                image={event.Poster}
+                                idRestaurant={event.idRestaurant}
+                                type ={event.type}
+                                description={event.description}
                                 />
                             </div>
                         )

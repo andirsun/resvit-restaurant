@@ -1,0 +1,15 @@
+.main_contentEvent {
+    width: auto;
+    height: auto;
+    position: relative;
+    display: flex;
+}
+
+.containerEvent {
+    width: 955px!important;
+    height: auto;
+    margin: 0 auto auto auto;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+}
