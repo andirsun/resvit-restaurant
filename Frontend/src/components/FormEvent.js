@@ -13,17 +13,26 @@ export class FormEvent extends Component{
         type: '',
         isModalOpen: false
     }
-     
+    
+    updateState=(m)=>{
+        console.log(m)
+        console.log("es esatado que venia",this.state)
+        this.setState({
+            name : '',
+            startDate: new Date(),
+            type: '',
+            isModalOpen: false
+        })
+        this.forceUpdate()
+        console.log("el nuevo estado actualizado",this.state)
+        
+    }
     openModal=()=> {
-        console.log("venia el estado", this.state.isModalOpen)
         this.setState({isModalOpen : true})
-        console.log("cambio el estado", this.state.isModalOpen)
     }
 
     closeModal=()=> {
-        console.log("venia el estado", this.state.isModalOpen)
         this.setState({isModalOpen : false})
-        console.log("cambio el estado", this.state.isModalOpen)
     }
     handleChange = (date) => {
         this.setState({
@@ -72,6 +81,7 @@ export class FormEvent extends Component{
             console.log(response.status)
             if (response.status == "200") {
                 console.log("se escribió con exito")
+                this.updateState("me fuí a actualizar");
             };
         })
         .catch(err => console.log("Se presentó un error"));
@@ -102,7 +112,11 @@ export class FormEvent extends Component{
                         <input type="file" onChange={this.handleFileSelect} />
                     </Form.Field>
                     <Button className='ui inverted secondary button' type='submit'>Guardar</Button>
-                </Form>             
+                </Form> 
+                <Button onClick={this.openModal}>el modal</Button>{
+                    this.state.isModalOpen &&
+                    <ModalConfirm  onClose={this.closeModal} ></ModalConfirm>
+                }            
             </div>
             </Segment>
         )
