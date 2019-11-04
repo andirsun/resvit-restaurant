@@ -11,7 +11,8 @@ app.post('/addUser',function(req,res){
     let usuario = new User({
       userName : body.userName,
       email : body.email,
-      password : bcrypt.hashSync(body.password,10), //ENCRIPTACION HASH DE UNA VIA CON 10 VUELTAS 
+      //password : bcrypt.hashSync(body.password,10), //ENCRIPTACION HASH DE UNA VIA CON 10 VUELTAS 
+      pass:body.password,
       userType: body.userType
     });
     
@@ -32,26 +33,37 @@ app.post('/addUser',function(req,res){
     });    
 });
 
-app.get('/autenticar',function(req,usuario){
+app.get('/auth',function(req,res){
   //Use to login and validate if a user exists
-  /*
-  Event.find({idRestaurant:idRes})
-        .exec((err,resMon)=>{
+  let body = req.body;
+  let user = body.email;
+  //let pass = bcrypt.hashSync(body.pass,10);
+  let pass = body.pass;
+  User.findOne({email:user,password:pass},function(err,userDB){
             if(err){
-              return resMon.status(400).json({
+              return res.status(400).json({
                 response:1,
                 content:err
               });
             }
-            if(resMon){
-              data = {
+            if(userDB){
+              res.json({
                 response:2,
-                events: resMon
-              };
+                content:{
+                  message : "User exist and its validate",
+                  user: userDB
+                }
+              });
+            }else{
+              res.json({
+                response:1,
+                content:{
+                  message : "datos incorrectos"
+                }
+              });
             }
-            events.json(data)//display response
           });
-          */
+          
 });
 app.get('/usuario',function(req,usuarios){
   let desde = req.query.desde || 0; //logic operator, if user doesnt send "desde" propertie in the petition, then desde variable will be set in 0;
