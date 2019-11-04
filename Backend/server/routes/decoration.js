@@ -8,7 +8,8 @@ app.post('/addDecoration',function(req,res){
     let decoration = new Decoration({
       idRestaurant : body.idRestaurant,
       description : body.description,
-      type: body.type
+      type: body.type,
+      price: body.price
     });
     decoration.save((err,decorationDB)=>{
       //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
@@ -26,7 +27,7 @@ app.post('/addDecoration',function(req,res){
 });
 app.put('/editDecoration',function(req,res){
   let id = req.query.id;
-  let body =_.pick( req.body,['type','description']);//library underscore let me filter just the fields that i want to accept for update
+  let body =_.pick( req.body,['type','description','price']);//library underscore let me filter just the fields that i want to accept for update
   Decoration.findByIdAndUpdate(id,body,{new:true,runValidators:true},(err,decorationDB)=>{
     if(err){
       return res.status(400).json({
