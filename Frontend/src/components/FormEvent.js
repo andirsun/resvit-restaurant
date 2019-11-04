@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { Button, Form, Segment } from 'semantic-ui-react'
+import { Button, Form, Segment, Modal } from 'semantic-ui-react'
 import DatePicker from "react-datepicker";
-//import axios from 'axios';
+import {ModalConfirm} from '../components/ModalConfirm.js' 
 import "react-datepicker/dist/react-datepicker.css";
 
 export class FormEvent extends Component{
@@ -10,9 +10,21 @@ export class FormEvent extends Component{
         idRestaurant : '1',
         name : '',
         startDate: new Date(),
-        type: ''
+        type: '',
+        isModalOpen: false
     }
      
+    openModal=()=> {
+        console.log("venia el estado", this.state.isModalOpen)
+        this.setState({isModalOpen : true})
+        console.log("cambio el estado", this.state.isModalOpen)
+    }
+
+    closeModal=()=> {
+        console.log("venia el estado", this.state.isModalOpen)
+        this.setState({isModalOpen : false})
+        console.log("cambio el estado", this.state.isModalOpen)
+    }
     handleChange = (date) => {
         this.setState({
           startDate: date
@@ -90,7 +102,7 @@ export class FormEvent extends Component{
                         <input type="file" onChange={this.handleFileSelect} />
                     </Form.Field>
                     <Button className='ui inverted secondary button' type='submit'>Guardar</Button>
-                </Form>              
+                </Form>             
             </div>
             </Segment>
         )
