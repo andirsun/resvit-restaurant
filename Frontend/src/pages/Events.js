@@ -5,12 +5,24 @@ import {MenuR} from '../components/MenuR'
 import {Title} from'../components/Title'
 import {Button } from 'semantic-ui-react'
 import '../styles/menu.css'
+import '../styles/EventsPageStyle.css'
+import { AddEvent } from './AddEvent';
+import {Link} from "react-router-dom";
 
 
 export class Events extends Component {
-    state={
-        result:[]
-    }
+
+  constructor(props) {
+    super(props);
+    this.handleToUpdate  = this.handleToUpdate.bind(this);
+    this.state={
+      result:[]
+    };
+  }
+
+  handleToUpdate(newState){
+    this.setState({result:newState})
+  }
 
   _fetchMovie(){
     fetch('http://resvit.herokuapp.com/getEvents/?id=1')
@@ -18,6 +30,7 @@ export class Events extends Component {
     .then(result => {
       const {events=[]}=result
       this.setState({result : events})
+      console.log(this.state.result)
     })        
   }
 
@@ -41,15 +54,19 @@ export class Events extends Component {
         <div className="ui bottom attached button"> 
           <Title>Eventos</Title>
           <div>
-            <Button className='ui inverted secondary button' onClick={this._handleNew}>
-              <i className="add icon"></i>
-              Añadir Evento           
-            </Button>
+            <Link to ={'/AddEvent'} >
+                <Button className='ui inverted secondary button' >
+                  <i className="add icon"></i>
+                  Añadir Evento           
+                </Button>
+            </Link>
           </div>
         </div>
         <br></br>
-        <div className="EventCard">
-          <EventList events={this.state.result}></EventList>
+        <div className="main_contentEvent">
+          <div className="containerEvent">
+            <EventList events={this.state.result} action={this.handleToUpdate}></EventList>
+          </div>
         </div>
       </div>
     );
