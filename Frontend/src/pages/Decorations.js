@@ -2,6 +2,8 @@ import React , {Component} from 'react';
 import {Title} from '../components/Title'
 import {Link} from 'react-router-dom'
 import { Button} from 'semantic-ui-react'
+import logo from '../images/RevitBlanco.png'
+import {MenuR} from '../components/MenuR'
 //import ScrollMenu from 'react-horizontal-scrolling-menu'
 
 import {DecorationsList} from '../components/DecorationsList.js'
@@ -30,6 +32,13 @@ export class Decorations extends Component{
     render(){
         return(
             <div>
+                <header className="App-header">
+                <div className="Menu">
+                    <img src={logo} className="App-logo" alt="logo"/>
+                    <MenuR/>
+                </div>
+                </header>
+                <div className="decorBar"></div>
                 <div className="ui bottom attached button">
                     <Title>Decoraciones</Title>
                     <div>
