@@ -12,7 +12,7 @@ app.post('/addUser',function(req,res){
       userName : body.userName,
       email : body.email,
       //password : bcrypt.hashSync(body.password,10), //ENCRIPTACION HASH DE UNA VIA CON 10 VUELTAS 
-      pass:body.password,
+      pass:body.password, 
       userType: body.userType
     });
     
