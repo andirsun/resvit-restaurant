@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const User = require('../models/user');
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const _=require('underscore');
 //////////////////////////////////////
 
@@ -65,17 +65,26 @@ app.get('/auth',function(req,res){
           });
           
 });
-app.get('/usuario',function(req,usuarios){
+app.get('/getUsers',function(req,res){
+  
   let desde = req.query.desde || 0; //logic operator, if user doesnt send "desde" propertie in the petition, then desde variable will be set in 0;
   desde = Number(desde);
 
   let limite = req.query.limite || 0; 
   limite = Number(limite);
 
-  Usuario.find({})
-        .skip(desde)//avoid this number or records 
-        .limit(5)//show this number of records after skip n records 
-        .exec((err,res)=>{
+  let tipo = req.query.type || 1;
+  tipo = Number(tipo);
+
+
+  User.find({userType:tipo})
+        //.skip(desde)//avoid this number or records 
+        //.limit(5)//show this number of records after skip n records
+
+        .exec((err,usuariosDB)=>{
+          usuariosDB.forEach(element => {
+            element.password = "top secret madafuca";
+          });
             if(err){
               return res.status(400).json({
                 response:1,
@@ -84,14 +93,16 @@ app.get('/usuario',function(req,usuarios){
             }
             res.status(200).json({
               response : 2,
-              usuarios
+              usuariosDB,
+              type: tipo
             });
           })
 });
-app.put('/usuario/:id',function(req,res){
-  let id = req.params.id;
-  let body =_.pick( req.body,['nombre','email','img','role','estado']);//library underscore let me filter just the fields that i want to accept for update
+app.put('/editUser',function(req,res){
+  let id = req.query.id;
+  let body =_.pick( req.body,['userName','email','img','type']);//library underscore let me filter just the fields that i want to accept for update
   Usuario.findByIdAndUpdate(id,body,{new:true,runValidators:true},(err,usuarioDB)=>{
+      
     if(err){
       return res.status(400).json({
         response:1,
