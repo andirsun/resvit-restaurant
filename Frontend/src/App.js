@@ -8,7 +8,8 @@ import {
   Link
 } from "react-router-dom";
 import { Decorations } from './pages/Decorations';
-import {AddDecoration} from './pages/AddDecoration'
+import {AddDecoration} from './pages/AddDecoration';
+import {AdminProfile} from './pages/AdminProfile'
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
         <Route path ="/Events" component ={Events}></Route>
         <Route path ="/AddEvent" component ={AddEvent}></Route>
         <Route path ="/AddDecoration" component ={AddDecoration}></Route>
+        <Route path ="/AdminProfile" component ={AdminProfile}></Route>
       </div>
     );
   }

@@ -1,0 +1,20 @@
+.main_contentP {
+    width: auto;
+    height: auto;
+    position: relative;
+}
+
+.containerP{
+    float: left;
+}
+
+.containerP1 {
+    width: 900px;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    background-color: #1c1d1f;
+    float: left;
+}
