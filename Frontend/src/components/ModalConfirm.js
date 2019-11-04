@@ -1,24 +1,18 @@
 import React, { Component } from 'react'
 import { Button, Modal } from 'semantic-ui-react'
 
-class ModalConfirm extends Component {
-  state = { open: false }
-
-  show = (size) => () => this.setState({ size, open: true })
-  close = () => this.setState({ open: false })
+export class ModalConfirm extends Component {
 
   render() {
-    const { open, size } = this.state
-
     return (
       <div>
-        <Modal size={size} open={open} onClose={this.close}>
+        <Modal>
           <Modal.Header>Delete Your Account</Modal.Header>
           <Modal.Content>
             <p>Are you sure you want to delete your account</p>
           </Modal.Content>
           <Modal.Actions>
-            <Button negative>No</Button>
+            <Button negative onClick={this.props.onClose}>No</Button>
             <Button
               positive
               icon='checkmark'
@@ -31,5 +25,3 @@ class ModalConfirm extends Component {
     )
   }
 }
-
-export default ModalConfirm

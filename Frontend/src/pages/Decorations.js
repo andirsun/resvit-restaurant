@@ -1,8 +1,8 @@
 import React , {Component} from 'react';
-import {FormDecoration} from '../components/FormDecoration.js'
 import {Title} from '../components/Title'
+import {Link} from 'react-router-dom'
+import { Button} from 'semantic-ui-react'
 //import ScrollMenu from 'react-horizontal-scrolling-menu'
-import '../styles/DecorationsPageStyle.css'
 
 import {DecorationsList} from '../components/DecorationsList.js'
 
@@ -32,15 +32,17 @@ export class Decorations extends Component{
             <div>
                 <div className="ui bottom attached button">
                     <Title>Decoraciones</Title>
+                    <div>
+                    <Link to ='/AddDecoration' >
+                        <Button className='ui inverted secondary button' >
+                        <i className="add icon"></i>
+                        Añadir Decoración           
+                        </Button>
+                    </Link>
+                    </div>
                 </div >
                 <div>
                 <DecorationsList decorations={this.state.resultado}></DecorationsList>    
-                </div>
-                <br></br>
-                <div className="main_contentD">
-                    <div className='containerD'>
-                        <FormDecoration></FormDecoration>
-                    </div>
                 </div>
             </div>
         )

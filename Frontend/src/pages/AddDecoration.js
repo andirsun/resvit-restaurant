@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import{FormEvent} from '../components/FormEvent'
+import{FormDecoration} from '../components/FormDecoration'
 import {MenuR} from '../components/MenuR'
 import {Title} from '../components/Title'
 import logo from '../images/RevitBlanco.png'
-import Calendar from 'react-calendar'
 import {Link} from 'react-router-dom'
+import { Button} from 'semantic-ui-react'
 import '../styles/menu.css'
 import '../styles/addEventStyle.css'
-import { Segment , Button} from 'semantic-ui-react';
+import '../styles/DecorationsPageStyle.css'
 
-export class AddEvent extends Component{
+export class AddDecoration extends Component{
     
     render(){
         return(
@@ -22,9 +22,9 @@ export class AddEvent extends Component{
                 </header>
                 <div className="decorBar"></div>
                 <div className="ui bottom attached button">
-                    <Title>Añadir Evento</Title>
+                    <Title>Añadir Decoración</Title>
                     <div>
-                    <Link to ='/Events' >
+                    <Link to ='/Decorations' >
                         <Button className='ui inverted secondary button' >
                         <i className="angle double left icon"></i>
                         Volver           
@@ -33,17 +33,12 @@ export class AddEvent extends Component{
                     </div>
                 </div>
                 <br></br>
-                <div className="main_content">
-                    <div className='container2' >
-                    <Segment>
-                    <Calendar></Calendar>
-                    </Segment>
-                    </div>  
-                    <div className='container'>
-                    <FormEvent></FormEvent>
+                <div className="main_contentD"> 
+                    <div className='containerD'>
+                    <FormDecoration></FormDecoration>
                     </div>  
                 </div>
-            </div>
+            </div>            
         )
     }
 }

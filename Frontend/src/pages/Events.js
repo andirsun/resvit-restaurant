@@ -54,7 +54,7 @@ export class Events extends Component {
         <div className="ui bottom attached button"> 
           <Title>Eventos</Title>
           <div>
-            <Link to ={'/AddEvent'} >
+            <Link to ='/AddEvent' >
                 <Button className='ui inverted secondary button' >
                   <i className="add icon"></i>
                   Añadir Evento           
