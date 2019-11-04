@@ -48,6 +48,10 @@ mongoose.connect('mongodb://181.50.100.167:27018/Restaurants', {
     process.exit();
 });
 //////////////////////////////////////////////////////////////////
+process.on('uncaughtException', function (error) {
+    console.log(error.stack);
+    
+ });
 app.listen(process.env.PORT,()=>{
     console.log('Running in the port number : ',3000);
 });

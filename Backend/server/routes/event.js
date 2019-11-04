@@ -53,8 +53,11 @@ app.put('/uploadImageEvent',function(req,res){
     });
   }
   let file = req.files.archivo;//el nombre del input en html debe ser para este caso "archivo"
+  let fileName = file.name.split('.');//para sacar la extencion del archivo 
+  let extention = fileName[fileName.length-1] ;
+
   // Extenciones permitidas para cargar al servidor
-  let extenciones = [];
+  let extenciones = ['png','jpg','gif','jpeg'];
   //Moving FIle
   file.mv('uploads/filename.jpg', (err) => {
     if (err)
