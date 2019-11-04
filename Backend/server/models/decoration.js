@@ -16,6 +16,10 @@ let decorationSchema = new Schema({
     description:{
         type: String,
         required:[true,'las descripcion es necesaria']
+    },
+    price :{
+        type:String,
+        required:[true,'el precio es necesario']
     }
 });
 decorationSchema.plugin(uniqueValidator,{message: '{PATH} Debe de ser Unico'}); //desplegar los errores mas user friendly

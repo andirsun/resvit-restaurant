@@ -28,7 +28,11 @@ let userSchema = new Schema({
     },
     password:{
         type:String,
-        required: [true,"EL pass es necesario"]
+        required: [true,"EL password es necesario"]
+    },
+    active:{
+        type:Boolean,
+        default:false
     }
 });
 

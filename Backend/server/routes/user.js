@@ -8,11 +8,12 @@ const _=require('underscore');
 app.post('/addUser',function(req,res){
   //Add user to DB 
     let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
+    console.log(body);
     let usuario = new User({
       userName : body.userName,
       email : body.email,
       //password : bcrypt.hashSync(body.password,10), //ENCRIPTACION HASH DE UNA VIA CON 10 VUELTAS 
-      pass:body.password, 
+      password:body.password, 
       userType: body.userType
     });
     
@@ -24,7 +25,7 @@ app.post('/addUser',function(req,res){
           content:err
         });
       }
-      usuario.password =null;
+      usuarioDB.password =null;
       res.status(200).json({
         response:2,
         user: usuarioDB
@@ -33,7 +34,29 @@ app.post('/addUser',function(req,res){
     });    
 });
 
-app.get('/auth',function(req,res){
+app.get('/getNameUser',function(req,res){
+  let id = req.query.id;
+  User.findOne({_id:id},function(err,userDB){
+    if(err){
+      res.status(500).json({
+        response :1,
+        content: {
+          error : err,
+          message : "no se puede encontrar el usuario"
+        }
+      });
+    }
+    if(userDB){
+      res.status(200).json({
+        response :1,
+        content:{
+          name : userDB.userName
+        } 
+      })
+    }
+  })
+});
+app.post('/logout',function(req,res){
   //Use to login and validate if a user exists
   let body = req.body;
   let user = body.email;
@@ -47,10 +70,12 @@ app.get('/auth',function(req,res){
               });
             }
             if(userDB){
+              userDB.password = "";
+              userDB.active = false;
               res.json({
                 response:2,
                 content:{
-                  message : "User exist and its validate",
+                  message : "User its correctly logout",
                   user: userDB
                 }
               });
@@ -58,7 +83,35 @@ app.get('/auth',function(req,res){
               res.json({
                 response:1,
                 content:{
-                  message : "datos incorrectos"
+                  message : "incorrect data, cant logout"
+                }
+              });
+            }
+          });
+          
+});
+app.post('/login',function(req,res){
+  //Use to login and validate if a user exists
+  let body =_.pick( req.body,['id','password']);
+  body.active = true;
+  console.log(body);
+  User.findByIdAndUpdate(body.id,body,{new:true,runValidators:true},function(err,userDB){
+            if(err){
+              return res.status(400).json({
+                response:1,
+                content:{
+                  error:err,
+                  message: "incorrect data"
+                }
+              });
+            }
+            if(userDB){
+              userDB.password = "";
+              res.json({
+                response:2,
+                content:{
+                  message : "now the user is login"
+                  
                 }
               });
             }
@@ -97,6 +150,34 @@ app.get('/getUsers',function(req,res){
               type: tipo
             });
           })
+});
+app.get('/validateSession',function(req,res){
+  let body = req.body;
+  let id = body.id;
+  let password = body.password;
+  User.findOne({_id:id},function(err,userDB){
+    console.log(userDB);
+    if(err){
+      return res.status(500).json({
+        response:1,
+        content:"user not found",
+        error:err
+      });
+    }
+    if(userDB){
+      if(userDB.active ==true){
+        res.status(200).json({
+          response:2,
+          content:"user is authenticate!!!"
+        });
+      }else{
+        res.status(200).json({
+          response:1,
+          content:"user is not authenticated!!!"
+        });
+      }
+    }
+  });
 });
 app.put('/editUser',function(req,res){
   let id = req.query.id;
