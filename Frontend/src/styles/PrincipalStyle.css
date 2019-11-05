@@ -32,6 +32,7 @@
 .LogOutIcon{
     padding: 40px;
     float: left;
-    color: white;
+    /*color: white;*/
     text-align: center;
+    background-color: white;
 }

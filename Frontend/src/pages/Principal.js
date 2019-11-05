@@ -2,9 +2,13 @@ import React, {Component} from 'react';
 import logo from '../images/RevitBlanco.png';
 import '../styles/PrincipalStyle.css'
 import {Search}  from 'semantic-ui-react'
+import {Title} from '../components/Title'
+import {RestaurantsList} from '../components/RestauransList'
+
 export class Principal extends Component{
     state={
-        result:[]
+        result: [],
+        userName : ''
     }
 
     fetchRestaurant(id){
@@ -16,11 +20,27 @@ export class Principal extends Component{
           console.log(this.state.result)
         })        
     }
+    fetchUser(id){
+        fetch('http://181.50.100.167:4000/getNameUser?id='+id)
+        .then(res => res.json())
+        .then(result => {
+            const name=result.content.name
+            console.log("este es el contenido",result.content)
+            this.setState({userName:name})
+            console.log("este es el estado", this.state.userName)
+        })        
+    }
 
     componentDidMount(){
-        this.fetchRestaurant("2");
+        let url = window.location.href;
+        let urlSplit=url.split("=")
+        let idCiudad = urlSplit[1];
+        this.fetchRestaurant(idCiudad);
+        this.fetchUser("5dc09c32d2e3cb5d7515802a")
     }
     render(){
+        const user = this.state.userName
+        console.log("el usuario",user)
         return(
             <div>
                 <header className="headerp">
@@ -32,13 +52,13 @@ export class Principal extends Component{
                     </div> 
                     </div>
                     <div className="LogOutIcon">
-                        <h2>NombreUsuario</h2>
+                        <Title>{user}</Title>
                         <i className="log out icon"/>
                     </div>
                 </header>
                 <div className="decorBar"></div>
                 <div>
-        
+                <RestaurantsList restaurants={this.state.result}></RestaurantsList>
                 </div>
             </div>
             
