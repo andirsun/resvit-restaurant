@@ -35,8 +35,8 @@ export class Principal extends Component{
         let url = window.location.href;
         let urlSplit=url.split("=")
         let idCiudad = urlSplit[1];
-        this.fetchRestaurant(idCiudad);
-        this.fetchUser("5dc09c32d2e3cb5d7515802a")
+        this.fetchRestaurant("2");
+        this.fetchUser(idCiudad)
     }
     render(){
         const user = this.state.userName
@@ -52,7 +52,7 @@ export class Principal extends Component{
                     </div> 
                     </div>
                     <div className="LogOutIcon">
-                        <Title>{user}</Title>
+                        <Title>{user || "inicia Sesión"}</Title>
                         <i className="log out icon"/>
                     </div>
                 </header>
