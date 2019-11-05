@@ -6,7 +6,6 @@ import {Title} from'../components/Title'
 import {Button } from 'semantic-ui-react'
 import '../styles/menu.css'
 import '../styles/EventsPageStyle.css'
-import { AddEvent } from './AddEvent';
 import {Link} from "react-router-dom";
 
 
@@ -25,7 +24,7 @@ export class Events extends Component {
   }
 
   _fetchMovie(){
-    fetch('http://resvit.herokuapp.com/getEvents/?id=1')
+    fetch('https://resvit.herokuapp.com/getEvents/?id=1')
     .then(res => res.json())
     .then(result => {
       const {events=[]}=result
