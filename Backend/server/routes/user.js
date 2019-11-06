@@ -153,10 +153,10 @@ app.get('/getUsers',function(req,res){
 });
 app.get('/validateSession',function(req,res){
   let body = req.body;
-  let id = body.id;
-  let password = body.password;
+  let id = req.query.id;
+  let password = req.query.pass;
   User.findOne({_id:id},function(err,userDB){
-    console.log(userDB);
+    //console.log(userDB);
     if(err){
       return res.status(500).json({
         response:1,
