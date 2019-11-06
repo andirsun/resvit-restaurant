@@ -15,15 +15,6 @@ export class Event extends Component{
         image: PropTypes.string
     }
 
-    handleDelete(id,e){ 
-        console.log(id)
-        var url = 'https://resvit.herokuapp.com/deleteEvent/?id='+id
-        console.log(url)
-        fetch(url,{method:'DELETE'})
-        .then("se supone que eliminó")
-
-    }
-
     render(){
         const { id,name, description, date, image}= this.props
         return(

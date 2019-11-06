@@ -31,34 +31,33 @@ export class FormDecoration extends Component{
 
     _handleSubmit=(e)=>{
         console.log(this.state)
-        const {idRestaurant,name,date,type}=this.props
+        var idRestaurant = this.state.idRestaurant
+        var  description = this.state.description
+        var  type = this.state.type
+        var  valor=this.state.value
         var params ={
-            idRestaurant: {idRestaurant},
-            name: {name},
-            date: {date},
-            type:{type}        
+            idRestaurant: idRestaurant,
+            description: description,
+            type: type ,
+            value : valor      
         };
-
-        var formData = new FormData();
-        for (var k in params){
-            let encodedkey = encodeURIComponent(k);
-            let encondedValue  = encodeURIComponent(params[k]);
-           
-        }
 
         var request ={
             method: 'POST',
-            //mode: 'cors',
             headers:{
-                //"Acceses-Control-Allow-Origin":'*',
-                //'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+                'Accept' : 'application/json',
 				"Content-type": "application/json"
             },
-            body : params
+            body : JSON.stringify(params)
         }
 
-        fetch('https://resvit.herokuapp.com/addEvent',request)
-        .then(response => console.log(response))
+        fetch('https://resvit.herokuapp.com/addDecoration',request)
+        .then(response => {console.log(response)
+            if (response.status == "200") {
+                console.log("se escribió con exito")
+                window.location.reload();
+            }
+            })
         .catch(err => console.log(err));
           
     }
