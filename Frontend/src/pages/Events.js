@@ -6,7 +6,7 @@ import {Title} from'../components/Title'
 import {Button } from 'semantic-ui-react'
 import '../styles/menu.css'
 import '../styles/EventsPageStyle.css'
-import { AddEvent } from './AddEvent';
+
 import {Link} from "react-router-dom";
 
 

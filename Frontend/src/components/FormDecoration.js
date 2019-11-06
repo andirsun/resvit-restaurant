@@ -3,66 +3,77 @@ import { Button, Form, Segment } from 'semantic-ui-react'
 
 export class FormDecoration extends Component{
 
+   
     state = {
         idRestaurant : '1',
         description : '',
-        type:'',
-        value: '',
-        name:'',
-        image : null
+        type: '',
+        isModalOpen: false
+    }
+     
+    openModal=()=> {
+        console.log("venia el estado", this.state.isModalOpen)
+        this.setState({isModalOpen : true})
+        console.log("cambio el estado", this.state.isModalOpen)
     }
 
-    handleChangeName=(e)=>{
-        this.setState({name:e.target.value})
+    closeModal=()=> {
+        console.log("venia el estado", this.state.isModalOpen)
+        this.setState({isModalOpen : false})
+        console.log("cambio el estado", this.state.isModalOpen)
     }
-    handleChangeDescription=(e)=>{
-        this.setState({description:e.target.value})
+    handleChange = (date) => {
+        this.setState({
+          startDate: date
+        });
     }
-    handleChangeType=(e)=>{
-        this.setState({type:e.target.value})
+    
+
+    
+    handleChangeDescription = (e) => {
+        e.preventDefault()
+        this.setState({
+          description: e.target.value
+        });
     }
-    handleChangeValue=(e)=>{
-        this.setState({value:e.target.value})
+
+    handleChangeType = (e) => {
+        e.preventDefault()
+        this.setState({
+          type: e.target.value
+        });
     }
     handleFileSelect=(e)=>{
         console.log(e.target.files[0])
     }
-     
 
     _handleSubmit=(e)=>{
-        console.log(this.state)
-        const {idRestaurant,name,date,type}=this.props
+        var idRestaurant1 = this.state.idRestaurant
+        var description1 = this.state.description
+        var type1 = this.state.type
         var params ={
-            idRestaurant: {idRestaurant},
-            name: {name},
-            date: {date},
-            type:{type}        
+            idRestaurant: idRestaurant1,
+            description: description1,
+            type: type1        
         };
-
-        var formData = new FormData();
-        for (var k in params){
-            let encodedkey = encodeURIComponent(k);
-            let encondedValue  = encodeURIComponent(params[k]);
-           
-        }
-
         var request ={
             method: 'POST',
-            //mode: 'cors',
             headers:{
-                //"Acceses-Control-Allow-Origin":'*',
-                //'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+                'Accept' : 'application/json',
 				"Content-type": "application/json"
             },
-            body : params
+            body : JSON.stringify(params)
         }
-
-        fetch('https://resvit.herokuapp.com/addEvent',request)
-        .then(response => console.log(response))
-        .catch(err => console.log(err));
+        fetch('https://resvit.herokuapp.com/AddDecoration',request)
+        .then(response =>  {
+            console.log(response.status)
+            if (response.status == "200") {
+                console.log("se escribió con exito")
+            };
+        })
+        .catch(err => console.log("Se presentó un error"));
           
     }
-
     
     render(){
         return(
@@ -70,20 +81,12 @@ export class FormDecoration extends Component{
             <div >
                 <Form onSubmit={this._handleSubmit}>
                     <Form.Field>
-                        <label>Nombre</label>
-                        <input placeholder='Nombre para la decoración' onChange={this.handleChangeName}/>
+                        <label>descripcion</label>
+                        <input placeholder='Nombre para la descripcion' onChange={this.handleChangeDescription}/>
                     </Form.Field>
                     <Form.Field>
                         <label>Tipo</label>
                         <input placeholder='Tipo de decoración' onChange={this.handleChangeType} />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Valor</label>
-                        <input placeholder='Valor de la decoración' onChange={this.handleChangeValue} />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Descripción</label>
-                        <input placeholder='Describa la Decoración' onChange={this.handleChangeDescription} />
                     </Form.Field>
                     <Form.Field>
                         <label>Sube una imagen</label>

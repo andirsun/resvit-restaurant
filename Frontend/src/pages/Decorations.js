@@ -2,6 +2,10 @@ import React , {Component} from 'react';
 import {Title} from '../components/Title'
 import {Link} from 'react-router-dom'
 import { Button} from 'semantic-ui-react'
+import logo from '../images/RevitBlanco.png'
+import {MenuR} from '../components/MenuR'
+import '../styles/menu.css'
+import '../styles/DecorationsPageStyle.css'
 //import ScrollMenu from 'react-horizontal-scrolling-menu'
 
 import {DecorationsList} from '../components/DecorationsList.js'
@@ -13,7 +17,7 @@ export class Decorations extends Component{
       };
 
     _fetchMovie(){
-        fetch('http://resvit.herokuapp.com/getDecorations/?id=2')
+        fetch('http://resvit.herokuapp.com/getDecorations/?id=1')
         .then(res => res.json())
         .then(response =>{ 
            const {decorations=[]}=response
@@ -30,21 +34,32 @@ export class Decorations extends Component{
     render(){
         return(
             <div>
-                <div className="ui bottom attached button">
-                    <Title>Decoraciones</Title>
+                 <header className="App-header">
+                    <div className="Menu">
+                        <img src={logo} className="App-logo" alt="logo"/>
+                        <MenuR/>
+                    </div>
+                </header>
+                <div className="decorBar"></div>
+                    <div className="ui bottom attached button">
+                        <Title>Decoraciones</Title>
                     <div>
-                    <Link to ='/AddDecoration' >
-                        <Button className='ui inverted secondary button' >
-                        <i className="add icon"></i>
-                        Añadir Decoración           
-                        </Button>
-                    </Link>
+                        <Link to ='/AddDecoration' >
+                            <Button className='ui inverted secondary button' >
+                            <i className="add icon"></i>
+                            Añadir Decoración           
+                            </Button>
+                         </Link>
                     </div>
                 </div >
-                <div>
-                <DecorationsList decorations={this.state.resultado}></DecorationsList>    
+                <br></br>
+                    <div className="main_contentD">
+                    <div className="containerD">
+                        <DecorationsList decorations={this.state.resultado}></DecorationsList>    
+                    </div>
                 </div>
-            </div>
+            </div> 
+
         )
     }
 }
