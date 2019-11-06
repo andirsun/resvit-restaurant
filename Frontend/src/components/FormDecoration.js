@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Form, Segment } from 'semantic-ui-react'
+import { Button, Form, Segment, Message } from 'semantic-ui-react'
 
 export class FormDecoration extends Component{
 
@@ -9,7 +9,9 @@ export class FormDecoration extends Component{
         type:'',
         value: '',
         name:'',
-        image : null
+        image : null,
+        showMsm : false,
+        showMsmE : false
     }
 
     handleChangeName=(e)=>{
@@ -55,10 +57,16 @@ export class FormDecoration extends Component{
         .then(response => {console.log(response)
             if (response.status == "200") {
                 console.log("se escribió con exito")
-                window.location.reload();
+                this.setState({showMsm: true})
+                setTimeout(function(){
+                },3000)
+                window.location.reload(); 
+            }else{
+                this.setState({showMsmE: true})
             }
-            })
-        .catch(err => console.log(err));
+        })
+        .catch(err => {
+            console.log(err)});
           
     }
 
@@ -88,7 +96,22 @@ export class FormDecoration extends Component{
                         <label>Sube una imagen</label>
                         <input type="file" onChange={this.handleFileSelect} />
                     </Form.Field>
-                    <Button className='ui inverted secondary button' type='submit'>Guardar</Button>
+                    <Button className='ui inverted secondary button' type='submit'>Guardar</Button>{
+                        this.state.showMsm &&
+                        (<Message positive>
+                        <Message.Header>Guardado Exitoso</Message.Header>
+                        <p>
+                        ¡ Tu evento se ha guardado de forma exitosa !
+                        </p>
+                        </Message> ) ||
+                        this.state.showMsmE &&
+                        (<Message negative>
+                            <Message.Header> Un Error ha Ocurrido :c</Message.Header>
+                            <p>
+                                Por favor. revisa que los campos estén llenos adecuadamente
+                            </p>
+                            </Message> )
+                    }
                 </Form>              
             </div>
             </Segment>

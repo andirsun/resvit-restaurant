@@ -11,7 +11,8 @@ export class FormEvent extends Component{
         startDate: new Date(),
         type: '',
         isModalOpen: false,
-        showMsm : false
+        showMsm : false,
+        showMsmE : false
     }
     
     updateState=(m)=>{
@@ -86,6 +87,8 @@ export class FormEvent extends Component{
                 setTimeout(function(){
                 },2000)
                 window.location.reload()
+            }else{
+                this.setState({showMsmE: true})
             };
         })
         .catch(err => console.log("Se presentó un error"));
@@ -116,13 +119,20 @@ export class FormEvent extends Component{
                         <input type="file" onChange={this.handleFileSelect} />
                     </Form.Field>
                     <Button className='ui inverted secondary button' type='submit'>Guardar</Button>{
-                        this.state.showMsm && 
+                       ( this.state.showMsm && 
                         <Message positive>
-                        <Message.Header>Guardado Éxito</Message.Header>
+                        <Message.Header>Guardado Exitoso</Message.Header>
                         <p>
                           ¡ Tu evento se ha guardado de forma exitosa !
                         </p>
-                      </Message>    
+                       </Message>) ||
+                        (this.state.showMsmE &&
+                        <Message negative>
+                            <Message.Header> Un Error ha Ocurrido :c</Message.Header>
+                            <p>
+                                Por favor. revisa que los campos estén llenos adecuadamente
+                            </p>
+                        </Message> )    
                     }
                 </Form>          
             </div>
