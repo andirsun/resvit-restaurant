@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Form, Segment, Modal } from 'semantic-ui-react'
+import { Button, Form, Segment, Message } from 'semantic-ui-react'
 import DatePicker from "react-datepicker";
 import {ModalConfirm} from '../components/ModalConfirm.js' 
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,7 +11,8 @@ export class FormEvent extends Component{
         name : '',
         startDate: new Date(),
         type: '',
-        isModalOpen: false
+        isModalOpen: false,
+        showMsm : false
     }
     
     updateState=(m)=>{
@@ -82,6 +83,8 @@ export class FormEvent extends Component{
             if (response.status == "200") {
                 console.log("se escribió con exito")
                 this.updateState("me fuí a actualizar");
+                this.setState({showMsm: true})
+                window.location.reload()
             };
         })
         .catch(err => console.log("Se presentó un error"));
@@ -89,6 +92,16 @@ export class FormEvent extends Component{
     }
 
     render(){
+        if (this.state.showMsm == true){
+            return(
+                <Message positive>
+                <Message.Header>Guardado Éxito</Message.Header>
+                <p>
+                  ¡ Tu evento se ha guardado de forma exitosa !
+                </p>
+              </Message>                
+            )
+        }
         return(
             <Segment>
             <div >
