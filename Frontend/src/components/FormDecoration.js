@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Form, Segment } from 'semantic-ui-react'
+import { Button, Form, Segment, Message } from 'semantic-ui-react'
 
 export class FormDecoration extends Component{
 
@@ -9,7 +9,9 @@ export class FormDecoration extends Component{
         type:'',
         value: '',
         name:'',
-        image : null
+        image : null,
+        showMsm : false,
+        showMsmE : false
     }
 
     handleChangeName=(e)=>{
@@ -31,35 +33,40 @@ export class FormDecoration extends Component{
 
     _handleSubmit=(e)=>{
         console.log(this.state)
-        const {idRestaurant,name,date,type}=this.props
+        var idRestaurant = this.state.idRestaurant
+        var  description = this.state.description
+        var  type = this.state.type
+        var  valor=this.state.value
         var params ={
-            idRestaurant: {idRestaurant},
-            name: {name},
-            date: {date},
-            type:{type}        
+            idRestaurant: idRestaurant,
+            description: description,
+            type: type ,
+            value : valor      
         };
-
-        var formData = new FormData();
-        for (var k in params){
-            let encodedkey = encodeURIComponent(k);
-            let encondedValue  = encodeURIComponent(params[k]);
-           
-        }
 
         var request ={
             method: 'POST',
-            //mode: 'cors',
             headers:{
-                //"Acceses-Control-Allow-Origin":'*',
-                //'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+                'Accept' : 'application/json',
 				"Content-type": "application/json"
             },
-            body : params
+            body : JSON.stringify(params)
         }
 
-        fetch('https://resvit.herokuapp.com/addEvent',request)
-        .then(response => console.log(response))
-        .catch(err => console.log(err));
+        fetch('https://resvit.herokuapp.com/addDecoration',request)
+        .then(response => {console.log(response)
+            if (response.status == "200") {
+                console.log("se escribió con exito")
+                this.setState({showMsm: true})
+                setTimeout(function(){
+                },3000)
+                window.location.reload(); 
+            }else{
+                this.setState({showMsmE: true})
+            }
+        })
+        .catch(err => {
+            console.log(err)});
           
     }
 
@@ -89,7 +96,22 @@ export class FormDecoration extends Component{
                         <label>Sube una imagen</label>
                         <input type="file" onChange={this.handleFileSelect} />
                     </Form.Field>
-                    <Button className='ui inverted secondary button' type='submit'>Guardar</Button>
+                    <Button className='ui inverted secondary button' type='submit'>Guardar</Button>{
+                        this.state.showMsm &&
+                        (<Message positive>
+                        <Message.Header>Guardado Exitoso</Message.Header>
+                        <p>
+                        ¡ Tu evento se ha guardado de forma exitosa !
+                        </p>
+                        </Message> ) ||
+                        this.state.showMsmE &&
+                        (<Message negative>
+                            <Message.Header> Un Error ha Ocurrido :c</Message.Header>
+                            <p>
+                                Por favor. revisa que los campos estén llenos adecuadamente
+                            </p>
+                            </Message> )
+                    }
                 </Form>              
             </div>
             </Segment>

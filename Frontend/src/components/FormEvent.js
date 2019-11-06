@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import { Button, Form, Segment, Modal } from 'semantic-ui-react'
+import { Button, Form, Segment, Message } from 'semantic-ui-react'
 import DatePicker from "react-datepicker";
-import {ModalConfirm} from '../components/ModalConfirm.js' 
 import "react-datepicker/dist/react-datepicker.css";
 
 export class FormEvent extends Component{
@@ -11,7 +10,9 @@ export class FormEvent extends Component{
         name : '',
         startDate: new Date(),
         type: '',
-        isModalOpen: false
+        isModalOpen: false,
+        showMsm : false,
+        showMsmE : false
     }
     
     updateState=(m)=>{
@@ -82,6 +83,12 @@ export class FormEvent extends Component{
             if (response.status == "200") {
                 console.log("se escribió con exito")
                 this.updateState("me fuí a actualizar");
+                this.setState({showMsm: true})
+                setTimeout(function(){
+                },2000)
+                window.location.reload()
+            }else{
+                this.setState({showMsmE: true})
             };
         })
         .catch(err => console.log("Se presentó un error"));
@@ -111,12 +118,23 @@ export class FormEvent extends Component{
                         <label>Sube una imagen</label>
                         <input type="file" onChange={this.handleFileSelect} />
                     </Form.Field>
-                    <Button className='ui inverted secondary button' type='submit'>Guardar</Button>
-                </Form> 
-                <Button onClick={this.openModal}>el modal</Button>{
-                    this.state.isModalOpen &&
-                    <ModalConfirm  onClose={this.closeModal} ></ModalConfirm>
-                }            
+                    <Button className='ui inverted secondary button' type='submit'>Guardar</Button>{
+                       ( this.state.showMsm && 
+                        <Message positive>
+                        <Message.Header>Guardado Exitoso</Message.Header>
+                        <p>
+                          ¡ Tu evento se ha guardado de forma exitosa !
+                        </p>
+                       </Message>) ||
+                        (this.state.showMsmE &&
+                        <Message negative>
+                            <Message.Header> Un Error ha Ocurrido :c</Message.Header>
+                            <p>
+                                Por favor. revisa que los campos estén llenos adecuadamente
+                            </p>
+                        </Message> )    
+                    }
+                </Form>          
             </div>
             </Segment>
         )

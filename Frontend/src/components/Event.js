@@ -2,7 +2,7 @@ import React , {Component} from 'react';
 import { Button, Card, Image, Segment} from 'semantic-ui-react'
 import ImageDefault from '../images/banda.jpg'
 import PropTypes from 'prop-types'
-//import {ButtonAdv} from '../components/ModalConfirm.js'
+import {ButtonAdv} from '../components/ButtonAdv'
 import "../semantic/semantic.min.css"
 import "../styles/menu.css"
 
@@ -13,15 +13,6 @@ export class Event extends Component{
         description : PropTypes.string,
         date: PropTypes.string,
         image: PropTypes.string
-    }
-
-    handleDelete(id,e){ 
-        console.log(id)
-        var url = 'https://resvit.herokuapp.com/deleteEvent/?id='+id
-        console.log(url)
-        fetch(url,{method:'DELETE'})
-        .then("se supone que eliminó")
-
     }
 
     render(){
@@ -47,9 +38,12 @@ export class Event extends Component{
                                     <Button className='ui inverted secondary button'>
                                         Editar
                                     </Button>
-                                    <Button className='ui inverted secondary button' onClick={(e)=>this.handleDelete(id,e)}>
-                                        Eliminar
-                                    </Button>
+                                    <ButtonAdv cancelButton={'cancelar'} 
+                                                content={'¿Está Seguro(a) que desea eliminar el evento?'} 
+                                                confirmButton={'Continuar'}
+                                                ide={id}
+                                                className='ui inverted secondary button' >
+                                    </ButtonAdv>
                                 </div>
                             </div>
                         </Card.Content>

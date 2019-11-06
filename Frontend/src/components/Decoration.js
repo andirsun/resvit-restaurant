@@ -2,6 +2,7 @@ import React , {Component} from 'react';
 import { Button, Card, Image, Segment} from 'semantic-ui-react'
 import ImageDefault from '../images/decora.jpg'
 import PropTypes from 'prop-types'
+import {ButtonAdvD} from '../components/ButtonAdvD'
 import "../semantic/semantic.min.css"
 import "../styles/menu.css"
 
@@ -13,15 +14,6 @@ export class Decoration extends Component{
         type: PropTypes.string,
         image: PropTypes.string,
         valor:PropTypes.string
-    }
-
-    handleDelete(id,e){ 
-        console.log(id)
-        var url = 'https://resvit.herokuapp.com/deleteDecoration/?id='+id
-        console.log(url)
-        fetch(url,{method:'DELETE'})
-        .then("se supone que eliminó")
-
     }
 
     render(){
@@ -53,9 +45,12 @@ export class Decoration extends Component{
                                     <Button className='ui inverted secondary button'>
                                         Editar
                                     </Button>
-                                    <Button className='ui inverted secondary button' onClick={(e)=>this.handleDelete(idD,e)}>
-                                        Eliminar
-                                    </Button>
+                                    <ButtonAdvD  cancelButton={'cancelar'} 
+                                                content={'¿Está Seguro(a) que desea eliminar la Decoración?'} 
+                                                confirmButton={'Continuar'}
+                                                ide={idD}
+                                                className='ui inverted secondary button'  >
+                                    </ButtonAdvD>
                                 </div>
                             </div>
                         </Card.Content>
