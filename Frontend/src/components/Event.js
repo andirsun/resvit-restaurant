@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {ButtonAdv} from '../components/ButtonAdv'
 import "../semantic/semantic.min.css"
 import "../styles/menu.css"
+import { FormE } from '../components/EditEvent';
 
 export class Event extends Component{
     PropTypes ={
@@ -35,9 +36,7 @@ export class Event extends Component{
                         <Card.Content extra >
                             <div className='Center'>
                                 <div className='ui two buttons' >
-                                    <Button className='ui inverted secondary button'>
-                                        Editar
-                                    </Button>
+                                    <FormE></FormE>
                                     <ButtonAdv cancelButton={'cancelar'} 
                                                 content={'¿Está Seguro(a) que desea eliminar el evento?'} 
                                                 confirmButton={'Continuar'}
