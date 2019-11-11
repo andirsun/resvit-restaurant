@@ -2,17 +2,31 @@ const express = require('express');
 const app = express();
 const Event = require('../models/event');
 const _=require('underscore');
-
+///////////////////////////////////////////////
 
 
 app.post('/addEvent',function(req,res){
+  
   let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
+  if (!req.files || Object.keys(req.files).length === 0) { //Primer paso, Comprobar que venga la imagen para poder jacer la insercion
+    return res.status(400).json({
+        response : 1,
+        error:{
+          message: "Es necesario subir una imagen"
+        }
+    });
+  }
   let event = new Event({
     idRestaurant : body.idRestaurant,
     name : body.name,
     date : body.date,
     type: body.type
   });
+  
+  let event2 = new Event({
+    
+  });
+  
   event.save((err,eventDB)=>{
     //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
     if(err){
@@ -58,8 +72,17 @@ app.put('/uploadImageEvent',function(req,res){
 
   // Extenciones permitidas para cargar al servidor
   let extenciones = ['png','jpg','gif','jpeg'];
+  // Validando extencion del archivo 
+  if (extenciones.indexOf(extention)<0){
+    return res.status(400).json({
+      response:1,
+      content:{
+        message: 'tu extencion de archivo es :'+extention+', pero las extenciones permitidas son : '+ extenciones.join(', ')
+      }
+    });
+  }
   //Moving FIle
-  file.mv('uploads/filename.jpg', (err) => {
+  file.mv('uploads/events/'+file.name, (err) => {
     if (err)
       return res.status(500).json({
         response : 1,

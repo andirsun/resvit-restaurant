@@ -93,7 +93,7 @@ app.post('/logout',function(req,res){
 app.post('/login',function(req,res){
   //Use to login and validate if a user exists
   let body =_.pick( req.body,['id','password']);
-  body.active = true;
+  body.active = true; //aqui le digo que esta iniciara sesion
   console.log(body);
   User.findByIdAndUpdate(body.id,body,{new:true,runValidators:true},function(err,userDB){
             if(err){
