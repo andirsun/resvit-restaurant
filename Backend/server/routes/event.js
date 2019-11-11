@@ -8,7 +8,7 @@ const _=require('underscore');
 app.post('/addEvent',function(req,res){
   
   let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
-  if (!req.files || Object.keys(req.files).length === 0) { //si ningun archivo es detectado en la peticion que se envio
+  if (!req.files || Object.keys(req.files).length === 0) { //Primer paso, Comprobar que venga la imagen para poder jacer la insercion
     return res.status(400).json({
         response : 1,
         error:{
@@ -22,9 +22,11 @@ app.post('/addEvent',function(req,res){
     date : body.date,
     type: body.type
   });
-
-  ////////Seguir migrando aca 
-  /////
+  
+  let event2 = new Event({
+    
+  });
+  
   event.save((err,eventDB)=>{
     //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
     if(err){
