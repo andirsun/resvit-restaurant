@@ -58,9 +58,31 @@ app.get('/getNameUser',function(req,res){
     }
     if(userDB){
       res.status(200).json({
-        response :1,
+        response :2,
         content:{
           name : userDB.userName
+        } 
+      })
+    }
+  })
+});
+app.get('/getEmail',function(req,res){
+  let id = req.query.id;
+  User.findOne({_id:id},function(err,userDB){
+    if(err){
+      res.status(500).json({
+        response :1,
+        content: {
+          error : err,
+          message : "no se puede encontrar el usuario"
+        }
+      });
+    }
+    if(userDB){
+      res.status(200).json({
+        response :2,
+        content:{
+          email : userDB.email
         } 
       })
     }
