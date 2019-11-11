@@ -9,13 +9,23 @@ app.post('/addUser',function(req,res){
   //Add user to DB 
     let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
     console.log(body);
+    let userName = req.query.userName;
+    let email = req.query.email;
+    let password = req.query.password;
+    let userType = req.query.userType;
     let usuario = new User({
+      userName : userName,
+      email : email,
+      password:password, 
+      userType:userType
+    });
+    /*let usuario = new User({
       userName : body.userName,
       email : body.email,
       //password : bcrypt.hashSync(body.password,10), //ENCRIPTACION HASH DE UNA VIA CON 10 VUELTAS 
       password:body.password, 
       userType: body.userType
-    });
+    });*/
     
     usuario.save((err,usuarioDB)=>{
       //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
@@ -92,10 +102,34 @@ app.post('/logout',function(req,res){
 });
 app.post('/login',function(req,res){
   //Use to login and validate if a user exists
-  let body =_.pick( req.body,['id','password']);
-  body.active = true; //aqui le digo que esta iniciara sesion
-  console.log(body);
-  User.findByIdAndUpdate(body.id,body,{new:true,runValidators:true},function(err,userDB){
+  //let body =_.pick( req.body,['id','password']);
+  let id = req.query.id ;
+  let password = req.query.password; 
+  let active = true;
+  //body.active = true; //aqui le digo que esta iniciara sesion
+  let body = {}
+  User.findByIdAndUpdate(id,{id,password,active},{new:true,runValidators:true},function(err,userDB){
+    if(err){
+      return res.status(400).json({
+        response:1,
+        content:{
+          error:err,
+          message: "Data of user is incorrect"
+        }
+      });
+    }
+    if(userDB){
+      userDB.password = "";
+      res.json({
+        response:2,
+        content:{
+          message : "now the user is login"
+          
+        }
+      });
+    }
+  });
+  /*User.findByIdAndUpdate(body.id,body,{new:true,runValidators:true},function(err,userDB){
             if(err){
               return res.status(400).json({
                 response:1,
@@ -116,7 +150,7 @@ app.post('/login',function(req,res){
               });
             }
           });
-          
+    */      
 });
 app.get('/getUsers',function(req,res){
   
