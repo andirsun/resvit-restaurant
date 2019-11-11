@@ -36,7 +36,11 @@ export class Event extends Component{
                         <Card.Content extra >
                             <div className='Center'>
                                 <div className='ui two buttons' >
-                                    <FormE></FormE>
+                                    <FormE 
+                                        idE={id}
+                                        nameE={name}
+                                        typeE={description}
+                                        dateE={date}></FormE>
                                     <ButtonAdv cancelButton={'cancelar'} 
                                                 content={'¿Está Seguro(a) que desea eliminar el evento?'} 
                                                 confirmButton={'Continuar'}

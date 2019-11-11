@@ -12,7 +12,8 @@ export class FormEvent extends Component{
         type: '',
         isModalOpen: false,
         showMsm : false,
-        showMsmE : false
+        showMsmE : false,
+        file : null
     }
     
     updateState=(m)=>{
@@ -77,7 +78,7 @@ export class FormEvent extends Component{
             },
             body : JSON.stringify(params)
         }
-        fetch('https://resvit.herokuapp.com/addEvent',request)
+        fetch('http://181.50.100.167:4000/addEvent',request)
         .then(response =>  {
             console.log(response.status)
             if (response.status == "200") {

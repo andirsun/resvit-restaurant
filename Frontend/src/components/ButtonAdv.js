@@ -8,7 +8,7 @@ export class ButtonAdv extends Component {
 
     handleDelete(id,e){ 
         console.log(id)
-        var url = 'https://resvit.herokuapp.com/deleteEvent/?id='+id
+        var url = 'http://181.50.100.167:4000/deleteEvent/?id='+id
         console.log(url)
         fetch(url,{method:'DELETE'})
         .then("se supone que eliminó")

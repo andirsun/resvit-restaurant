@@ -25,6 +25,7 @@ export class MenuR extends Component {
             />
             <Menu.Item
               name='Buzón'
+              as={Link} name='Google' to='/google'
               active={activeItem === 'Buzón'}
               onClick={this.handleItemClick}
             />
@@ -45,7 +46,6 @@ export class MenuR extends Component {
               name='Decoración'
               active={activeItem === 'Decoración'}
               onClick={this.handleItemClick}
-              
             />
              <Menu.Item
               name='Comentarios'

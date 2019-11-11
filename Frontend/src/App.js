@@ -24,6 +24,11 @@ class App extends Component {
         <Route path ="/AddDecoration" component ={AddDecoration}></Route>
         <Route path ="/AdminProfile" component ={AdminProfile}></Route>
         <Route path ="/Principal" component ={Principal}></Route>
+        <Route path='/google' component={() => { 
+          window.location.href = 'http://google.com'; 
+          return null;
+        }}
+        />
       </div>
     );
   }

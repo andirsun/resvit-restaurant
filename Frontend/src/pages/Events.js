@@ -15,7 +15,8 @@ export class Events extends Component {
     super(props);
     this.handleToUpdate  = this.handleToUpdate.bind(this);
     this.state={
-      result:[]
+      result:[],
+      noConection: false
     };
   }
 
@@ -25,11 +26,13 @@ export class Events extends Component {
 
   _fetchMovie(){
     fetch('https://resvit.herokuapp.com/getEvents/?id=1')
-    .then(res => res.json())
+    .then(res => 
+      res.json())
     .then(result => {
       const {events=[]}=result
+      console.log("este es events",events)
       this.setState({result : events})
-      console.log(this.state.result)
+      console.log("este s resurlt", result)
     })        
   }
 
