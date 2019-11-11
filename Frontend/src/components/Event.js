@@ -18,6 +18,11 @@ export class Event extends Component{
 
     render(){
         const { id,name, description, date, image}= this.props
+        console.log("La Imagen",image)
+        //var file = image
+        //var reader = new FileReader()
+        //var url = reader.readAsDataURL(file)
+
         return(
             <Segment>
                 <Card.Group>    

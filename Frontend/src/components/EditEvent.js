@@ -33,6 +33,7 @@ export class FormE extends Component {
         this.setState({
             name: nameE,
             type : typeE,
+            Date : new Date(dateE)
         })
     }
 
@@ -58,8 +59,8 @@ export class FormE extends Component {
     
         var id=this.props.idE
         var nameE = this.state.name
-        var typeE = this.state.description
-        var dateE = this.state.type
+        var typeE = this.state.type
+        var dateE = this.state.Date
         var params ={
             name: nameE,
             date: dateE,
@@ -79,6 +80,8 @@ export class FormE extends Component {
             console.log(response.status)
             if (response.status == "200") {
                 console.log("se editó con exito")
+                this.setState({open:false})
+                window.location.reload()
             };
         })
         .catch(err => console.log("Se presentó un error"));
@@ -104,7 +107,6 @@ export class FormE extends Component {
                         defaultValue ={this.state.name}
                         onChange={this.handleName}
                     />
-
                     <TextField
                         autoFocus
                         margin="dense"
@@ -126,10 +128,10 @@ export class FormE extends Component {
                 </DialogContent>
 
                 <DialogActions>
-                    <Button onClick={this.handleClose} color='blue'>
+                    <Button className='ui inverted secondary button' onClick={this.handleClose} color='blue'>
                         Salir
                     </Button>
-                    <Button onClick={this._handleSubmit} color='blue'>
+                    <Button className='ui inverted secondary button' onClick={this._handleSubmit} color='blue'>
                         Guardar
                     </Button>
                 </DialogActions>

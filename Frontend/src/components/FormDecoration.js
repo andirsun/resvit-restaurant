@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Button, Form, Segment, Message } from 'semantic-ui-react'
+import ModalConfirm from './ModalConfirm';
 
 export class FormDecoration extends Component{
 
@@ -112,7 +113,11 @@ export class FormDecoration extends Component{
                             </p>
                             </Message> )
                     }
-                </Form>              
+                </Form>
+                <ModalConfirm
+                description={"Desea Eliminar el mensaje"}
+                text={"eliminar"}
+                ></ModalConfirm>              
             </div>
             </Segment>
         )

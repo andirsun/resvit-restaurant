@@ -20,7 +20,7 @@ export class EventList extends Component {
                                 name ={event.name}
                                 description={event.type}
                                 date={event.date}
-                                image={event.Poster}
+                                image={event.urlImg}
                                 />
                             </div>
                         )
