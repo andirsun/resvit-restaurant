@@ -8,7 +8,8 @@ const _=require('underscore');
 app.post('/addEvent',function(req,res){
   
   let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
-  if (!req.files || Object.keys(req.files).length === 0) { //Primer paso, Comprobar que venga la imagen para poder jacer la insercion
+  /*Compruebo que en el los datos venga una imagen valida para insertar*/ 
+  if (!req.files || Object.keys(req.files).length === 0) { 
     return res.status(400).json({
         response : 1,
         error:{
@@ -16,30 +17,58 @@ app.post('/addEvent',function(req,res){
         }
     });
   }
-  let event = new Event({
-    idRestaurant : body.idRestaurant,
-    name : body.name,
-    date : body.date,
-    type: body.type
-  });
-  
-  let event2 = new Event({
-    
-  });
-  
-  event.save((err,eventDB)=>{
-    //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
-    if(err){
-      return res.status(400).json({
-        response:1,
-        content:err
-      });
-    }
-    res.json({
-      response:2,
-      event: eventDB
+  /******************************************* */
+  let file = req.files.archivo;//el nombre del input en html debe ser para este caso "archivo"
+  let fileName = file.name.split('.');//para sacar la extencion del archivo 
+  let extention = fileName[fileName.length-1] ;
+
+  // Extenciones permitidas para cargar al servidor
+  let extenciones = ['png','jpg','gif','jpeg'];
+  // Validando extencion del archivo 
+  if (extenciones.indexOf(extention)<0){
+    return res.status(400).json({
+      response:1,
+      content:{
+        message: 'tu extencion de archivo es :'+extention+', pero las extenciones permitidas son : '+ extenciones.join(', ')
+      }
     });
-  });    
+  }
+  file.mv('uploads/events/'+file.name, (err) => {
+    if (err)
+      return res.status(500).json({
+        response : 1,
+        content:{
+          message : "ocurrio un error mientras se movia el archivo al directorio" ,
+          error: err
+        }
+      });
+      //Si inserto bien la imagen entonces ahora si insertare el evento
+      /*Armo el evento que voy a insertar abajo*/
+      let event = new Event({
+        idRestaurant : body.idRestaurant,
+        name : body.name,
+        date : body.date,
+        type: body.type,
+        urlImg : "resvit-restaurant/Backend/uploads/events/"+file.name
+      });
+      /****************************************/ 
+      event.save((err,eventDB)=>{
+        //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
+        if(err){
+          return res.status(400).json({
+            response:1,
+            content:err
+          });
+        }
+        res.json({
+          response:2,
+          content:{
+            event :eventDB,
+            message : "El evento se creo correctamente"
+          } 
+        });
+      }); 
+  });
 });
 app.put('/editEvent',function(req,res){
   let id = req.query.id;
@@ -117,7 +146,7 @@ app.get('/getEvents',function(req,events){
             if(resMon){
               data = {
                 response:2,
-                events: resMon
+                content: resMon
               };
             }
             events.json(data)//display response

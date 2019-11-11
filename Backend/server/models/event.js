@@ -20,6 +20,11 @@ let eventSchema = new Schema({
     date:{
         type: Date,
         required:[true,'Es necesario colocar la fecha del evento']
+    },
+    urlImg:{
+        type: String,
+        required:[true,'Es necesario que envies la imagen del evento']
+
     }
 });
 eventSchema.plugin(uniqueValidator,{message: '{PATH} Debe de ser Unico'}); //desplegar los errores mas user friendly
