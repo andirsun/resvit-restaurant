@@ -7,8 +7,7 @@
 .Menu {
     display: flex;
     flex-direction: row;
-    width: 80%;
-    text-align: center;
+    width: 82%;
   }
 .App-header {
     background-color: #1c1d1f;

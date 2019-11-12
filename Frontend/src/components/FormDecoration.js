@@ -113,11 +113,7 @@ export class FormDecoration extends Component{
                             </p>
                             </Message> )
                     }
-                </Form>
-                <ModalConfirm
-                description={"Desea Eliminar el mensaje"}
-                text={"eliminar"}
-                ></ModalConfirm>              
+                </Form>             
             </div>
             </Segment>
         )

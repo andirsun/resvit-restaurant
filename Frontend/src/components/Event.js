@@ -6,8 +6,13 @@ import {ButtonAdv} from '../components/ButtonAdv'
 import "../semantic/semantic.min.css"
 import "../styles/menu.css"
 import { FormE } from '../components/EditEvent';
+import ModalConfirm from './ModalConfirm';
 
 export class Event extends Component{
+
+    state={
+        open : false
+    }
     PropTypes ={
         id : PropTypes.string,
         name : PropTypes.string,
@@ -16,6 +21,7 @@ export class Event extends Component{
         image: PropTypes.string
     }
 
+    
     render(){
         const { id,name, description, date, image}= this.props
         console.log("La Imagen",image)
@@ -53,6 +59,14 @@ export class Event extends Component{
                                                 ide={id}
                                                 className='ui inverted secondary button' >
                                     </ButtonAdv>
+                                    <Button className='ui inverted secondary button'
+                                            >Eliminar</Button>
+                                    <ModalConfirm
+                                    text={"Eliminar"}
+                                    textC={"Eliminar Evento"}
+                                    description={"Desea Eliminar el este Evento"}
+                                    >
+                                    </ModalConfirm> 
                                 </div>
                             </div>
                         </Card.Content>
