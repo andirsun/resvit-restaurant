@@ -8,10 +8,11 @@ let rolesValidos ={
     message:'{VALUE} no es un rol valido'
 };
 let userSchema = new Schema({
-   /* idUser:{
-        type:int,
-        required:[true,'el nombre es necesario']
-    },*/
+    id:{
+        type:Number,
+        required:[true,"Se requiere el id para insertar"],
+        default:0
+    },
     userType:{
         type:Number,
         required:[true,'el tipo de usuario es un campo necesario'],
