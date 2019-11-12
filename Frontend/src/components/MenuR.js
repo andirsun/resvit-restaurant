@@ -36,7 +36,7 @@ export class MenuR extends Component {
             />
              <Menu.Item 
               name='Eventos'
-              as={Link} name='Events' to='/Events'
+              as={Link} to='/Events'
               active={activeItem === 'Eventos'}
               onClick={this.handleItemClick}
               
