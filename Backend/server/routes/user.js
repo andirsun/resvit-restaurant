@@ -3,7 +3,8 @@ const app = express();
 const User = require('../models/user');
 //const bcrypt = require('bcrypt');
 const _=require('underscore');
-//////////////////////////////////////
+/////////////////////////////////////
+
 
 app.post('/addUser',function(req,res){
   //Add user to DB 
@@ -35,6 +36,42 @@ app.post('/addUser',function(req,res){
           response:2,
           content: usuarioDB,
           message: "User added!!"
+        });
+      });    
+    });
+});
+app.post('/addUserRestaurant',function(req,res){
+  //Add user to DB 
+    //let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
+    //console.log(body);
+    User.find(function(err,userDB){
+      let id = userDB.length+1;//para que es id sea autoincrementable
+      let user = req.query.userName;
+      let correo = req.query.email;
+      let pass = req.query.password;
+      let type = req.query.userType;
+      let restaurant = req.query.idRestaurant;
+      let usuario = new User({
+        userName : user,
+        email : correo,
+        password:pass, 
+        userType: type,
+        id : id,
+        idRestaurant : restaurant
+      });
+      usuario.save((err,usuarioDB)=>{
+        //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
+        if(err){
+          return res.status(400).json({
+            response:1,
+            content:err
+          });
+        }
+        usuarioDB.password =null;
+        res.status(200).json({
+          response:2,
+          content: usuarioDB,
+          message: "User Restaurant added!!"
         });
       });    
     });
@@ -86,11 +123,10 @@ app.get('/getEmail',function(req,res){
 });
 app.post('/logout',function(req,res){
   //Use to login and validate if a user exists
-  let body = req.body;
-  let user = body.email;
-  //let pass = bcrypt.hashSync(body.pass,10);
-  let pass = body.pass;
-  User.findOne({email:user,password:pass},function(err,userDB){
+  //let body = req.body;
+  
+  let id = req.query.id;
+  User.findOne({id:id},function(err,userDB){
             if(err){
               return res.status(400).json({
                 response:1,
@@ -98,20 +134,29 @@ app.post('/logout',function(req,res){
               });
             }
             if(userDB){
-              userDB.password = "";
-              userDB.active = false;
-              res.json({
-                response:2,
-                content:{
-                  message : "User its correctly logout",
-                  user: userDB
+              
+              User.findOneAndUpdate({id:id},{active:false},{new:true,runValidators:true},function(err,user){
+                if(err){
+                  return res.status(400).json({
+                    response:1,
+                    content:err
+                  });
                 }
+                userDB.password = "";
+                res.json({
+                  response:2,
+                  content:{
+                    message : "User its correctly logout",
+                    user: userDB
+                  }
+                });
               });
+              
             }else{
               res.json({
                 response:1,
                 content:{
-                  message : "incorrect data, cant logout"
+                  message : "User no exists"
                 }
               });
             }

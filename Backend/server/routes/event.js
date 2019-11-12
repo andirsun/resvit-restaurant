@@ -12,7 +12,7 @@ app.post('/addEvent',function(req,res){
   if (!req.files || Object.keys(req.files).length === 0) { 
     return res.status(400).json({
         response : 1,
-        error:{
+        content:{
           message: "Es necesario subir una imagen"
         }
     });
@@ -82,7 +82,7 @@ app.put('/editEvent',function(req,res){
     }
     res.json({
       response:2,
-      usuario:eventDB
+      content:eventDB
     });
   });
 });
@@ -164,7 +164,7 @@ app.delete('/deleteEvent',function(req,res){
     }
     res.json({
       response:2,
-      event: eventDB
+      content: eventDB
     });
   });  
   
