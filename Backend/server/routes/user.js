@@ -7,17 +7,17 @@ const _=require('underscore');
 
 app.post('/addUser',function(req,res){
   //Add user to DB 
-    let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
-    console.log(body);
-    let userName = req.query.userName;
-    let email = req.query.email;
-    let password = req.query.password;
-    let userType = req.query.userType;
+    //let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
+    //console.log(body);
+    let user = req.query.userName;
+    let correo = req.query.email;
+    let pass = req.query.password;
+    let type = req.query.userType;
     let usuario = new User({
-      userName : userName,
-      email : email,
-      password:password, 
-      userType:userType
+      userName : user,
+      email : correo,
+      password:pass, 
+      userType: type
     });
     /*let usuario = new User({
       userName : body.userName,
@@ -26,7 +26,6 @@ app.post('/addUser',function(req,res){
       password:body.password, 
       userType: body.userType
     });*/
-    
     usuario.save((err,usuarioDB)=>{
       //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
       if(err){
@@ -40,7 +39,6 @@ app.post('/addUser',function(req,res){
         response:2,
         content: usuarioDB
       });
-      
     });    
 });
 
