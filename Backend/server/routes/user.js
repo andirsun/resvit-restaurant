@@ -9,42 +9,40 @@ app.post('/addUser',function(req,res){
   //Add user to DB 
     //let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
     //console.log(body);
-    let user = req.query.userName;
-    let correo = req.query.email;
-    let pass = req.query.password;
-    let type = req.query.userType;
-    let usuario = new User({
-      userName : user,
-      email : correo,
-      password:pass, 
-      userType: type
-    });
-    /*let usuario = new User({
-      userName : body.userName,
-      email : body.email,
-      //password : bcrypt.hashSync(body.password,10), //ENCRIPTACION HASH DE UNA VIA CON 10 VUELTAS 
-      password:body.password, 
-      userType: body.userType
-    });*/
-    usuario.save((err,usuarioDB)=>{
-      //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
-      if(err){
-        return res.status(400).json({
-          response:1,
-          content:err
-        });
-      }
-      usuarioDB.password =null;
-      res.status(200).json({
-        response:2,
-        content: usuarioDB
+    User.find(function(err,userDB){
+      let id = userDB.length+1;//para que es id sea autoincrementable
+      let user = req.query.userName;
+      let correo = req.query.email;
+      let pass = req.query.password;
+      let type = req.query.userType;
+      let usuario = new User({
+        userName : user,
+        email : correo,
+        password:pass, 
+        userType: type,
+        id : id
       });
-    });    
+      usuario.save((err,usuarioDB)=>{
+        //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
+        if(err){
+          return res.status(400).json({
+            response:1,
+            content:err
+          });
+        }
+        usuarioDB.password =null;
+        res.status(200).json({
+          response:2,
+          content: usuarioDB,
+          message: "User added!!"
+        });
+      });    
+    });
 });
 
 app.get('/getNameUser',function(req,res){
   let id = req.query.id;
-  User.findOne({_id:id},function(err,userDB){
+  User.findOne({id:id},function(err,userDB){
     if(err){
       res.status(500).json({
         response :1,
@@ -66,7 +64,7 @@ app.get('/getNameUser',function(req,res){
 });
 app.get('/getEmail',function(req,res){
   let id = req.query.id;
-  User.findOne({_id:id},function(err,userDB){
+  User.findOne({id:id},function(err,userDB){
     if(err){
       res.status(500).json({
         response :1,
@@ -233,7 +231,7 @@ app.get('/validateSession',function(req,res){
   let body = req.body;
   let id = req.query.id;
   let password = req.query.pass;
-  User.findOne({_id:id},function(err,userDB){
+  User.findOne({id:id},function(err,userDB){
     //console.log(userDB);
     if(err){
       return res.status(500).json({
