@@ -28,7 +28,7 @@ export class FormDecoration extends Component{
         this.setState({value:e.target.value})
     }
     handleFileSelect=(e)=>{
-        console.log(e.target.files[0])
+        this.setState({file:e.target.files[0]})
     }
      
 

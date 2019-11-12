@@ -22,13 +22,14 @@ export class Event extends Component{
         //var file = image
         //var reader = new FileReader()
         //var url = reader.readAsDataURL(file)
+        //{image ||ImageDefault}
 
         return(
             <Segment>
                 <Card.Group>    
                     <Card>
-                        <Image
-                            src= {image ||ImageDefault}
+                        <Image  
+                            src= {ImageDefault}
                             wrapped ui={false}
                         />
                         <Card.Content>

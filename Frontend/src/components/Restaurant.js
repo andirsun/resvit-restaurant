@@ -23,7 +23,7 @@ export class Restaurant extends Component{
         return(
             <Segment>
                 <Card.Group>    
-                    <Card fluid color="yellow">
+                    <Card fluid color="yellow" href='https://google.com'>
                         <Card.Content>
                             <Card.Header>{name || 'nombre'}</Card.Header>
                             <Card.Meta>{ address||'fecha'}</Card.Meta>

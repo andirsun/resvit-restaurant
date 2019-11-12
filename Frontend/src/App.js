@@ -10,7 +10,8 @@ import {
 import { Decorations } from './pages/Decorations';
 import {AddDecoration} from './pages/AddDecoration';
 import {AdminProfile} from './pages/AdminProfile';
-import {Principal} from './pages/Principal'
+import {Principal} from './pages/Principal';
+import {AddRestaurant} from './pages/AddRestaurant';
 
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
           return null;
         }}
         />
+        <Route path='/AddRestaurant' component ={AddRestaurant}></Route>
       </div>
     );
   }

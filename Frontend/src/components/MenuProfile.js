@@ -1,5 +1,6 @@
 import React , {Component} from 'react';
-import {Menu } from 'semantic-ui-react'
+import {Menu } from 'semantic-ui-react';
+import {Link} from "react-router-dom";
 
 export class MenuProfile extends Component {
     state = { activeItem: 'Eventos' }
@@ -13,6 +14,7 @@ export class MenuProfile extends Component {
           <Menu inverted pointing secondary>
             <Menu.Item
               name='Agregar'
+              as={Link} to='/AddRestaurant'
               active={activeItem === 'Agregar'}
               onClick={this.handleItemClick}
             />
