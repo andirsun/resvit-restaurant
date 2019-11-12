@@ -21,7 +21,7 @@ app.post('/addDecoration',function(req,res){
       }
       res.json({
         response:2,
-        event: decorationDB
+        content: decorationDB
       });
     });    
 });
@@ -37,7 +37,7 @@ app.put('/editDecoration',function(req,res){
     }
     res.json({
       response:2,
-      usuario:decorationDB
+      content:decorationDB
     });
   });
 });
@@ -59,7 +59,7 @@ app.get('/getDecorations',function(req,events){
             if(resMon){
               data = {
                 response:2,
-                decorations: resMon
+                content: resMon
               };
             }
             events.json(data)//display response
@@ -78,7 +78,7 @@ app.delete('/deleteDecoration',function(req,res){
     }
     res.json({
       response:2,
-      event: decorationDB,
+      content: decorationDB,
       message:"borrada"
     });
   });  
