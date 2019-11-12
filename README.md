@@ -12,8 +12,8 @@ Changes publication (in case of adding modules to package.json)
 * git pull origin master
 * cd "Changed folder"
 * npm install
+* cd ..
 * docker-compose up
 * ctrl c (After the application is up. Interrupts docker compose running process)
-* cd ..
-* docker start frontendImage backendImage
+* docker start frontendImage backendImage (Not necessarily both)
 * Done!
