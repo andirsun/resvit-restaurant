@@ -125,32 +125,56 @@ app.post('/logout',function(req,res){
 app.post('/login',function(req,res){
   //Use to login and validate if a user exists
   //let body =_.pick( req.body,['id','password']);
-  let id = req.query.id ;
+  let email = req.query.email;
   let password = req.query.password; 
-  let active = true;
+  
   //body.active = true; //aqui le digo que esta iniciara sesion
   let body = {}
-  User.findByIdAndUpdate(id,{id,password,active},{new:true,runValidators:true},function(err,userDB){
+  User.findOne({email:email,password:password},function(err,user){
     if(err){
       return res.status(400).json({
         response:1,
         content:{
           error:err,
-          message: "Data of user is incorrect"
+          message: "Error at search for user"
         }
       });
     }
-    if(userDB){
-      userDB.password = "";
-      res.json({
-        response:2,
-        content:{
-          message : "now the user is login"
-          
+    if(user){
+      let active = true;
+      User.findByIdAndUpdate(user.id,{active},{new:true,runValidators:true},function(err,userDB){
+        if(err){
+          return res.status(400).json({
+            response:1,
+            content:{
+              error:err,
+              message: "Data of user is incorrect"
+            }
+          });
         }
+        if(userDB){
+          userDB.password = "";
+          res.json({
+            response:2,
+            content:userDB,
+            message:"User is now Logged"
+          });
+        }else{
+          userDB.password = "";
+          res.json({
+            response:1,
+            content:"User Not found"
+          });
+        }
+      });
+    }else{
+      res.json({
+        response:1,
+        content:"User Not found or data incorrect"
       });
     }
   });
+  
   /*User.findByIdAndUpdate(body.id,body,{new:true,runValidators:true},function(err,userDB){
             if(err){
               return res.status(400).json({
@@ -216,7 +240,7 @@ app.get('/validateSession',function(req,res){
     if(err){
       return res.status(500).json({
         response:1,
-        content:"user not found",
+        content:"Error",
         error:err
       });
     }
@@ -232,6 +256,11 @@ app.get('/validateSession',function(req,res){
           content:"user is not authenticated!!!"
         });
       }
+    }else{
+      res.status(400).json({
+        response:1,
+        content:"User not found"
+      });
     }
   });
 });

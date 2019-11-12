@@ -33,6 +33,10 @@ let userSchema = new Schema({
     active:{
         type:Boolean,
         default:false
+    },
+    idRestaurant:{
+        type: Number,
+        required:[false]
     }
 });
 
