@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 const cors = require('cors')
 
+
+//console.log(__dirname);
+//app.use('/static', express.static("/home/andirsun/Documents/Projects/resvit-restaurant/Backend" +'/uploads'));
 app.use(cors());
 // Using module express-fileupload to upload files to server
 app.use(fileUpload({ useTempFiles: true })); 

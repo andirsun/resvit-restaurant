@@ -17,6 +17,10 @@ let decorationSchema = new Schema({
         type: String,
         required:[true,'las descripcion es necesaria']
     },
+    urlImg:{
+        type :String,
+        required:[true,"es necesario la imagen"]
+    },
     price :{
         type:String,
         required:[true,'el precio es necesario']

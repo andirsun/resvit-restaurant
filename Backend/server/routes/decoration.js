@@ -4,26 +4,67 @@ const Decoration = require('../models/decoration');
 const _=require('underscore');
 
 app.post('/addDecoration',function(req,res){
-    let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
-    let decoration = new Decoration({
-      idRestaurant : body.idRestaurant,
-      description : body.description,
-      type: body.type,
-      price: body.price
+
+  /*Compruebo que en el los datos venga una imagen valida para insertar*/ 
+  if (!req.files || Object.keys(req.files).length === 0) { 
+    return res.status(400).json({
+        response : 1,
+        content:{
+          message: "Es necesario subir una imagen"
+        }
     });
-    decoration.save((err,decorationDB)=>{
-      //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
-      if(err){
-        return res.status(400).json({
-          response:1,
-          content:err
-        });
+  }
+  /******************************************* */
+  let file = req.files.archivo;//el nombre del input en html debe ser para este caso "archivo"
+  let fileName = file.name.split('.');//para sacar la extencion del archivo 
+  let extention = fileName[fileName.length-1] ;
+
+  // Extenciones permitidas para cargar al servidor
+  let extenciones = ['png','jpg','gif','jpeg'];
+  // Validando extencion del archivo 
+  if (extenciones.indexOf(extention)<0){
+    return res.status(400).json({
+      response:1,
+      content:{
+        message: 'tu extencion de archivo es :'+extention+', pero las extenciones permitidas son : '+ extenciones.join(', ')
       }
-      res.json({
-        response:2,
-        content: decorationDB
+    });
+  }
+  let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
+  file.mv('uploads/decorations/'+file.name, (err) => {
+    if (err)
+      return res.status(500).json({
+        response : 1,
+        content:{
+          message : "ocurrio un error mientras se movia el archivo al directorio" ,
+          error: err
+        }
       });
-    });    
+      //Si inserto bien la imagen entonces ahora si insertare el evento
+      /*Armo el evento que voy a insertar abajo*/
+      let decoration = new Decoration({
+        idRestaurant : body.idRestaurant,
+        description : body.description,
+        type: body.type,
+        price: body.price,
+        urlImg : "resvit-restaurant/Backend/uploads/events/"+file.name
+      });
+      /****************************************/ 
+      decoration.save((err,decorationDB)=>{
+        //callback que trae error si no pudo grabar en la base de datos y usuarioDB si lo inserto
+        if(err){
+          return res.status(400).json({
+            response:1,
+            content:err
+          });
+        }
+        res.json({
+          response:2,
+          content: decorationDB
+        });
+      });   
+  });
+   
 });
 app.put('/editDecoration',function(req,res){
   let id = req.query.id;
