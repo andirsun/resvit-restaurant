@@ -138,7 +138,8 @@ app.post('/login',function(req,res){
     }
     if(user){
       let active = true;
-      User.findByIdAndUpdate(user.id,{active},{new:true,runValidators:true},function(err,userDB){
+      console.log(user);
+      User.findOneAndUpdate({id:user.id},{active},{new:true,runValidators:true},function(err,userDB){
         if(err){
           return res.status(400).json({
             response:1,
@@ -262,8 +263,8 @@ app.get('/validateSession',function(req,res){
 });
 app.put('/editUser',function(req,res){
   let id = req.query.id;
-  let body =_.pick( req.body,['userName','email','img','type']);//library underscore let me filter just the fields that i want to accept for update
-  Usuario.findByIdAndUpdate(id,body,{new:true,runValidators:true},(err,usuarioDB)=>{
+  let body =_.pick( req.body,['userName','email']);//library underscore let me filter just the fields that i want to accept for update
+  Usuario.findOneAndUpdate({id:id},body,{new:true,runValidators:true},(err,usuarioDB)=>{
       
     if(err){
       return res.status(400).json({
