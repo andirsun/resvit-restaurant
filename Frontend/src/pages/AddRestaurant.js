@@ -19,7 +19,7 @@ export class AddRestaurant extends Component{
                             </Button>
                         </Link>
                     </div>
-                </div >
+                </div>
                 <div>
                     <FormRestaurant>
                     </FormRestaurant>

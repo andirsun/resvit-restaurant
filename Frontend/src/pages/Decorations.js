@@ -11,11 +11,12 @@ import {DecorationsList} from '../components/DecorationsList.js'
 export class Decorations extends Component{
     
     state={
-        resultado:[]
+        resultado:[],
+        idRes :''
       };
 
-    _fetchMovie(){
-        fetch('https://resvit.herokuapp.com/getDecorations/?id=1')
+    _fetchMovie(id){
+        fetch('http://181.50.100.167:4000/getDecorations/?id='+ id)
         .then(res => res.json())
         .then(response =>{ 
            const {decorations=[]}=response
@@ -26,7 +27,11 @@ export class Decorations extends Component{
     }
     
       componentDidMount(){
-        this._fetchMovie()
+        const url = window.location.href
+        let urlSplit = url.split('?')
+        let idRestaurant = urlSplit[1].split('=')[1]
+        console.log(idRestaurant)
+        this._fetchMovie(idRestaurant)
       }
 
     render(){

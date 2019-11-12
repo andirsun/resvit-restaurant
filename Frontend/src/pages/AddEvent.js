@@ -12,6 +12,7 @@ import { Segment , Button} from 'semantic-ui-react';
 export class AddEvent extends Component{
     
     render(){
+        const ruta='/Events'+this.props.idR
         return(
             <div>
                 <header className="App-header">

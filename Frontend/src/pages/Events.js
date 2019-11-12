@@ -24,8 +24,8 @@ export class Events extends Component {
     this.setState({result:newState})
   }
 
-  _fetchMovie(){
-    fetch('https://resvit.herokuapp.com/getEvents/?id=1')
+  _fetchMovie(id){
+    fetch('https://resvit.herokuapp.com/getEvents/?id='+id)
     .then(res => 
       res.json())
     .then(result => {
@@ -37,7 +37,11 @@ export class Events extends Component {
   }
 
   componentDidMount(){
-    this._fetchMovie()
+    const url = window.location.href
+    let urlSplit = url.split('?')
+    let idRestaurant = urlSplit[1].split('=')[1]
+    console.log(idRestaurant)
+    this._fetchMovie(idRestaurant)
   }
 
 
