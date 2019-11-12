@@ -11,7 +11,8 @@ import {
 import { Decorations } from './pages/Decorations';
 import {AddDecoration} from './pages/AddDecoration';
 import {AdminProfile} from './pages/AdminProfile';
-import {Principal} from './pages/Principal'
+import {Principal} from './pages/Principal';
+import {AddRestaurant} from './pages/AddRestaurant';
 
 
 class App extends Component {
@@ -25,6 +26,12 @@ class App extends Component {
         <Route path ="/AddDecoration" component ={AddDecoration}></Route>
         <Route path ="/AdminProfile" component ={AdminProfile}></Route>
         <Route path ="/Principal" component ={Principal}></Route>
+        <Route path='/google' component={() => { 
+          window.location.href = 'http://google.com'; 
+          return null;
+        }}
+        />
+        <Route path='/AddRestaurant' component ={AddRestaurant}></Route>
       </div>
     );
   }

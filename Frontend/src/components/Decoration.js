@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {ButtonAdvD} from '../components/ButtonAdvD'
 import "../semantic/semantic.min.css"
 import "../styles/menu.css"
+import { FormE } from '../components/funt';
 
 export class Decoration extends Component{
     PropTypes ={
@@ -42,9 +43,7 @@ export class Decoration extends Component{
                         <Card.Content extra >
                             <div className='Center'>
                                 <div className='ui two buttons' >
-                                    <Button className='ui inverted secondary button'>
-                                        Editar
-                                    </Button>
+                                    <FormE></FormE>
                                     <ButtonAdvD  cancelButton={'cancelar'} 
                                                 content={'¿Está Seguro(a) que desea eliminar la Decoración?'} 
                                                 confirmButton={'Continuar'}

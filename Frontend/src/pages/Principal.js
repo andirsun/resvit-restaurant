@@ -80,7 +80,7 @@ export class Principal extends Component{
                     <img src={logo} className="ellogo" alt="logo"/> 
                     <div className="titlecss">
                         <h1>Bienvenido a RESVIT</h1>
-                        <Search></Search>
+                        <Search results={this.state.result}></Search>
                     </div> 
                     </div>
                     <div className="LogOutIcon">

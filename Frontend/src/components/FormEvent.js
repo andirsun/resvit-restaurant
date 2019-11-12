@@ -12,7 +12,8 @@ export class FormEvent extends Component{
         type: '',
         isModalOpen: false,
         showMsm : false,
-        showMsmE : false
+        showMsmE : false,
+        file : null
     }
     
     updateState=(m)=>{
@@ -55,7 +56,7 @@ export class FormEvent extends Component{
         });
     }
     handleFileSelect=(e)=>{
-        console.log(e.target.files[0])
+        this.setState({file: e.target.files[0]})
     }
 
     _handleSubmit=(e)=>{
@@ -63,21 +64,25 @@ export class FormEvent extends Component{
         var name1 = this.state.name
         var date1 = this.state.startDate
         var type1 = this.state.type
+        var file = this.state.file
+        
         var params ={
             idRestaurant: idRestaurant1,
             name: name1,
             date: date1,
-            type: type1        
+            type: type1,
+            archivo : file        
         };
+
+        var data = new FormData()
+        for(var key in params){
+            data.append(key,params[key])
+        }
         var request ={
             method: 'POST',
-            headers:{
-                'Accept' : 'application/json',
-				"Content-type": "application/json"
-            },
-            body : JSON.stringify(params)
+            body : data
         }
-        fetch('https://resvit.herokuapp.com/addEvent',request)
+        fetch('http://181.50.100.167:4000/addEvent',request)
         .then(response =>  {
             console.log(response.status)
             if (response.status == "200") {
@@ -116,7 +121,7 @@ export class FormEvent extends Component{
                     </Form.Field>
                     <Form.Field>
                         <label>Sube una imagen</label>
-                        <input type="file" onChange={this.handleFileSelect} />
+                        <input name="archivo" type="file" onChange={this.handleFileSelect} />
                     </Form.Field>
                     <Button className='ui inverted secondary button' type='submit'>Guardar</Button>{
                        ( this.state.showMsm && 
