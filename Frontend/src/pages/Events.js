@@ -53,6 +53,7 @@ export class Events extends Component {
           <div className="Menu">
             <img src={logo} className="App-logo" alt="logo"/>
             <MenuR/>
+            <br></br>
           </div>
         </header>
         <div className="decorBar"></div>
