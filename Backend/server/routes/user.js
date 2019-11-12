@@ -38,7 +38,7 @@ app.post('/addUser',function(req,res){
       usuarioDB.password =null;
       res.status(200).json({
         response:2,
-        user: usuarioDB
+        content: usuarioDB
       });
       
     });    
