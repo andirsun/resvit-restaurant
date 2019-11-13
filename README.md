@@ -15,5 +15,6 @@ Changes publication (in case of adding modules to package.json)
 * cd ..
 * docker-compose up
 * ctrl c (After the application is up. Interrupts docker compose running process)
-* docker start frontendImage backendImage (Not necessarily both)
+* docker ps -a (Look for our front and back images names (the longest names) and copy them)
+* docker start frontendImage backendImage
 * Done!
