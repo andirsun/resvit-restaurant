@@ -70,15 +70,35 @@ export class Principal extends Component{
             this.setState({noConection : true})
         }
     }
+
+    logOut(id){
+        var request ={
+            method : 'POST'
+        }
+        fetch('http://181.50.100.167:4000/logout?id='+id,request)
+        .then(res=> res.json())
+        .then(response =>   {
+            console.log(response)
+            if (response.response == 2){
+                console.log("cerro la sesión")
+                window.location.reload()
+            }
+        }
+        )
+
+    }
+
     render(){
         const user = this.state.userName
         console.log("el usuario",user)
         if(this.state.door == true){
            return( <Message negative>
             <Message.Header> Error</Message.Header>
+            <a  href={"http://181.50.100.167:9000/login/"}>
             <p>
-               No existe el usuario
+               No no ha iniciado Sesión. Inicia sesión
             </p>
+            </a>
         </Message>             
            )}
         if(this.state.noConection == true){
@@ -111,8 +131,8 @@ export class Principal extends Component{
                         <div className="nameUser">
                         <h2>{user || "inicia Sesión"}</h2>
                         </div>
-                        <div className="LogOutIcon">
-                            <i className="log out icon"/>
+                        <div className="LogOutIcon" onClick={()=> this.logOut(this.state.idUser)}>
+                            <i size={40} className="log out icon inverted"/>
                         </div>
                     </div>
                 </header>

@@ -22,7 +22,7 @@ export class Decoration extends Component{
         const idRes=this.props.idRestaurant
         const description=this.props.description
         const type=this.props.type
-        const img=this.props.image
+        const img=this.props.img
         const valor= this.props.valor
 
         return(
@@ -30,7 +30,7 @@ export class Decoration extends Component{
                 <Card.Group>    
                     <Card>
                         <Image
-                            src= {img ||ImageDefault}
+                            src= {'http://181.50.100.167:4000/'+ img ||ImageDefault}
                             wrapped ui={false}
                         />
                         <Card.Content>
