@@ -20,6 +20,7 @@ export class DecorationsList extends Component {
                                 idRestaurant={event.idRestaurant}
                                 type ={event.type}
                                 description={event.description}
+                                valor ={event.price}
                                 />
                             </div>
                         )

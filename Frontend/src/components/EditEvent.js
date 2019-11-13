@@ -75,7 +75,7 @@ export class FormE extends Component {
             },
             body : JSON.stringify(params)
         }
-        fetch('http://181.50.100.167:4000/editEvent?id='+id,request)
+        fetch('http://181.50.100.167:4000/editDecoration?id='+id,request)
         .then(response =>  {
             console.log(response.status)
             if (response.status == "200") {
@@ -94,7 +94,7 @@ export class FormE extends Component {
                 Modificar 
             </Button>
             <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Editar Event</DialogTitle>
+                <DialogTitle id="form-dialog-title">Editar Evento</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         El nuevo contenido será reemplazado en el evento

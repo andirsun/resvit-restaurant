@@ -5,13 +5,15 @@ import '../styles/PrincipalStyle.css'
 import {Search}  from 'semantic-ui-react'
 import {Title} from '../components/Title'
 import {RestaurantsList} from '../components/RestauransList'
+import '../styles/menu.css'
 
 export class Principal extends Component{
     state={
         result: [],
         userName : '',
         door :'',
-        idUser :''
+        idUser :'',
+        noConection : false
     }
 
     fetchRestaurant(id){
@@ -48,20 +50,24 @@ export class Principal extends Component{
     }
 
     componentDidMount(){
-        let url = window.location.href;
-        let urlSplit=url.split("?")
-        console.log(urlSplit)       
-        let idUser = urlSplit[1].split("=")[1];
-        let password = urlSplit[2].split("=")[1]
-        let idCiudad = urlSplit[3].split("=")[1]
-        console.log(idUser,password,idCiudad)
-        if(idUser == '' || password == '' || idCiudad == ''){
-            this.setState({door : true})
-        }else{
+        try{
+            let url = window.location.href;
+            let urlSplit=url.split("?")
+            console.log(urlSplit)       
+            let idUser = urlSplit[1].split("=")[1];
+            let password = urlSplit[2].split("=")[1]
+            let idCiudad = urlSplit[3].split("=")[1]
+            console.log(idUser,password,idCiudad)
+            if(idUser == '' || password == '' || idCiudad == ''){
+                this.setState({door : true})
+            }else{
 
-            this.setState({idUser :idUser})
-            this.validarUser(idUser,password);
-            this.fetchRestaurant(idCiudad);
+                this.setState({idUser :idUser})
+                this.validarUser(idUser,password);
+                this.fetchRestaurant(idCiudad);
+            }
+        }catch(err){
+            this.setState({noConection : true})
         }
     }
     render(){
@@ -75,23 +81,43 @@ export class Principal extends Component{
             </p>
         </Message>             
            )}
+        if(this.state.noConection == true){
+            return(
+                <div>
+              <div className="Error-Page">
+              <div className="row">
+              <img src= {logo} className = "Error-Logo"></img>
+              </div>
+              <div className="row">
+              <h1 className =" Error-Link">
+                      <a  href={"http://181.50.100.167:9000/login/"} className="link" >Intentalo de Nuevo</a>
+              </h1>
+              </div>
+              </div>
+              </div>
+              )            
+        }
         return(
             <div>
                 <header className="headerp">
                     <div className="Menup">
-                    <img src={logo} className="ellogo" alt="logo"/> 
-                    <div className="titlecss">
-                        <h1>Bienvenido a RESVIT</h1>
-                        <Search results={this.state.result}></Search>
-                    </div> 
+                        <img src={logo} className="ellogo" alt="logo"/> 
+                        <div className="titlecss">
+                            <h1>Bienvenido a RESVIT</h1>
+                            <Search results={this.state.result}></Search>
+                        </div> 
                     </div>
-                    <div className="LogOutIcon">
-                        <Title>{user || "inicia Sesión"}</Title>
-                        <i className="log out icon"/>
+                    <div>
+                        <div className="nameUser">
+                        <h2>{user || "inicia Sesión"}</h2>
+                        </div>
+                        <div className="LogOutIcon">
+                            <i className="log out icon"/>
+                        </div>
                     </div>
                 </header>
                 <div className="decorBar"></div>
-                <div>
+                <div className="cuerpo">
                 <RestaurantsList restaurants={this.state.result} user={this.state.idUser}></RestaurantsList>
                 </div>
             </div>

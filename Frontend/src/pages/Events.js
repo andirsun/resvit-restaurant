@@ -17,7 +17,9 @@ export class Events extends Component {
     this.state={
       result:[],
       noConection: false,
-      idRes : ''
+      idRes : '',
+      noEvents: false,
+      idUs : ''
     };
   }
 
@@ -26,14 +28,16 @@ export class Events extends Component {
   }
 
   _fetchMovie(id){
-    fetch('https://resvit.herokuapp.com/getEvents/?id='+id)
+    fetch('http://181.50.100.167:4000/getEvents/?id='+id)
     .then(res => 
       res.json())
-    .then(result => {
-      const {events=[]}=result
-      console.log("este es events",events)
-      this.setState({result : events})
-      console.log("este s resurlt", result)
+    .then(response => {
+      if ( response.content.length == 0){
+        this.setState({noEvents : true})
+      }else{
+        this.setState({result : response.content})
+        console.log("este s resurlt", response)
+      }
     })        
   }
 
@@ -41,9 +45,13 @@ export class Events extends Component {
     try{
       const url = window.location.href
       let urlSplit = url.split('?')
-      let idRestaurant = urlSplit[1].split('=')[1]
+      const idRestaurant = urlSplit[1].split('=')[1]
+      const idUser =urlSplit[2].split('=')[1]
       this.setState({idRes : idRestaurant})
-      console.log(idRestaurant)
+      this.setState({idUs : idUser})
+      console.log("empezamos en eventos con estado :")
+      console.log(this.state.idRes)
+      console.log(this.state.idUs)
       this._fetchMovie(idRestaurant)
     }
     catch(error){
@@ -84,7 +92,7 @@ export class Events extends Component {
         <div className="ui bottom attached button"> 
           <Title>Eventos</Title>
           <div>
-            <Link to ={'/AddEvent/?id='+ this.state.idRes} >
+            <Link to ={'/AddEvent/?id='+ this.state.idRes +'?id='+ this.state.idUs} >
                 <Button className='ui inverted secondary button' >
                   <i className="add icon"></i>
                   Añadir Evento           
@@ -92,7 +100,9 @@ export class Events extends Component {
             </Link>
           </div>
         </div>
-        <br></br>
+        <br></br>{
+          (this.state.noEvents && <h1 align="center" >No hay eventos para mostrar</h1>)
+        }
         <div className="main_contentEvent">
           <div className="containerEvent">
             <EventList events={this.state.result} action={this.handleToUpdate}></EventList>

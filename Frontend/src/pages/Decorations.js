@@ -15,16 +15,22 @@ export class Decorations extends Component{
         resultado:[],
         idRes :'',
         idUser :'',
-        noConection: false
+        noConection: false,
+        noDecor : false
       };
 
     _fetchMovie(id){
         fetch('http://181.50.100.167:4000/getDecorations/?id='+ id)
         .then(res => res.json())
-        .then(response =>{ 
-           const {decorations=[]}=response
-           this.setState({resultado:decorations})
-           console.log(this.state.resultado)
+        .then(response =>{
+            if (response.content.length == 0){
+                this.setState({noDecor : true})
+            }else{
+            //const {decorations=[]}=response.content
+            this.setState({resultado : response.content})
+            //console.log("este es el response", decorations)
+            console.log(this.state.resultado)
+            }
 
         })
     }
@@ -34,7 +40,9 @@ export class Decorations extends Component{
             const url = window.location.href
             let urlSplit = url.split('?')
             let idRestaurant = urlSplit[1].split('=')[1]
+            let idUs = urlSplit[2].split('=')[1]
             this.setState({idRes : idRestaurant})
+            this.setState({idUser : idUs})
             console.log(idRestaurant)
             this._fetchMovie(idRestaurant)
 
@@ -73,7 +81,7 @@ export class Decorations extends Component{
                 <div className="ui bottom attached button">
                     <Title>Decoraciones</Title>
                     <div>
-                    <Link to ={'/AddDecoration/?id='+this.state.idRes} >
+                    <Link to ={'/AddDecoration/?id='+this.state.idRes + '?id='+ this.state.idUser} >
                         <Button className='ui inverted secondary button' >
                         <i className="add icon"></i>
                         Añadir Decoración           
@@ -81,7 +89,9 @@ export class Decorations extends Component{
                     </Link>
                     </div>
                 </div >
-                <br></br>
+                <br></br>{
+                    (this.state.noDecor && <h1 align="center" >No hay decoraciones para mostrar</h1> )
+                }
                 <div>
                 <DecorationsList decorations={this.state.resultado}></DecorationsList>    
                 </div>

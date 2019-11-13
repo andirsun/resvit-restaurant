@@ -12,15 +12,39 @@ import '../styles/DecorationsPageStyle.css'
 export class AddDecoration extends Component{
     state={
         idRes : '',
-        idUser: ''
+        idUser: '',
+        noConection : false
     }
     componentDidMount(){
-        const url = window.location.href
-        let urlSplit = url.split('?')
-        let idRestaurant = urlSplit[1].split('=')[1]
-        this.setState({idRes : idRestaurant})
+        try{
+            const url = window.location.href
+            let urlSplit = url.split('?')
+            let idRestaurant = urlSplit[1].split('=')[1]
+            let idUs = urlSplit[2].split('=')[1]
+            this.setState({idRes : idRestaurant})
+            this.setState({idUser : idUs})
+        }catch(err){
+            this.setState({noConection: true})
+        }
     }   
     render(){
+        const idR=this.state.idRes
+        if( this.state.noConection == true){
+            return(
+                <div>
+                    <div className="Error-Page">
+                        <div className="row">
+                        <img src= {logo} className = "Error-Logo"></img>
+                        </div>
+                        <div className="row">
+                        <h1 className =" Error-Link">
+                                <a  href={"http://181.50.100.167:9000/login/"} className="link" >Intentalo de Nuevo</a>
+                        </h1>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
         return(
             <div>
                 <header className="App-header">
@@ -33,7 +57,7 @@ export class AddDecoration extends Component{
                 <div className="ui bottom attached button">
                     <Title>Añadir Decoración</Title>
                     <div>
-                    <Link to ={'/Decorations/?id='+this.state.idRes} >
+                    <Link to ={'/Decorations/?id='+this.state.idRes + '?id=' + this.state.idUser} >
                         <Button className='ui inverted secondary button' >
                         <i className="angle double left icon"></i>
                         Volver           
@@ -44,7 +68,7 @@ export class AddDecoration extends Component{
                 <br></br>
                 <div className="main_contentD"> 
                     <div className='containerD'>
-                    <FormDecoration></FormDecoration>
+                    <FormDecoration restaurant ={idR}></FormDecoration>
                     </div>  
                 </div>
             </div>            

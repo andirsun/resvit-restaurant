@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 export class FormEvent extends Component{
 
     state = {
-        idRestaurant : '1',
+        idRestaurant : '',
         name : '',
         startDate: new Date(),
         type: '',
@@ -15,7 +15,7 @@ export class FormEvent extends Component{
         showMsmE : false,
         file : null
     }
-    
+     
     updateState=(m)=>{
         console.log(m)
         console.log("es esatado que venia",this.state)
@@ -60,7 +60,7 @@ export class FormEvent extends Component{
     }
 
     _handleSubmit=(e)=>{
-        var idRestaurant1 = this.state.idRestaurant
+        var idRestaurant1 = this.props.restaurant
         var name1 = this.state.name
         var date1 = this.state.startDate
         var type1 = this.state.type
@@ -78,6 +78,8 @@ export class FormEvent extends Component{
         for(var key in params){
             data.append(key,params[key])
         }
+
+        console.log("así se va data",params)
         var request ={
             method: 'POST',
             body : data
@@ -101,6 +103,7 @@ export class FormEvent extends Component{
     }
 
     render(){
+
         return(
             <Segment>
             <div >
