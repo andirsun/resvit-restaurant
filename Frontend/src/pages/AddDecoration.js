@@ -12,15 +12,37 @@ import '../styles/DecorationsPageStyle.css'
 export class AddDecoration extends Component{
     state={
         idRes : '',
-        idUser: ''
+        idUser: '',
+        noConection : false
     }
     componentDidMount(){
-        const url = window.location.href
-        let urlSplit = url.split('?')
-        let idRestaurant = urlSplit[1].split('=')[1]
-        this.setState({idRes : idRestaurant})
+        try{
+            const url = window.location.href
+            let urlSplit = url.split('?')
+            let idRestaurant = urlSplit[1].split('=')[1]
+            this.setState({idRes : idRestaurant})
+        }catch(err){
+            this.setState({noConection: true})
+        }
     }   
     render(){
+
+        if( this.state.noConection == true){
+            return(
+                <div>
+                    <div className="Error-Page">
+                        <div className="row">
+                        <img src= {logo} className = "Error-Logo"></img>
+                        </div>
+                        <div className="row">
+                        <h1 className =" Error-Link">
+                                <a  href={"http://181.50.100.167:9000/login/"} className="link" >Intentalo de Nuevo</a>
+                        </h1>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
         return(
             <div>
                 <header className="App-header">

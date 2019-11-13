@@ -37,10 +37,10 @@ export class FormDecoration extends Component{
         var  file = this.state.image
         var params ={
             idRestaurant: idRestaurantD,
-            description: descriptionD,
             type: typeD ,
+            description: descriptionD,
             price : valorD , 
-            urlImg : file  
+            archivo : file  
         };
 
         var data = new FormData()

@@ -40,7 +40,9 @@ export class Decorations extends Component{
             const url = window.location.href
             let urlSplit = url.split('?')
             let idRestaurant = urlSplit[1].split('=')[1]
+            let idUs = urlSplit[2].split('=')[1]
             this.setState({idRes : idRestaurant})
+            this.setState({idUser : idUs})
             console.log(idRestaurant)
             this._fetchMovie(idRestaurant)
 
@@ -79,7 +81,7 @@ export class Decorations extends Component{
                 <div className="ui bottom attached button">
                     <Title>Decoraciones</Title>
                     <div>
-                    <Link to ={'/AddDecoration/?id='+this.state.idRes} >
+                    <Link to ={'/AddDecoration/?id='+this.state.idRes + '?id='+ this.state.idUser} >
                         <Button className='ui inverted secondary button' >
                         <i className="add icon"></i>
                         Añadir Decoración           

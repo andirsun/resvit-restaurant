@@ -18,7 +18,8 @@ export class Events extends Component {
       result:[],
       noConection: false,
       idRes : '',
-      noEvents: false
+      noEvents: false,
+      idUs : ''
     };
   }
 
@@ -44,9 +45,13 @@ export class Events extends Component {
     try{
       const url = window.location.href
       let urlSplit = url.split('?')
-      let idRestaurant = urlSplit[1].split('=')[1]
+      const idRestaurant = urlSplit[1].split('=')[1]
+      const idUser =urlSplit[2].split('=')[1]
       this.setState({idRes : idRestaurant})
-      console.log(idRestaurant)
+      this.setState({idUs : idUser})
+      console.log("empezamos en eventos con estado :")
+      console.log(this.state.idRes)
+      console.log(this.state.idUs)
       this._fetchMovie(idRestaurant)
     }
     catch(error){
@@ -87,7 +92,7 @@ export class Events extends Component {
         <div className="ui bottom attached button"> 
           <Title>Eventos</Title>
           <div>
-            <Link to ={'/AddEvent/?id='+ this.state.idRes} >
+            <Link to ={'/AddEvent/?id='+ this.state.idRes +'?id='+ this.state.idUs} >
                 <Button className='ui inverted secondary button' >
                   <i className="add icon"></i>
                   Añadir Evento           
