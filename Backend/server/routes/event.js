@@ -49,7 +49,8 @@ app.post('/addEvent',function(req,res){
         name : body.name,
         date : body.date,
         type: body.type,
-        urlImg : "events/uploads/events/"+file.name
+        urlImg : "events/"+file.name //esta ruta es asi, ya que el static de la ruta con el dirname se debe establecel en la configuracion del servidor 
+        
       });
       /****************************************/ 
       event.save((err,eventDB)=>{

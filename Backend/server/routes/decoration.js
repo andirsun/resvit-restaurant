@@ -47,7 +47,7 @@ app.post('/addDecoration',function(req,res){
         description : body.description,
         type: body.type,
         price: body.price,
-        urlImg : "decorations/uploads/events/"+file.name
+        urlImg : "decorations/"+file.name
       });
       /****************************************/ 
       decoration.save((err,decorationDB)=>{
