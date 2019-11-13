@@ -8,7 +8,9 @@ const cors = require('cors')
 
 
 //console.log(__dirname);
-//app.use('/static', express.static("/home/andirsun/Documents/Projects/resvit-restaurant/Backend" +'/uploads'));
+app.use('/events', express.static(__dirname+'/uploads/events'));
+app.use('/decorations', express.static(__dirname+'/uploads/decorations'));
+
 app.use(cors());
 // Using module express-fileupload to upload files to server
 app.use(fileUpload({ useTempFiles: true })); 

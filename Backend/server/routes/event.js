@@ -33,7 +33,7 @@ app.post('/addEvent',function(req,res){
       }
     });
   }
-  file.mv('uploads/events/'+file.name, (err) => {
+  file.mv('server/uploads/events/'+file.name, (err) => {
     if (err)
       return res.status(500).json({
         response : 1,
@@ -49,7 +49,7 @@ app.post('/addEvent',function(req,res){
         name : body.name,
         date : body.date,
         type: body.type,
-        urlImg : "resvit-restaurant/Backend/uploads/events/"+file.name
+        urlImg : "events/uploads/events/"+file.name
       });
       /****************************************/ 
       event.save((err,eventDB)=>{

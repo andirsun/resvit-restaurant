@@ -31,7 +31,7 @@ app.post('/addDecoration',function(req,res){
     });
   }
   let body = req.body;//asi leo lo que hay en el vody de la peticion post, debe usarse body parser de npm
-  file.mv('uploads/decorations/'+file.name, (err) => {
+  file.mv('server/uploads/decorations/'+file.name, (err) => {
     if (err)
       return res.status(500).json({
         response : 1,
@@ -47,7 +47,7 @@ app.post('/addDecoration',function(req,res){
         description : body.description,
         type: body.type,
         price: body.price,
-        urlImg : "resvit-restaurant/Backend/uploads/events/"+file.name
+        urlImg : "decorations/uploads/events/"+file.name
       });
       /****************************************/ 
       decoration.save((err,decorationDB)=>{
