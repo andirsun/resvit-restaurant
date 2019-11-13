@@ -10,7 +10,8 @@ export class Principal extends Component{
     state={
         result: [],
         userName : '',
-        door :''
+        door :'',
+        idUser :''
     }
 
     fetchRestaurant(id){
@@ -58,6 +59,7 @@ export class Principal extends Component{
             this.setState({door : true})
         }else{
 
+            this.setState({idUser :idUser})
             this.validarUser(idUser,password);
             this.fetchRestaurant(idCiudad);
         }
@@ -90,7 +92,7 @@ export class Principal extends Component{
                 </header>
                 <div className="decorBar"></div>
                 <div>
-                <RestaurantsList restaurants={this.state.result}></RestaurantsList>
+                <RestaurantsList restaurants={this.state.result} user={this.state.idUser}></RestaurantsList>
                 </div>
             </div>
             

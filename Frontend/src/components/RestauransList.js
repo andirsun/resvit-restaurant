@@ -8,6 +8,7 @@ export class RestaurantsList extends Component {
     }
     render(){
         const {restaurants} = this.props
+        const user=this.props.user
         console.log("aqui ya va a listar esto",restaurants)
         return(
             <div className="divRestaurant">
@@ -23,6 +24,7 @@ export class RestaurantsList extends Component {
                                 cellR={event.telephone}
                                 emailR={event.email}
                                 scheduleR={event.schedule}
+                                User={user}
                                 />
                             </div>
                         )
