@@ -30,7 +30,7 @@ export class FormDecoration extends Component{
 
     _handleSubmit=(e)=>{
         console.log(this.state)
-        var idRestaurantD = this.state.idRestaurant
+        var idRestaurantD = this.props.restaurant
         var  descriptionD = this.state.description
         var  typeD = this.state.type
         var  valorD=this.state.value
