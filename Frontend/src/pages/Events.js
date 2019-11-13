@@ -16,7 +16,8 @@ export class Events extends Component {
     this.handleToUpdate  = this.handleToUpdate.bind(this);
     this.state={
       result:[],
-      noConection: false
+      noConection: false,
+      idRes : ''
     };
   }
 
@@ -41,6 +42,7 @@ export class Events extends Component {
       const url = window.location.href
       let urlSplit = url.split('?')
       let idRestaurant = urlSplit[1].split('=')[1]
+      this.setState({idRes : idRestaurant})
       console.log(idRestaurant)
       this._fetchMovie(idRestaurant)
     }
@@ -82,7 +84,7 @@ export class Events extends Component {
         <div className="ui bottom attached button"> 
           <Title>Eventos</Title>
           <div>
-            <Link to ='/AddEvent' >
+            <Link to ={'/AddEvent/?id='+ this.state.idRes} >
                 <Button className='ui inverted secondary button' >
                   <i className="add icon"></i>
                   Añadir Evento           

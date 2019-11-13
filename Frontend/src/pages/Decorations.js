@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import { Button} from 'semantic-ui-react'
 import logo from '../images/RevitBlanco.png'
 import {MenuR} from '../components/MenuR'
+import '../styles/menu.css'
 //import ScrollMenu from 'react-horizontal-scrolling-menu'
 
 import {DecorationsList} from '../components/DecorationsList.js'
@@ -12,7 +13,9 @@ export class Decorations extends Component{
     
     state={
         resultado:[],
-        idRes :''
+        idRes :'',
+        idUser :'',
+        noConection: false
       };
 
     _fetchMovie(id){
@@ -27,14 +30,37 @@ export class Decorations extends Component{
     }
     
       componentDidMount(){
-        const url = window.location.href
-        let urlSplit = url.split('?')
-        let idRestaurant = urlSplit[1].split('=')[1]
-        console.log(idRestaurant)
-        this._fetchMovie(idRestaurant)
+        try{
+            const url = window.location.href
+            let urlSplit = url.split('?')
+            let idRestaurant = urlSplit[1].split('=')[1]
+            this.setState({idRes : idRestaurant})
+            console.log(idRestaurant)
+            this._fetchMovie(idRestaurant)
+
+        }catch(err){
+            this.setState({noConection : true})
+            console.log("un Error Ocurrió")
+        }
       }
 
     render(){
+        if(this.state.noConection == true){
+            return(
+              <div>
+            <div className="Error-Page">
+            <div className="row">
+            <img src= {logo} className = "Error-Logo"></img>
+            </div>
+            <div className="row">
+            <h1 className =" Error-Link">
+                    <a  href={"http://181.50.100.167:9000/login/"} className="link" >Intentalo de Nuevo</a>
+            </h1>
+            </div>
+            </div>
+            </div>
+            )
+          }
         return(
             <div>
                 <header className="App-header">
@@ -47,7 +73,7 @@ export class Decorations extends Component{
                 <div className="ui bottom attached button">
                     <Title>Decoraciones</Title>
                     <div>
-                    <Link to ='/AddDecoration' >
+                    <Link to ={'/AddDecoration/?id='+this.state.idRes} >
                         <Button className='ui inverted secondary button' >
                         <i className="add icon"></i>
                         Añadir Decoración           

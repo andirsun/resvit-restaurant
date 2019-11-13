@@ -10,9 +10,19 @@ import '../styles/addEventStyle.css'
 import { Segment , Button} from 'semantic-ui-react';
 
 export class AddEvent extends Component{
+    state={
+        idRes : '',
+        idUser: ''
+    }
+    componentDidMount(){
+        const url = window.location.href
+        let urlSplit = url.split('?')
+        let idRestaurant = urlSplit[1].split('=')[1]
+        this.setState({idRes : idRestaurant})
+    }
     
     render(){
-        const ruta='/Events'+this.props.idR
+        const ruta='/Events/?id='+this.state.idRes
         return(
             <div>
                 <header className="App-header">
@@ -25,7 +35,7 @@ export class AddEvent extends Component{
                 <div className="ui bottom attached button">
                     <Title>Añadir Evento</Title>
                     <div>
-                    <Link to ='/Events' >
+                    <Link to ={ruta} >
                         <Button className='ui inverted secondary button' >
                         <i className="angle double left icon"></i>
                         Volver           
