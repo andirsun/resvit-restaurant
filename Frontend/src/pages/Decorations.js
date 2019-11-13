@@ -15,16 +15,22 @@ export class Decorations extends Component{
         resultado:[],
         idRes :'',
         idUser :'',
-        noConection: false
+        noConection: false,
+        noDecor : false
       };
 
     _fetchMovie(id){
         fetch('http://181.50.100.167:4000/getDecorations/?id='+ id)
         .then(res => res.json())
-        .then(response =>{ 
-           const {decorations=[]}=response
-           this.setState({resultado:decorations})
-           console.log(this.state.resultado)
+        .then(response =>{
+            if (response.content.length == 0){
+                this.setState({noDecor : true})
+            }else{
+            //const {decorations=[]}=response.content
+            this.setState({resultado : response.content})
+            //console.log("este es el response", decorations)
+            console.log(this.state.resultado)
+            }
 
         })
     }
@@ -81,7 +87,9 @@ export class Decorations extends Component{
                     </Link>
                     </div>
                 </div >
-                <br></br>
+                <br></br>{
+                    (this.state.noDecor && <h1 align="center" >No hay decoraciones para mostrar</h1> )
+                }
                 <div>
                 <DecorationsList decorations={this.state.resultado}></DecorationsList>    
                 </div>

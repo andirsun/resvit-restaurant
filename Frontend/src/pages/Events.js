@@ -17,7 +17,8 @@ export class Events extends Component {
     this.state={
       result:[],
       noConection: false,
-      idRes : ''
+      idRes : '',
+      noEvents: false
     };
   }
 
@@ -26,14 +27,16 @@ export class Events extends Component {
   }
 
   _fetchMovie(id){
-    fetch('https://resvit.herokuapp.com/getEvents/?id='+id)
+    fetch('http://181.50.100.167:4000/getEvents/?id='+id)
     .then(res => 
       res.json())
-    .then(result => {
-      const {events=[]}=result
-      console.log("este es events",events)
-      this.setState({result : events})
-      console.log("este s resurlt", result)
+    .then(response => {
+      if ( response.content.length == 0){
+        this.setState({noEvents : true})
+      }else{
+        this.setState({result : response.content})
+        console.log("este s resurlt", response)
+      }
     })        
   }
 
@@ -92,7 +95,9 @@ export class Events extends Component {
             </Link>
           </div>
         </div>
-        <br></br>
+        <br></br>{
+          (this.state.noEvents && <h1 align="center" >No hay eventos para mostrar</h1>)
+        }
         <div className="main_contentEvent">
           <div className="containerEvent">
             <EventList events={this.state.result} action={this.handleToUpdate}></EventList>

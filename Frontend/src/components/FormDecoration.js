@@ -9,15 +9,11 @@ export class FormDecoration extends Component{
         description : '',
         type:'',
         value: '',
-        name:'',
         image : null,
         showMsm : false,
         showMsmE : false
     }
 
-    handleChangeName=(e)=>{
-        this.setState({name:e.target.value})
-    }
     handleChangeDescription=(e)=>{
         this.setState({description:e.target.value})
     }
@@ -28,33 +24,36 @@ export class FormDecoration extends Component{
         this.setState({value:e.target.value})
     }
     handleFileSelect=(e)=>{
-        this.setState({file:e.target.files[0]})
+        this.setState({image : e.target.files[0]})
     }
      
 
     _handleSubmit=(e)=>{
         console.log(this.state)
-        var idRestaurant = this.state.idRestaurant
-        var  description = this.state.description
-        var  type = this.state.type
-        var  valor=this.state.value
+        var idRestaurantD = this.state.idRestaurant
+        var  descriptionD = this.state.description
+        var  typeD = this.state.type
+        var  valorD=this.state.value
+        var  file = this.state.image
         var params ={
-            idRestaurant: idRestaurant,
-            description: description,
-            type: type ,
-            value : valor      
+            idRestaurant: idRestaurantD,
+            description: descriptionD,
+            type: typeD ,
+            price : valorD , 
+            urlImg : file  
         };
+
+        var data = new FormData()
+        for(var key in params){
+            data.append(key,params[key])
+        }
 
         var request ={
             method: 'POST',
-            headers:{
-                'Accept' : 'application/json',
-				"Content-type": "application/json"
-            },
-            body : JSON.stringify(params)
+            body : data
         }
 
-        fetch('https://resvit.herokuapp.com/addDecoration',request)
+        fetch('http://181.50.100.167:4000/addDecoration',request)
         .then(response => {console.log(response)
             if (response.status == "200") {
                 console.log("se escribió con exito")
@@ -78,16 +77,12 @@ export class FormDecoration extends Component{
             <div >
                 <Form onSubmit={this._handleSubmit}>
                     <Form.Field>
-                        <label>Nombre</label>
-                        <input placeholder='Nombre para la decoración' onChange={this.handleChangeName}/>
-                    </Form.Field>
-                    <Form.Field>
                         <label>Tipo</label>
-                        <input placeholder='Tipo de decoración' onChange={this.handleChangeType} />
+                        <input placeholder='Tipo de decoración ej. Cumpleaños' onChange={this.handleChangeType} />
                     </Form.Field>
                     <Form.Field>
                         <label>Valor</label>
-                        <input placeholder='Valor de la decoración' onChange={this.handleChangeValue} />
+                        <input placeholder='Valor de la decoración ej. 10.000' onChange={this.handleChangeValue} />
                     </Form.Field>
                     <Form.Field>
                         <label>Descripción</label>
