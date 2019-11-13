@@ -35,7 +35,7 @@ export class Decoration extends Component{
                         />
                         <Card.Content>
                             <Card.Header>{type || 'nombre'}</Card.Header>
-                            <Card.Meta>{idRes || 'fecha'}</Card.Meta>
+                            <Card.Meta>{valor || 'fecha'}</Card.Meta>
                             <Card.Description>
                             {description || 'descripción'}
                             </Card.Description>
@@ -43,7 +43,13 @@ export class Decoration extends Component{
                         <Card.Content extra >
                             <div className='Center'>
                                 <div className='ui two buttons' >
-                                    <FormE></FormE>
+                                    <FormE
+                                    idD={idD}
+                                    typeD={type}
+                                    descriptionD={description}
+                                    priceD={valor}
+
+                                    ></FormE>
                                     <ButtonAdvD  cancelButton={'cancelar'} 
                                                 content={'¿Está Seguro(a) que desea eliminar la Decoración?'} 
                                                 confirmButton={'Continuar'}
