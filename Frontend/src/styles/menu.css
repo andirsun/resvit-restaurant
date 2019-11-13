@@ -40,3 +40,35 @@
   height: auto;
   margin: auto;
 }
+.Error-Page{
+  background-color: #1b1c1d !important;
+  align-items: center;
+  align-content: center;
+  display: flex;
+  height: 100vh;
+  width: 100%;  
+}
+
+.Error-Logo{
+  height: 500px;
+  width: 500px;
+  margin-left: 30%;
+  margin-bottom: 0% !important;
+}
+
+.Error-Link{
+  padding-left: 34%;
+  margin-bottom: 0% !important ;
+  margin-top: 0% !important;
+  background-color: 'yellow';/* #1b1c1d;*/
+  text-align: center;
+  text-align: center;
+  display: flex;
+  width: 100%;
+  height: 15%;
+
+}
+.link{
+  color : white;
+
+}

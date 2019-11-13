@@ -16,7 +16,8 @@ export class Events extends Component {
     this.handleToUpdate  = this.handleToUpdate.bind(this);
     this.state={
       result:[],
-      noConection: false
+      noConection: false,
+      idRes : ''
     };
   }
 
@@ -37,16 +38,38 @@ export class Events extends Component {
   }
 
   componentDidMount(){
-    const url = window.location.href
-    let urlSplit = url.split('?')
-    let idRestaurant = urlSplit[1].split('=')[1]
-    console.log(idRestaurant)
-    this._fetchMovie(idRestaurant)
+    try{
+      const url = window.location.href
+      let urlSplit = url.split('?')
+      let idRestaurant = urlSplit[1].split('=')[1]
+      this.setState({idRes : idRestaurant})
+      console.log(idRestaurant)
+      this._fetchMovie(idRestaurant)
+    }
+    catch(error){
+      this.setState({noConection : true})
+    }
   }
 
 
   render(){
 
+    if(this.state.noConection == true){
+      return(
+        <div>
+      <div className="Error-Page">
+      <div className="row">
+      <img src= {logo} className = "Error-Logo"></img>
+      </div>
+      <div className="row">
+      <h1 className =" Error-Link">
+              <a  href={"http://181.50.100.167:9000/login/"} className="link" >Intentalo de Nuevo</a>
+      </h1>
+      </div>
+      </div>
+      </div>
+      )
+    }
     return (
       <div> 
         <header className="App-header">
@@ -61,7 +84,7 @@ export class Events extends Component {
         <div className="ui bottom attached button"> 
           <Title>Eventos</Title>
           <div>
-            <Link to ='/AddEvent' >
+            <Link to ={'/AddEvent/?id='+ this.state.idRes} >
                 <Button className='ui inverted secondary button' >
                   <i className="add icon"></i>
                   Añadir Evento           

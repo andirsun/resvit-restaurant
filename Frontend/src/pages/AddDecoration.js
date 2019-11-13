@@ -10,7 +10,16 @@ import '../styles/addEventStyle.css'
 import '../styles/DecorationsPageStyle.css'
 
 export class AddDecoration extends Component{
-    
+    state={
+        idRes : '',
+        idUser: ''
+    }
+    componentDidMount(){
+        const url = window.location.href
+        let urlSplit = url.split('?')
+        let idRestaurant = urlSplit[1].split('=')[1]
+        this.setState({idRes : idRestaurant})
+    }   
     render(){
         return(
             <div>
@@ -24,7 +33,7 @@ export class AddDecoration extends Component{
                 <div className="ui bottom attached button">
                     <Title>Añadir Decoración</Title>
                     <div>
-                    <Link to ='/Decorations' >
+                    <Link to ={'/Decorations/?id='+this.state.idRes} >
                         <Button className='ui inverted secondary button' >
                         <i className="angle double left icon"></i>
                         Volver           

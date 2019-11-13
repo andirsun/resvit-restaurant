@@ -12,7 +12,8 @@ export class Restaurant extends Component{
         addressR: PropTypes.string,
         cellR: PropTypes.string,
         emailR: PropTypes.string,
-        scheduleR : PropTypes.string
+        scheduleR : PropTypes.string,
+        User: PropTypes
     }
 
     render(){
@@ -21,9 +22,10 @@ export class Restaurant extends Component{
         const name = this.props.nameR;
         const description = this.props.descriptionR;
         const idRestaurant = this.props.idR;
+        const idUser=this.props.User
         console.log("el id restaurante",idRestaurant)
         console.log("este es el nombre de l restaurante ",name) 
-        var url='http://181.50.100.167:3010/?id='+idRestaurant
+        var url='http://181.50.100.167:3010/?id='+idRestaurant+'?id='+idUser
         console.log("esta es la url",url)
         return(
             <Segment>

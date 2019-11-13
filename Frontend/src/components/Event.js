@@ -59,14 +59,6 @@ export class Event extends Component{
                                                 ide={id}
                                                 className='ui inverted secondary button' >
                                     </ButtonAdv>
-                                    <Button className='ui inverted secondary button'
-                                            >Eliminar</Button>
-                                    <ModalConfirm
-                                    text={"Eliminar"}
-                                    textC={"Eliminar Evento"}
-                                    description={"Desea Eliminar el este Evento"}
-                                    >
-                                    </ModalConfirm> 
                                 </div>
                             </div>
                         </Card.Content>

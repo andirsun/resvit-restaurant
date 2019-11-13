@@ -1,16 +1,24 @@
 import React , {Component} from 'react';
 import {Menu } from 'semantic-ui-react';
 import {Link} from "react-router-dom";
+import logo from '../images/RevitBlanco.png'
+import '../styles/menu.css'
 
 export class MenuR extends Component {
-    state = { activeItem: 'Eventos', id : '' }
+    state = { activeItem: 'Eventos', id : '' , error : false}
 
     componentDidMount(){
-      const url = window.location.href
-      let urlSplit = url.split('?')
-      let idRestaurant = urlSplit[1].split('=')[1]
-      console.log(idRestaurant)
-      this.setState({id : idRestaurant})
+      try{
+        const url = window.location.href
+        let urlSplit = url.split('?')
+        let idRestaurant = urlSplit[1].split('=')[1]
+        console.log(idRestaurant)
+        this.setState({id : idRestaurant})
+      }
+      catch(err){
+        this.setState({error : true})
+        console.log("no hubo split")
+      }
     }
     
   
@@ -18,6 +26,21 @@ export class MenuR extends Component {
     
   
     render() {
+      if(this.state.error ==  true){
+        return(
+          <div> 
+            sxdcftvygbhnjmk,liugyf
+            <div className="Error-Page">
+            <img src= {logo}></img>
+            </div>
+            <h1 className =" Error-Link">
+              <a  href={"http://181.50.100.167:9000/login/"} className="link" >Intentalo de Nuevo</a>
+            </h1>
+          </div>
+          )        
+      }else{
+
+      
       const { activeItem } = this.state
       console.log("este es el id", this.state.id)
       const urlInfo='http://181.50.100.167:3000/?id='+this.state.id
@@ -56,13 +79,13 @@ export class MenuR extends Component {
             />
              <Menu.Item 
               name='Eventos'
-              as={Link} to={'/Events'+ this.state.id}
+              as={Link} to={'/Events/?id='+ this.state.id}
               active={activeItem === 'Eventos'}
               onClick={this.handleItemClick}
               
             />
              <Menu.Item 
-             as={Link} name='Decorations' to={'/Decorations'+ this.state.id}
+             as={Link} name='Decorations' to={'/Decorations'+'/?id='+this.state.id}
               name='Decoración'
               active={activeItem === 'Decoración'}
               onClick={this.handleItemClick}
@@ -83,5 +106,5 @@ export class MenuR extends Component {
             />
           </Menu>
       )
-    }
+    }}
   }
