@@ -16,13 +16,13 @@ export class FormRestaurant extends Component{
                     id='form-input-control-first-name'
                     control={Input}
                     label='Nombre Usuario'
-                    placeholder='First name'
+                    placeholder='Asigne un nombre de Usuario, será modificable'
                 />
                 <Form.Field
                     id='form-input-control-last-name'
                     control={Input}
                     label='Contraseña'
-                    placeholder='Last name'
+                    placeholder='Asigne una contraseña, será provisional'
                 />
                 <Form.Select
                     fluid
@@ -32,16 +32,10 @@ export class FormRestaurant extends Component{
                 />                
                 </Form.Group>
                 <Form.Field
-                id='form-textarea-control-opinion'
-                control={TextArea}
-                label='Opinion'
-                placeholder='Opinion'
-                />
-                <Form.Field
                 id='form-button-control-public'
                 control={Button}
-                content='Confirm'
-                label='Label with htmlFor'
+                content='Agregar'
+                label='Guardar Nuevo Usuario'
                 />
             </Form>
           </Segment>

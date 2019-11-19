@@ -17,12 +17,13 @@ export class AddRestaurant extends Component{
                 <div className="Menu">
                 <img src={logo} className="App-logo" alt="logo"/>
                 <MenuProfile></MenuProfile>
+                <br></br>
                 </div>
                 </header>
                 <div className="ui bottom attached button">
                     <Title>Añadir Usuario</Title>
                     <div>
-                        <Link to ='/AddDecoration' >
+                        <Link to ='/AdminProfile' >
                             <Button className='ui inverted secondary button' >
                             <i className="angle double left icon"></i>
                                 Volver        
