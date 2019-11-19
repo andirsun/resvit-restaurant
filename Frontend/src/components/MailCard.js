@@ -5,14 +5,16 @@ import {Link} from "react-router-dom";
 
 export class MailCard extends Component{
     render(){
+        const id = this.props.idRes
+        const descripciOn = this.props.contenido
         return(
             <Segment>
                 <Card.Group>    
                     <Card fluid color="yellow">
-                        <Card.Content header='Este es el encabezado del mensaje'/>
+                        <Card.Content header={"Mensaje de la Reserva : " + id}/>
                         <Card.Content>
                         <Card.Description>
-                        { 'descripción'}
+                        {descripciOn}
                         </Card.Description>
                         </Card.Content>
                         <Card.Content extra>
