@@ -13,6 +13,7 @@ import {AddDecoration} from './pages/AddDecoration';
 import {AdminProfile} from './pages/AdminProfile';
 import {Principal} from './pages/Principal';
 import {AddRestaurant} from './pages/AddRestaurant';
+import {MailBox} from  './pages/MailBox'
 
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
         <Route path ="/AddDecoration" component ={AddDecoration}></Route>
         <Route path ="/AdminProfile" component ={AdminProfile}></Route>
         <Route path ="/Principal" component ={Principal}></Route>
+        <Route path ="/Buzon" component ={MailBox}></Route>
         <Route path='/google' component={() => { 
           window.location.href = 'http://google.com'; 
           return null;

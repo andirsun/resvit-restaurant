@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Form, Segment, Message } from 'semantic-ui-react'
+import { Button, Form, Segment, Message, Icon } from 'semantic-ui-react'
 import ModalConfirm from './ModalConfirm';
 
 export class FormDecoration extends Component{
@@ -82,7 +82,7 @@ export class FormDecoration extends Component{
                     </Form.Field>
                     <Form.Field>
                         <label>Valor</label>
-                        <input placeholder='Valor de la decoración ej. 10.000' onChange={this.handleChangeValue} />
+                        <input placeholder={'Valor de la decoración ej. 10.000'} onChange={this.handleChangeValue}/>
                     </Form.Field>
                     <Form.Field>
                         <label>Descripción</label>

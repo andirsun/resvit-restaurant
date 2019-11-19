@@ -13,6 +13,7 @@ export class Event extends Component{
     state={
         open : false
     }
+    
     PropTypes ={
         id : PropTypes.string,
         name : PropTypes.string,
@@ -33,9 +34,9 @@ export class Event extends Component{
         return(
             <Segment>
                 <Card.Group>    
-                    <Card>
+                    <Card>0
                         <Image  
-                            src= {ImageDefault}
+                            src= {'http://181.50.100.167:4000/'+ image || ImageDefault}
                             wrapped ui={false}
                         />
                         <Card.Content>
