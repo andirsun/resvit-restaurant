@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Button, Form, Segment } from 'semantic-ui-react'
+import { Button, Form, Segment, Message, Icon } from 'semantic-ui-react'
+import ModalConfirm from './ModalConfirm';
 
 export class FormDecoration extends Component{
 
@@ -8,13 +9,11 @@ export class FormDecoration extends Component{
         description : '',
         type:'',
         value: '',
-        name:'',
-        image : null
+        image : null,
+        showMsm : false,
+        showMsmE : false
     }
 
-    handleChangeName=(e)=>{
-        this.setState({name:e.target.value})
-    }
     handleChangeDescription=(e)=>{
         this.setState({description:e.target.value})
     }
@@ -25,41 +24,49 @@ export class FormDecoration extends Component{
         this.setState({value:e.target.value})
     }
     handleFileSelect=(e)=>{
-        console.log(e.target.files[0])
+        this.setState({image : e.target.files[0]})
     }
      
 
     _handleSubmit=(e)=>{
         console.log(this.state)
-        const {idRestaurant,name,date,type}=this.props
+        var idRestaurantD = this.props.restaurant
+        var  descriptionD = this.state.description
+        var  typeD = this.state.type
+        var  valorD=this.state.value
+        var  file = this.state.image
         var params ={
-            idRestaurant: {idRestaurant},
-            name: {name},
-            date: {date},
-            type:{type}        
+            idRestaurant: idRestaurantD,
+            type: typeD ,
+            description: descriptionD,
+            price : valorD , 
+            archivo : file  
         };
 
-        var formData = new FormData();
-        for (var k in params){
-            let encodedkey = encodeURIComponent(k);
-            let encondedValue  = encodeURIComponent(params[k]);
-           
+        var data = new FormData()
+        for(var key in params){
+            data.append(key,params[key])
         }
 
         var request ={
             method: 'POST',
-            //mode: 'cors',
-            headers:{
-                //"Acceses-Control-Allow-Origin":'*',
-                //'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-				"Content-type": "application/json"
-            },
-            body : params
+            body : data
         }
 
-        fetch('https://resvit.herokuapp.com/addEvent',request)
-        .then(response => console.log(response))
-        .catch(err => console.log(err));
+        fetch('http://181.50.100.167:4000/addDecoration',request)
+        .then(response => {console.log(response)
+            if (response.status == "200") {
+                console.log("se escribió con exito")
+                this.setState({showMsm: true})
+                setTimeout(function(){
+                },3000)
+                window.location.reload(); 
+            }else{
+                this.setState({showMsmE: true})
+            }
+        })
+        .catch(err => {
+            console.log(err)});
           
     }
 
@@ -70,16 +77,12 @@ export class FormDecoration extends Component{
             <div >
                 <Form onSubmit={this._handleSubmit}>
                     <Form.Field>
-                        <label>Nombre</label>
-                        <input placeholder='Nombre para la decoración' onChange={this.handleChangeName}/>
-                    </Form.Field>
-                    <Form.Field>
                         <label>Tipo</label>
-                        <input placeholder='Tipo de decoración' onChange={this.handleChangeType} />
+                        <input placeholder='Tipo de decoración ej. Cumpleaños' onChange={this.handleChangeType} />
                     </Form.Field>
                     <Form.Field>
                         <label>Valor</label>
-                        <input placeholder='Valor de la decoración' onChange={this.handleChangeValue} />
+                        <input placeholder={'Valor de la decoración ej. 10.000'} onChange={this.handleChangeValue}/>
                     </Form.Field>
                     <Form.Field>
                         <label>Descripción</label>
@@ -89,8 +92,23 @@ export class FormDecoration extends Component{
                         <label>Sube una imagen</label>
                         <input type="file" onChange={this.handleFileSelect} />
                     </Form.Field>
-                    <Button className='ui inverted secondary button' type='submit'>Guardar</Button>
-                </Form>              
+                    <Button className='ui inverted secondary button' type='submit'>Guardar</Button>{
+                        this.state.showMsm &&
+                        (<Message positive>
+                        <Message.Header>Guardado Exitoso</Message.Header>
+                        <p>
+                        ¡ Tu evento se ha guardado de forma exitosa !
+                        </p>
+                        </Message> ) ||
+                        this.state.showMsmE &&
+                        (<Message negative>
+                            <Message.Header> Un Error ha Ocurrido :c</Message.Header>
+                            <p>
+                                Por favor. revisa que los campos estén llenos adecuadamente
+                            </p>
+                            </Message> )
+                    }
+                </Form>             
             </div>
             </Segment>
         )

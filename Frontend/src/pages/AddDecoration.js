@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import{FormEvent} from '../components/FormEvent'
+import{FormDecoration} from '../components/FormDecoration'
 import {MenuR} from '../components/MenuR'
 import {Title} from '../components/Title'
 import logo from '../images/RevitBlanco.png'
-import Calendar from 'react-calendar'
 import {Link} from 'react-router-dom'
+import { Button} from 'semantic-ui-react'
 import '../styles/menu.css'
 import '../styles/addEventStyle.css'
-import { Segment , Button} from 'semantic-ui-react';
+import '../styles/DecorationsPageStyle.css'
 
-export class AddEvent extends Component{
+export class AddDecoration extends Component{
     state={
         idRes : '',
         idUser: '',
@@ -20,22 +20,15 @@ export class AddEvent extends Component{
             const url = window.location.href
             let urlSplit = url.split('?')
             let idRestaurant = urlSplit[1].split('=')[1]
-            let idUs = urlSplit[2].split("=")[1]
-            if(true){
+            let idUs = urlSplit[2].split('=')[1]
             this.setState({idRes : idRestaurant})
-            this.setState({idUser : idUs})}
+            this.setState({idUser : idUs})
         }catch(err){
-            console.log("ocurrio error en AddEvent")
-            this.setState({noConection : true})
-            
+            this.setState({noConection: true})
         }
-    }
-    
+    }   
     render(){
-        const idU = this.state.idUser
-        const idR = this.state.idRes
-        const ruta='/Events/?id='+ idR + '?id=' + idU
-        console.log("aqui se fue el id restaurante", idR)
+        const idR=this.state.idRes
         if( this.state.noConection == true){
             return(
                 <div>
@@ -63,9 +56,9 @@ export class AddEvent extends Component{
                 </header>
                 <div className="decorBar"></div>
                 <div className="ui bottom attached button">
-                    <Title>Añadir Evento</Title>
+                    <Title>Añadir Decoración</Title>
                     <div>
-                    <Link to ={ruta} >
+                    <Link to ={'/Decorations/?id='+this.state.idRes + '?id=' + this.state.idUser} >
                         <Button className='ui inverted secondary button' >
                         <i className="angle double left icon"></i>
                         Volver           
@@ -74,17 +67,12 @@ export class AddEvent extends Component{
                     </div>
                 </div>
                 <br></br>
-                <div className="main_content">
-                    <div className='container2' >
-                    <Segment>
-                    <Calendar></Calendar>
-                    </Segment>
-                    </div>  
-                    <div className='container'>
-                    <FormEvent restaurant = {idR}></FormEvent>
+                <div className="main_contentD"> 
+                    <div className='containerD'>
+                    <FormDecoration restaurant ={idR}></FormDecoration>
                     </div>  
                 </div>
-            </div>
+            </div>            
         )
     }
 }

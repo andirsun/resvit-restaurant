@@ -6,7 +6,6 @@ import {Title} from'../components/Title'
 import {Button } from 'semantic-ui-react'
 import '../styles/menu.css'
 import '../styles/EventsPageStyle.css'
-import { AddEvent } from './AddEvent';
 import {Link} from "react-router-dom";
 
 
@@ -16,7 +15,11 @@ export class Events extends Component {
     super(props);
     this.handleToUpdate  = this.handleToUpdate.bind(this);
     this.state={
-      result:[]
+      result:[],
+      noConection: false,
+      idRes : '',
+      noEvents: false,
+      idUs : ''
     };
   }
 
@@ -24,29 +27,64 @@ export class Events extends Component {
     this.setState({result:newState})
   }
 
-  _fetchMovie(){
-    fetch('http://resvit.herokuapp.com/getEvents/?id=1')
-    .then(res => res.json())
-    .then(result => {
-      const {events=[]}=result
-      this.setState({result : events})
-      console.log(this.state.result)
+  _fetchMovie(id){
+    fetch('http://181.50.100.167:4000/getEvents/?id='+id)
+    .then(res => 
+      res.json())
+    .then(response => {
+      if ( response.content.length == 0){
+        this.setState({noEvents : true})
+      }else{
+        this.setState({result : response.content})
+        console.log("este s resurlt", response)
+      }
     })        
   }
 
   componentDidMount(){
-    this._fetchMovie()
+    try{
+      const url = window.location.href
+      let urlSplit = url.split('?')
+      const idRestaurant = urlSplit[1].split('=')[1]
+      const idUser =urlSplit[2].split('=')[1]
+      this.setState({idRes : idRestaurant})
+      this.setState({idUs : idUser})
+      console.log("empezamos en eventos con estado :")
+      console.log(this.state.idRes)
+      console.log(this.state.idUs)
+      this._fetchMovie(idRestaurant)
+    }
+    catch(error){
+      this.setState({noConection : true})
+    }
   }
 
 
   render(){
 
+    if(this.state.noConection == true){
+      return(
+        <div>
+      <div className="Error-Page">
+      <div className="row">
+      <img src= {logo} className = "Error-Logo"></img>
+      </div>
+      <div className="row">
+      <h1 className =" Error-Link">
+              <a  href={"http://181.50.100.167:9000/login/"} className="link" >Intentalo de Nuevo</a>
+      </h1>
+      </div>
+      </div>
+      </div>
+      )
+    }
     return (
       <div> 
         <header className="App-header">
           <div className="Menu">
             <img src={logo} className="App-logo" alt="logo"/>
             <MenuR/>
+            <br></br>
           </div>
         </header>
         <div className="decorBar"></div>
@@ -54,7 +92,7 @@ export class Events extends Component {
         <div className="ui bottom attached button"> 
           <Title>Eventos</Title>
           <div>
-            <Link to ={'/AddEvent'} >
+            <Link to ={'/AddEvent/?id='+ this.state.idRes +'?id='+ this.state.idUs} >
                 <Button className='ui inverted secondary button' >
                   <i className="add icon"></i>
                   Añadir Evento           
@@ -62,7 +100,9 @@ export class Events extends Component {
             </Link>
           </div>
         </div>
-        <br></br>
+        <br></br>{
+          (this.state.noEvents && <h1 align="center" >No hay eventos para mostrar</h1>)
+        }
         <div className="main_contentEvent">
           <div className="containerEvent">
             <EventList events={this.state.result} action={this.handleToUpdate}></EventList>

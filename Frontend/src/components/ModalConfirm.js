@@ -1,35 +1,39 @@
-import React, { Component } from 'react'
-import { Button, Modal } from 'semantic-ui-react'
+import React, {Component}  from  'react'
+import { Button, Header, Icon, Modal } from 'semantic-ui-react'
 
-class ModalConfirm extends Component {
-  state = { open: false }
-
-  show = (size) => () => this.setState({ size, open: true })
-  close = () => this.setState({ open: false })
-
-  render() {
-    const { open, size } = this.state
-
-    return (
-      <div>
-        <Modal size={size} open={open} onClose={this.close}>
-          <Modal.Header>Delete Your Account</Modal.Header>
-          <Modal.Content>
-            <p>Are you sure you want to delete your account</p>
-          </Modal.Content>
-          <Modal.Actions>
-            <Button negative>No</Button>
-            <Button
-              positive
-              icon='checkmark'
-              labelPosition='right'
-              content='Yes'
-            />
-          </Modal.Actions>
-        </Modal>
-      </div>
-    )
+export default class  ModalConfirm  extends Component{
+  state= {
+    open : false
   }
-}
 
-export default ModalConfirm
+  CloseModal(){
+    //this.setState({open: true})
+  }
+
+  render(){
+    var textBut = this.props.text
+    var textCont=this.props.textC
+    var text = this.props.description
+    //trigger={<Button className='ui inverted secondary button'
+    //>{textBut}</Button>} 
+  return(
+  <Modal 
+    open={this.state.open}
+    closeIcon>
+    <Header icon='archive' content={textCont} />
+    <Modal.Content>
+      <p>
+        {text}
+      </p>
+    </Modal.Content>
+    <Modal.Actions>
+      <Button color='red' onClick={this.CloseModal()}>
+        <Icon name='remove' /> Cancelar
+      </Button>
+      <Button color='green'>
+        <Icon name='checkmark' /> Continuar
+      </Button>
+    </Modal.Actions>
+  </Modal>
+)}
+}
