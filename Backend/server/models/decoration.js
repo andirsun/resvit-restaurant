@@ -22,7 +22,7 @@ let decorationSchema = new Schema({
         required:[true,"es necesario la imagen"]
     },
     price :{
-        type:String,
+        type:Number,
         required:[true,'el precio es necesario']
     }
 });
