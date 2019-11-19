@@ -4,14 +4,15 @@ const uniqueValidator = require('mongoose-unique-validator');
 let Schema = mongoose.Schema;
 
 let rolesValidos ={
-    values:[1,2],
+    values:[1,2,3],
     message:'{VALUE} no es un rol valido'
 };
 let userSchema = new Schema({
-   /* idUser:{
-        type:int,
-        required:[true,'el nombre es necesario']
-    },*/
+    id:{
+        type:Number,
+        required:[true,"Se requiere el id para insertar"],
+        default:0
+    },
     userType:{
         type:Number,
         required:[true,'el tipo de usuario es un campo necesario'],
@@ -28,7 +29,15 @@ let userSchema = new Schema({
     },
     password:{
         type:String,
-        required: [true,"EL pass es necesario"]
+        required: [true,"EL password es necesario"]
+    },
+    active:{
+        type:Boolean,
+        default:false
+    },
+    idRestaurant:{
+        type: Number,
+        required:[false]
     }
 });
 

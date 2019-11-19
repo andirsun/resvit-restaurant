@@ -4,9 +4,9 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-EXPOSE 4001
+EXPOSE 4000
 
 RUN npm install
 
-CMD [ "npm", "start" ]
+CMD [ "npm","start" ]
 
