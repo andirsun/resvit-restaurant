@@ -6,10 +6,9 @@ const TableExampleApprove = () => (
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell />
-        <Table.HeaderCell>Name</Table.HeaderCell>
-        <Table.HeaderCell>Registration Date</Table.HeaderCell>
-        <Table.HeaderCell>E-mail address</Table.HeaderCell>
-        <Table.HeaderCell>Premium Plan</Table.HeaderCell>
+        <Table.HeaderCell>Usuario</Table.HeaderCell>
+        <Table.HeaderCell>Correo Electrónico</Table.HeaderCell>
+        <Table.HeaderCell>Tipo Usuario</Table.HeaderCell>
       </Table.Row>
     </Table.Header>
 
@@ -19,27 +18,24 @@ const TableExampleApprove = () => (
           <Checkbox slider />
         </Table.Cell>
         <Table.Cell>John Lilki</Table.Cell>
-        <Table.Cell>September 14, 2013</Table.Cell>
         <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-        <Table.Cell>No</Table.Cell>
+        <Table.Cell>Comensal</Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell collapsing>
           <Checkbox slider />
         </Table.Cell>
         <Table.Cell>Jamie Harington</Table.Cell>
-        <Table.Cell>January 11, 2014</Table.Cell>
         <Table.Cell>jamieharingonton@yahoo.com</Table.Cell>
-        <Table.Cell>Yes</Table.Cell>
+        <Table.Cell>Restaurante</Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell collapsing>
           <Checkbox slider />
         </Table.Cell>
         <Table.Cell>Jill Lewis</Table.Cell>
-        <Table.Cell>May 11, 2014</Table.Cell>
         <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
-        <Table.Cell>Yes</Table.Cell>
+        <Table.Cell>Administrador</Table.Cell>
       </Table.Row>
     </Table.Body>
 
@@ -54,11 +50,7 @@ const TableExampleApprove = () => (
             primary
             size='small'
           >
-            <Icon name='user' /> Add User
-          </Button>
-          <Button size='small'>Approve</Button>
-          <Button disabled size='small'>
-            Approve All
+            <Icon name='user' /> Añadir Usuario
           </Button>
         </Table.HeaderCell>
       </Table.Row>

@@ -3,6 +3,11 @@ import { Form, Input, TextArea, Button, Segment } from 'semantic-ui-react'
 export class FormRestaurant extends Component{
 
     render(){
+        const options=[
+            {key: 2, text: 'Usuario Restaurante', value : 2},
+            {key: 1, text: 'Usuario Comensal', value : 1},
+            {key: 3, text: 'Usuario Administrador', value : 3}
+        ]
         return(
             <Segment>
                 <Form>
@@ -10,27 +15,27 @@ export class FormRestaurant extends Component{
                 <Form.Field
                     id='form-input-control-first-name'
                     control={Input}
-                    label='First name'
-                    placeholder='First name'
+                    label='Nombre Usuario'
+                    placeholder='Asigne un nombre de Usuario, será modificable'
                 />
                 <Form.Field
                     id='form-input-control-last-name'
                     control={Input}
-                    label='Last name'
-                    placeholder='Last name'
+                    label='Contraseña'
+                    placeholder='Asigne una contraseña, será provisional'
                 />
+                <Form.Select
+                    fluid
+                    label='Tipo Usuario'
+                    options={options}
+                    placeholder='ej.Usuario Restaurante'
+                />                
                 </Form.Group>
-                <Form.Field
-                id='form-textarea-control-opinion'
-                control={TextArea}
-                label='Opinion'
-                placeholder='Opinion'
-                />
                 <Form.Field
                 id='form-button-control-public'
                 control={Button}
-                content='Confirm'
-                label='Label with htmlFor'
+                content='Agregar'
+                label='Guardar Nuevo Usuario'
                 />
             </Form>
           </Segment>

@@ -69,7 +69,7 @@ export class MenuR extends Component {
             />
             <Menu.Item
               name='Buzón'
-              as={Link} to={'/google'+this.state.id}
+              as={Link} to={'/Buzon/?id='+ this.state.id +'?id=' + this.state.idAdmin}
               active={activeItem === 'Buzón'}
               onClick={this.handleItemClick}
             />

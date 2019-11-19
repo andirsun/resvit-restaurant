@@ -21,6 +21,7 @@ export class DecorationsList extends Component {
                                 type ={event.type}
                                 description={event.description}
                                 valor ={event.price}
+                                img ={event.urlImg}
                                 />
                             </div>
                         )
