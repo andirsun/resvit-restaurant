@@ -46,6 +46,7 @@ export class FormE extends Component {
     }
 
     handleChange = (date) => {
+        console.log("esta es la fecha a la que cambió",date)
         this.setState({Date: date})
     }
     handleName =(e)=>{
@@ -56,11 +57,12 @@ export class FormE extends Component {
     }
     
     _handleSubmit=()=>{
-    
+        console.log(this.state)
         var id=this.props.idE
         var nameE = this.state.name
         var typeE = this.state.type
         var dateE = this.state.Date
+        console.log( "LA DATE QUE SE VA",dateE)
         var params ={
             name: nameE,
             date: dateE,
