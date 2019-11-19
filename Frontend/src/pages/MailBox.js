@@ -4,6 +4,7 @@ import logo from '../images/RevitBlanco.png'
 import {Title} from '../components/Title'
 import '../styles/menu.css'
 import {Button} from 'semantic-ui-react'
+import { MailCard } from '../components/MailCard';
 
 export class MailBox extends Component{
 
@@ -27,6 +28,7 @@ export class MailBox extends Component{
                     </Button>
                     </div>
                 </div >
+                <MailCard></MailCard>
             </div>
         )
     }
