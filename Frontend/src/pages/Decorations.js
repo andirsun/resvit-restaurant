@@ -16,7 +16,8 @@ export class Decorations extends Component{
         idRes :'',
         idUser :'',
         noConection: false,
-        noDecor : false
+        noDecor : false,
+        userName :''
       };
 
     _fetchMovie(id){
@@ -34,6 +35,33 @@ export class Decorations extends Component{
 
         })
     }
+
+    logOut(id){
+        var request ={
+            method : 'POST'
+        }
+        fetch('http://181.50.100.167:4000/logout?id='+id,request)
+        .then(res=> res.json())
+        .then(response =>   {
+            console.log(response)
+            if (response.response == 2){
+                console.log("cerro la sesión")
+                window.location.replace('http://159.65.58.193:3000/login/')
+            }
+        }
+        )
+    }
+    fetchUser(id){
+      fetch('http://181.50.100.167:4000/getNameUser?id='+id)
+      .then(res => res.json())
+      .then(result => {
+          const name=result.content.name
+          console.log("este es el contenido",result.content)
+          this.setState({userName:name})
+          console.log("este es el estado", this.state.userName)
+      }) 
+  
+    }
     
       componentDidMount(){
         try{
@@ -45,6 +73,7 @@ export class Decorations extends Component{
             this.setState({idUser : idUs})
             console.log(idRestaurant)
             this._fetchMovie(idRestaurant)
+            this.fetchUser(idUs)
 
         }catch(err){
             this.setState({noConection : true})
@@ -53,7 +82,7 @@ export class Decorations extends Component{
       }
 
     render(){
-        const user="este"
+        const user=this.state.userName
         if(this.state.noConection == true){
             return(
               <div>
