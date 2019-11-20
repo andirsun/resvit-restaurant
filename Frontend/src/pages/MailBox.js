@@ -3,9 +3,8 @@ import {MenuR} from '../components/MenuR'
 import logo from '../images/RevitBlanco.png'
 import {Title} from '../components/Title'
 import '../styles/menu.css'
-import {Button} from 'semantic-ui-react'
+import {Button, Icon} from 'semantic-ui-react'
 import { MailsList } from '../components/MailsList';
-
 export class MailBox extends Component{
 
     state ={
@@ -19,7 +18,11 @@ export class MailBox extends Component{
         .then(res => 
           res.json())
         .then(res => {
-            this.setState({result : res.Content})
+            if (res.Content.length == 0){
+                this.setState({noMail : true})
+            }else{
+                this.setState({result : res.Content})
+            }
         })         
     }
 
@@ -41,6 +44,7 @@ export class MailBox extends Component{
           }       
     }
     render(){
+        const user="este"
         return(
             <div>
                 <header className="App-header">
@@ -48,6 +52,14 @@ export class MailBox extends Component{
                     <img src={logo} className="App-logo" alt="logo"/>
                     <MenuR/>
                     <br></br>
+                </div>
+                <div>
+                    <div className="nameUserM">
+                    <h2>{user || "inicia Sesión"}</h2>
+                    <div className="LogOutIconM" onClick={()=> this.logOut(this.state.idUser)}>
+                        <Icon size={15} name="sign-out inverted"/>
+                    </div>
+                    </div>
                 </div>
                 </header>
                 <div className="decorBar"></div>
@@ -60,6 +72,7 @@ export class MailBox extends Component{
                     </Button>
                     </div>
                 </div >
+                <br></br>{(this.state.noMail && <h1 align="center" >No hay Mensajes para mostrar</h1>)}
                 <MailsList
                  contenido = {this.state.result}
                 ></MailsList>

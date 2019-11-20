@@ -3,7 +3,7 @@ import logo from '../images/RevitBlanco.png'
 import {EventList} from '../components/EventsList'
 import {MenuR} from '../components/MenuR'
 import {Title} from'../components/Title'
-import {Button } from 'semantic-ui-react'
+import {Button, Icon } from 'semantic-ui-react'
 import '../styles/menu.css'
 import '../styles/EventsPageStyle.css'
 import {Link} from "react-router-dom";
@@ -61,7 +61,7 @@ export class Events extends Component {
 
 
   render(){
-
+    const user="este"
     if(this.state.noConection == true){
       return(
         <div>
@@ -85,6 +85,14 @@ export class Events extends Component {
             <img src={logo} className="App-logo" alt="logo"/>
             <MenuR/>
             <br></br>
+          </div>
+          <div>
+              <div className="nameUserAddD">
+              <h2>{user || "inicia Sesión"}</h2>
+              <div className="LogOutIconAddD" onClick={()=> this.logOut(this.state.idUser)}>
+                  <Icon size={15} name="sign-out inverted"/>
+              </div>
+              </div>
           </div>
         </header>
         <div className="decorBar"></div>

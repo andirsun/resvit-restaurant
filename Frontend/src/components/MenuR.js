@@ -108,6 +108,7 @@ export class MenuR extends Component {
               onClick={this.handleItemClick}
             />
           </Menu>
+          
       )
     }}
   }
