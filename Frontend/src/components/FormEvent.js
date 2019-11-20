@@ -98,8 +98,7 @@ export class FormEvent extends Component{
                 this.setState({showMsmE: true})
             };
         })
-        .catch(err => console.log("Se presentó un error"));
-          
+        .catch(err => console.log("Se presentó un error"));    
     }
 
     render(){

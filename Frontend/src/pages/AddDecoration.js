@@ -13,7 +13,8 @@ export class AddDecoration extends Component{
     state={
         idRes : '',
         idUser: '',
-        noConection : false
+        noConection : false,
+        userName :''
     }
     componentDidMount(){
         try{
@@ -23,6 +24,7 @@ export class AddDecoration extends Component{
             let idUs = urlSplit[2].split('=')[1]
             this.setState({idRes : idRestaurant})
             this.setState({idUser : idUs})
+            this.fetchUser(idUs)
         }catch(err){
             this.setState({noConection: true})
         }
@@ -42,9 +44,20 @@ export class AddDecoration extends Component{
             }
         }
         )
-    }   
+    }
+    fetchUser(id){
+      fetch('http://181.50.100.167:4000/getNameUser?id='+id)
+      .then(res => res.json())
+      .then(result => {
+          const name=result.content.name
+          console.log("este es el contenido",result.content)
+          this.setState({userName:name})
+          console.log("este es el estado", this.state.userName)
+      }) 
+  
+    }  
     render(){
-        const user="este"
+        const user=this.state.userName
         const idR=this.state.idRes
         if( this.state.noConection == true){
             return(
