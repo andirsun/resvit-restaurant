@@ -12,31 +12,36 @@ export class FormRestaurant extends Component{
         idRestaurant:'',
         contrasena: '',
         tipoU:'',
-
-
+        nomUser:''
 
     }
 
     handleChangeNres=(e)=>{
         console.log(e.target.value)
+        this.setState({nombre: e.target.value})
     }
     handleChangeCity=(e)=>{
-        console.log(e.target.value)   
+        console.log(e.target.value)
+        this.setState({ciudad:e.target.value})   
     }
     handleChangeMail=(e)=>{
         console.log(e.target.value)
+        this.setState({correo:e.target.value})   
     }
     handleChangeNuser=(e)=>{
         console.log(e.target.value)
+        this.setState({nomUser:e.target.value})   
     }
     handleChangePass=(e)=>{
         console.log(e.target.value)
+        this.setState({contrasena:e.target.value})   
     }
     handleChangeTypeUser=(e, {value})=>{
         console.log(value)
+        this.setState({tipoU:e.target.value})   
     }
 
-    createRestaurant(){
+    createRestaurant=()=>{
         const params= {
             name: this.state.nombre,
             description: this.state.descripcion,
@@ -55,14 +60,14 @@ export class FormRestaurant extends Component{
         fetch('http://181.50.100.167:5000/postRestaurant', request)
         .then(res=> res.json())
         .then(res =>{
-            console.log("aqui se creo el restaurante", res)
-            this.setState({idRestaurant : res})
+            console.log("aqui se creo el restaurante", res.Response)
+            this.setState({idRestaurant : res.Response})
         })
     }
 
-    createUserRestaurant(){
+    createUserRestaurant=()=>{
         const params= {
-            userName: this.state.nombre,
+            userName: this.state.nomUser,
             email: this.state.correo,
             password: this.state.contrasena,
             userType : this.state.tipoU,
@@ -85,10 +90,16 @@ export class FormRestaurant extends Component{
         .then(res => res.json())
         .then(res =>{
             console.log("contra encriptada", res.content)
+            this.setState({contrasena:res.content})
         })
     }
 
-    makeUser(){
+    makeUser=(e)=>{
+        this.createRestaurant()
+        if (this.state.idRestaurant != ''){
+            this.passEncry(this.state.contrasena)
+            this.createUserRestaurant()
+        } 
         
     }
     render(){
@@ -99,7 +110,7 @@ export class FormRestaurant extends Component{
         ]
         return(
             <Segment>
-                <Form onSubmit={ this.makeUser}>
+                <Form onSubmit={this.makeUser}>
                 <Form.Group widths='equal'>
                 <Form.Field
                     id='form-input-control-name-res'
