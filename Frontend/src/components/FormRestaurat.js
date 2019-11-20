@@ -80,6 +80,14 @@ export class FormRestaurant extends Component{
         })
     }
 
+    passEncry(pass){
+        fetch('http://159.65.58.193:3000/crypto/'+ pass)
+        .then(res => res.json())
+        .then(res =>{
+            console.log("contra encriptada", res.content)
+        })
+    }
+
     makeUser(){
         
     }
@@ -98,7 +106,6 @@ export class FormRestaurant extends Component{
                     label='Nombre Restaurante'
                     control={Input}
                     placeholder='Asigne un nombre de Restaurante, será modificable'
-                    OnChange
                 >
                     <input onChange={this.handleChangeNres} />
                 </Form.Field>
