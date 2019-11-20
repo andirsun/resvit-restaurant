@@ -7,7 +7,7 @@ import Calendar from 'react-calendar'
 import {Link} from 'react-router-dom'
 import '../styles/menu.css'
 import '../styles/addEventStyle.css'
-import { Segment , Button} from 'semantic-ui-react';
+import { Segment , Button, Icon} from 'semantic-ui-react';
 
 export class AddEvent extends Component{
     state={
@@ -35,6 +35,7 @@ export class AddEvent extends Component{
         const idU = this.state.idUser
         const idR = this.state.idRes
         const ruta='/Events/?id='+ idR + '?id=' + idU
+        const user="este"
         console.log("aqui se fue el id restaurante", idR)
         if( this.state.noConection == true){
             return(
@@ -60,6 +61,14 @@ export class AddEvent extends Component{
                     <MenuR/>
                     <br></br>
                 </div>
+                <div>
+                        <div className="nameUserAddD">
+                        <h2>{user || "inicia Sesión"}</h2>
+                        <div className="LogOutIconAddD" onClick={()=> this.logOut(this.state.idUser)}>
+                            <Icon size={15} name="sign-out inverted"/>
+                        </div>
+                        </div>
+                    </div>
                 </header>
                 <div className="decorBar"></div>
                 <div className="ui bottom attached button">

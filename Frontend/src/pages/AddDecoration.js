@@ -4,7 +4,7 @@ import {MenuR} from '../components/MenuR'
 import {Title} from '../components/Title'
 import logo from '../images/RevitBlanco.png'
 import {Link} from 'react-router-dom'
-import { Button} from 'semantic-ui-react'
+import { Button, Icon} from 'semantic-ui-react'
 import '../styles/menu.css'
 import '../styles/addEventStyle.css'
 import '../styles/DecorationsPageStyle.css'
@@ -26,8 +26,25 @@ export class AddDecoration extends Component{
         }catch(err){
             this.setState({noConection: true})
         }
+    }
+
+    logOut(id){
+        var request ={
+            method : 'POST'
+        }
+        fetch('http://181.50.100.167:4000/logout?id='+id,request)
+        .then(res=> res.json())
+        .then(response =>   {
+            console.log(response)
+            if (response.response == 2){
+                console.log("cerro la sesión")
+                window.location.reload()
+            }
+        }
+        )
     }   
     render(){
+        const user="este"
         const idR=this.state.idRes
         if( this.state.noConection == true){
             return(
@@ -53,6 +70,14 @@ export class AddDecoration extends Component{
                     <MenuR/>
                     <br></br>
                 </div>
+                    <div>
+                        <div className="nameUserAddD">
+                        <h2>{user || "inicia Sesión"}</h2>
+                        <div className="LogOutIconAddD" onClick={()=> this.logOut(this.state.idUser)}>
+                            <Icon size={15} name="sign-out inverted"/>
+                        </div>
+                        </div>
+                    </div>
                 </header>
                 <div className="decorBar"></div>
                 <div className="ui bottom attached button">

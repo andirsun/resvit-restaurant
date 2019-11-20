@@ -13,3 +13,19 @@
     text-align: center;
     background-color: #1c1d1f;
 }
+
+.nameUserAddD{
+    float: left; 
+    margin-left: 80px;
+    margin-top : 30px;
+    color: white;   
+    display: flex;
+}
+.LogOutIconAddD{
+    /*padding: 20px;*/
+    float: left;
+    text-align: center;
+    margin-top: 7px;
+    margin-left: 10px;
+    cursor : pointer;
+}

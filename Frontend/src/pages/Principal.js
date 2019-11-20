@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import logo from '../images/RevitBlanco.png';
-import {Message } from 'semantic-ui-react'
+import {Message, Icon } from 'semantic-ui-react'
 import '../styles/PrincipalStyle.css'
 import {Search}  from 'semantic-ui-react'
 import {Title} from '../components/Title'
@@ -85,7 +85,6 @@ export class Principal extends Component{
             }
         }
         )
-
     }
 
     render(){
@@ -93,8 +92,8 @@ export class Principal extends Component{
         console.log("el usuario",user)
         if(this.state.door == true){
            return( <Message negative>
-            <Message.Header> Error</Message.Header>
-            <a  href={"http://181.50.100.167:9000/login/"}>
+            <Message.Header> Notificación</Message.Header>
+            <a  href={"http://159.65.58.193:3000/login"}>
             <p>
                No no ha iniciado Sesión. Inicia sesión
             </p>
@@ -130,9 +129,9 @@ export class Principal extends Component{
                     <div>
                         <div className="nameUser">
                         <h2>{user || "inicia Sesión"}</h2>
-                        </div>
                         <div className="LogOutIcon" onClick={()=> this.logOut(this.state.idUser)}>
-                            <i size={40} className="log out icon inverted"/>
+                            <Icon size={15} name="sign-out inverted"/>
+                        </div>
                         </div>
                     </div>
                 </header>

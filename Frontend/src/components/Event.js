@@ -34,7 +34,7 @@ export class Event extends Component{
         return(
             <Segment>
                 <Card.Group>    
-                    <Card>0
+                    <Card>
                         <Image  
                             src= {'http://181.50.100.167:4000/'+ image || ImageDefault}
                             wrapped ui={false}
